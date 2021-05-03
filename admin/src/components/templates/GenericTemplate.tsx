@@ -1,7 +1,27 @@
-import { createMuiTheme, colors, makeStyles, Theme, createStyles, AppBar, Box, Container, CssBaseline, Divider, Drawer, IconButton, Link, List, ListItem, ListItemIcon, ListItemText, ThemeProvider, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import React from "react";
-
+import clsx from "clsx";
+import { createMuiTheme } from "@material-ui/core/styles";
+import * as colors from "@material-ui/core/colors";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
+import Box from "@material-ui/core/Box";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import IconButton from "@material-ui/core/IconButton";
+import HomeIcon from "@material-ui/icons/Home";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const drawerWidth = 240;
 
@@ -185,11 +205,11 @@ const GenericTemplate: React.FC<GenericTemplateProps> = ({
         >
           <div className={classes.toolbarIcon}>
             <IconButton onClick={handleDrawerClose}>
-              {/* <ChevronLeftIcon /> */}
+              <ChevronLeftIcon />
             </IconButton>
           </div>
           <Divider />
-          {/* <List>
+          <List>
             <Link to="/" className={classes.link}>
               <ListItem button>
                 <ListItemIcon>
@@ -206,7 +226,7 @@ const GenericTemplate: React.FC<GenericTemplateProps> = ({
                 <ListItemText primary="商品ページ" />
               </ListItem>
             </Link>
-          </List> */}
+          </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
@@ -232,6 +252,3 @@ const GenericTemplate: React.FC<GenericTemplateProps> = ({
 };
 
 export default GenericTemplate;
-function clsx(appBar: string, arg1: string | boolean): string | undefined {
-  throw new Error("Function not implemented.");
-}

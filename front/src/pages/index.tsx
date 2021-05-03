@@ -15,7 +15,7 @@ const IndexPage = () => (
       <MenuIcon />
     </IconButton>
     <Typography variant="h6" >
-      News
+      New
     </Typography>
     <Button color="inherit">Login</Button>
   </Toolbar>
