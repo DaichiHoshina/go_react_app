@@ -1,0 +1,39 @@
+version: '3'
+services:
+  front:
+    container_name: front
+    build: ./front
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    tty: true
+    volumes:
+      - ./front:/usr/src/app
+    working_dir: "/usr/src/app"
+
+  backend:
+    container_name: backend
+    build: ./backend
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
+    tty: true
+    volumes:
+      - ./backend:/go/src/api
+
+  db:
+    image: mysql
+    command: >
+      mysqld
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db/mysql/volumes:/var/lib/mysql
