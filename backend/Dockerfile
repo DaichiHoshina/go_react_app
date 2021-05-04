@@ -1,8 +1,6 @@
-# ベースとなるDockerイメージ指定
-FROM golang:latest
-# コンテナ内に作業ディレクトリを作成
+FROM golang:1.16.3-alpine
 RUN mkdir /go/src/backend
-# コンテナログイン時のディレクトリ指定
 WORKDIR /go/src/backend
-# ホストのファイルをコンテナの作業ディレクトリに移行
 ADD . /go/src/backend
+RUN apk add --no-cache alpine-sdk git
+RUN GO111MODULE=on

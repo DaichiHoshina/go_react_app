@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   admin:
     container_name: admin
@@ -34,6 +34,7 @@ services:
     tty: true
     volumes:
       - ./backend:/go/src/api
+    working_dir: "/go/src/api"
 
   db:
     image: mysql
@@ -46,6 +47,6 @@ services:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql
