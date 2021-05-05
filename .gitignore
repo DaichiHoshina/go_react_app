@@ -8,3 +8,4 @@ worldplus-gym.iml
 codeStyleConfig.xml
 .pry_history
 db
+.env
