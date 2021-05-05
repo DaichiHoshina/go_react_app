@@ -23,7 +23,7 @@ package main
 import (
 	"os"
 
-	"./infrastructure"
+	"github.com/DaichiHoshina/go_react_app/tree/develop/backend/infrastructure"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
