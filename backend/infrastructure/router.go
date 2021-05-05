@@ -1,22 +1,19 @@
-package router
+package infrastructure
 
 import (
-	"net/http"
-
+	"github.com/DaichiHoshina/go_react_app/controllers"
 	"github.com/labstack/echo"
-	"github.com/selegee/app2/controller"
+	"gorm.io/gorm"
 )
 
-func Init() *echo.Echo {
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-
-	e.GET("/api/product/:id", controller.GetProduct)
-	e.POST("/api/product", controller.CreateProduct)
-	e.PUT("/api/product/:id", controller.UpdateProduct)
-	e.DELETE("/api/product/:id", controller.DeleteProduct)
-
-	return e
+// Init ルーティング設定
+func Init(e *echo.Echo, db *gorm.DB) {
+	api := e.Group("/api")
+	{
+		users := api.Group("/users")
+		{
+			users.GET("", controllers.GetUsers(db))
+			users.GET("/add", controllers.CreateUser(db))
+		}
+	}
 }

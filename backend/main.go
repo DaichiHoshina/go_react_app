@@ -1,29 +1,9 @@
-// package main
-
-// import (
-// 	"net/http"
-
-// 	"github.com/labstack/echo"
-// )
-
-// func main() {
-// 	e := echo.New()
-// 	e.GET("/users/:name", getUserName)
-// 	e.Logger.Fatal(e.Start(":3002"))
-
-// }
-
-// func getUserName(c echo.Context) error {
-// 	name := c.Param("name")
-// 	return c.String(http.StatusOK, name)
-// }
-
 package main
 
 import (
 	"os"
 
-	"github.com/DaichiHoshina/go_react_app/tree/develop/backend/infrastructure"
+	"github.com/DaichiHoshina/go_react_app/infrastructure"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -46,6 +26,10 @@ func main() {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.CORS())
+	// アクセス元を制限する場合は上記を消してこちらを使用
+	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	// 	AllowOrigins: []string{"(アクセスを許可するURL)"},
+	// }))
 
 	// DB Connect
 	db := infrastructure.Connect()
