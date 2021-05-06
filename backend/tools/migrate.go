@@ -16,4 +16,5 @@ func main() {
 	db := infrastructure.Connect()
 
 	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.Hospital{})
 }

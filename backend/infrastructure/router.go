@@ -8,12 +8,16 @@ import (
 
 // Init ルーティング設定
 func Init(e *echo.Echo, db *gorm.DB) {
-	api := e.Group("/api")
-	{
-		users := api.Group("/users")
+
+		users := e.Group("/users")
 		{
 			users.GET("", controllers.GetUsers(db))
-			users.GET("/add", controllers.CreateUser(db))
+			users.POST("", controllers.CreateUser(db))
 		}
-	}
+		hospitals := e.Group("/hospitals")
+		{
+			hospitals.GET("", controllers.GetHospitals(db))
+			hospitals.POST("/add", controllers.CreateHospital(db))
+		}
+
 }
