@@ -26,10 +26,6 @@ func main() {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.CORS())
-	// アクセス元を制限する場合は上記を消してこちらを使用
-	// e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-	// 	AllowOrigins: []string{"(アクセスを許可するURL)"},
-	// }))
 
 	// DB Connect
 	db := infrastructure.Connect()
