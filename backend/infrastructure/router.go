@@ -15,7 +15,7 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		users.GET("/:id", controllers.GetUser(db))
 		users.POST("", controllers.CreateUser(db))
 		users.PUT("/:id", controllers.UpdateUser(db))
-		// users.DELETE("/:id", controllers.DeleteUser(db))
+		users.DELETE("/:id", controllers.DeleteUser(db))
 	}
 
 	hospitals := e.Group("/hospitals")

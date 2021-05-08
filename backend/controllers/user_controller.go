@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/DaichiHoshina/go_react_app/model"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"
@@ -38,15 +40,12 @@ func CreateUser(db *gorm.DB) echo.HandlerFunc {
 
 func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
-
 		if id := c.Param("id"); id != "" {
 			var user []model.User
 			db.First(&user, id)
-			// newUser := new([]model.User)
-			// if err := c.Bind(newUser); err != nil {
-			// 	return err
-			// }
-			db.Model(&user).Update("name", "hello")
+			newUser := c.QueryParam("name")
+
+			db.Model(&user).Update("name", newUser)
 			return c.JSON(fasthttp.StatusOK, user)
 		} else {
 			return c.JSON(fasthttp.StatusNotFound, nil)
@@ -54,16 +53,15 @@ func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 	}
 }
 
-// func DeletePost(c echo.Context) error {
-// 	db := OpenSQLiteConnection()
-// 	defer db.Close()
-
-// 	if id := c.Param("id"); id != "" {
-// 		var post Post
-// 		db.First(&post, id)
-// 		db.Delete(post)
-// 		return c.JSON(http.StatusOK, post)
-// 	} else {
-// 		return c.JSON(http.StatusNotFound, nil)
-// 	}
-// }
+func DeleteUser(db *gorm.DB) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		if id := c.Param("id"); id != "" {
+			var user []model.User
+			db.First(&user, id)
+			db.Delete(&user)
+			return c.JSON(http.StatusOK, user)
+		} else {
+			return c.JSON(http.StatusNotFound, nil)
+		}
+	}
+}
