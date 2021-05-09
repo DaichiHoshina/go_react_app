@@ -1,11 +1,17 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { TUser, TUserState } from "../modules/User";
 import { fetchUsers } from "../services/User";
-import SampleMain from "../components/organisms/sample/SampleMain";
-import { TableBody, TableRow, TableCell } from "@material-ui/core";
-import Link from "next/link";
+import {
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  Table,
+  TableContainer,
+  TableHead,
+} from "@material-ui/core";
 
 export const UsersContext = createContext<{
   users?: UsersApiInterface;
@@ -44,22 +50,31 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <TableBody>
-        {state.userState?.users?.map((row, i) => {
-          return (
-            // <Link href={'/auth-accounts/' + row.userId} key={row.userId}>
-            <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-              <TableCell>
-                <Link href={"/auth-accounts/" + row.id}></Link>
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-      ;
-    </>
+    <div>
+      <Paper>
+        <TableContainer>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell style={{ minWidth: 140 }}>ユーザーID</TableCell>
+                <TableCell style={{ minWidth: 140 }}>氏名</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {state.userState?.users?.map((row) => {
+                return (
+                  // <Link href={'/auth-accounts/' + row.userId} key={row.userId}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    <TableCell>{row.id}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </div>
   );
 };
 

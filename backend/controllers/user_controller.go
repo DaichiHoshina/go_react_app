@@ -13,7 +13,9 @@ func GetUsers(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var users []model.User
 		db.Find(&users)
+		// arrayUser := model.Users{}
 		return c.JSON(fasthttp.StatusOK, users)
+		// return c.JSON(fasthttp.StatusOK, users)
 	}
 }
 

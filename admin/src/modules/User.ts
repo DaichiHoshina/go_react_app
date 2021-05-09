@@ -33,9 +33,8 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     // 通信成功時
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      debugger;
-      state.user = action.payload.users[0];
-      state.users = action.payload.users;
+      state.user = action.payload[0];
+      state.users = action.payload;
       state.loading = false;
       state.error = false;
     });

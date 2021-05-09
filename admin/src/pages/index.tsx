@@ -21,8 +21,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
-import { Provider } from "react-redux";
-import store from "../store";
 import Home from "./sample";
 
 const drawerWidth = 240;
@@ -91,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MiniDrawer() {
+const MedicalInstitutionListPage: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -170,4 +168,6 @@ export default function MiniDrawer() {
       </main>
     </div>
   );
-}
+};
+
+export default MedicalInstitutionListPage;

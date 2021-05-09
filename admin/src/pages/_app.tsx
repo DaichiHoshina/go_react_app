@@ -31,7 +31,9 @@ function MyApp({ Component, pageProps }: AppProps): any {
 
   return (
     <Provider store={store()}>
-      <Component {...pageProps} />
+      <>
+        <Component {...pageProps} />
+      </>
     </Provider>
   );
 }
