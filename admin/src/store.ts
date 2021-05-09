@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
-import logger from 'redux-logger';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { userSlice, initialState as userInitialState } from './modules/User';
+import { combineReducers } from "redux";
+import logger from "redux-logger";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { userSlice, initialState as userInitialState } from "./modules/User";
 
 const rootReducer = combineReducers({
   userState: userSlice.reducer,
@@ -17,7 +17,7 @@ const store = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: middlewareList,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production",
     preloadedState: preloadedState(),
   });
 };

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers } from '../services/User';
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchUsers } from "../services/User";
 
 // state
 export type TUser = {
@@ -22,17 +22,18 @@ export const initialState: TUserState = {
   users: [],
   loading: false,
   error: false,
-  errorMessage: '',
+  errorMessage: "",
 };
 
 // createSlice(action, reducer)
 export const userSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     // 通信成功時
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      debugger;
       state.user = action.payload.users[0];
       state.users = action.payload.users;
       state.loading = false;

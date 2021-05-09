@@ -21,6 +21,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
+import { Provider } from "react-redux";
+import store from "../store";
+import Home from "./sample";
 
 const drawerWidth = 240;
 
@@ -162,7 +165,7 @@ export default function MiniDrawer() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
-          これはテスト文章です！これはテスト文章です！これはテスト文章です！これはテスト文章です！
+          <Home />
         </Typography>
       </main>
     </div>
