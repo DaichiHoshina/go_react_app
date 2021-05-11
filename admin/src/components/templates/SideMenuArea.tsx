@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 import { useRouter } from "next/router";

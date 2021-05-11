@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { createMuiTheme } from "@material-ui/core/styles";
 import * as colors from "@material-ui/core/colors";
@@ -50,6 +50,12 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    if (sideMenuRef.current !== null) {
+      setSideMenuWidth(sideMenuRef.current.clientWidth);
+    }
+  });
+
   return (
     <div className="min-h-screen bg-blue-50">
       <CssBaseline />
@@ -68,50 +74,26 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer open={isOpen} variant="persistent" anchor="left">
-        <div ref={sideMenuRef} />
-        {/* <List>
-          <Link href="/">
-            <ListItem button>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="トップページ" />
-            </ListItem>
-          </Link>
-          <Link href="/">
-            <ListItem button>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="トップページ" />
-            </ListItem>
-          </Link>
-          <Link href="/users">
-            <ListItem button>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary="ユーザー管理" />
-            </ListItem>
-          </Link>
-        </List> */}
-        <SideMenuArea />
-      </Drawer>
       <div
         style={{
           paddingLeft:
             isOpen && !router.pathname.includes("/login") ? sideMenuWidth : 0,
         }}
       >
-        <Typography component="h2" variant="h5" color="inherit">
-          {title}
-        </Typography>
-        <div className="p-10">{children}</div>
+        <div className="p-5">
+          <Typography component="h2" variant="h5" color="inherit">
+            {title}
+          </Typography>
+          {children}
+        </div>
       </div>
-      <Box pt={8}>
+      <Box className="pt-8">
         <Copyright />
       </Box>
+      <Drawer open={isOpen} variant="persistent" anchor="left">
+        <div ref={sideMenuRef} />
+        <SideMenuArea />
+      </Drawer>
     </div>
   );
 };

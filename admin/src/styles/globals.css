@@ -1,9 +1,11 @@
 @tailwind base;
+
 @tailwind components;
+
 @tailwind utilities;
 
 &::after {
-  content: '';
+  content: "";
   display: table;
   clear: both;
 }

@@ -1,4 +1,4 @@
-import "tailwindcss/tailwind.css";
+import "../styles/tailwind.css";
 import "../styles/globals.css";
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
@@ -10,6 +10,10 @@ function MyApp({ Component, pageProps }: AppProps): any {
   return (
     <Provider store={store()}>
       <Component {...pageProps} />
+      <div className="min-h-screen flex justify-center items-center">
+        Weather Application
+      </div>
+      ;
     </Provider>
   );
 }
