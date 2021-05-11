@@ -86,7 +86,6 @@ const UsersList: React.FC = () => {
                         <a className="text-blue-600">{row.id}</a>
                       </Link>
                     </TableCell>
-
                     <TableCell>{row.name}</TableCell>
                   </TableRow>
                 );

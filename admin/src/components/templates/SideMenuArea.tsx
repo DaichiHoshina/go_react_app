@@ -23,12 +23,7 @@ const SideMenuArea: React.FC = (): JSX.Element => {
         <List>
           {navLinkInfos.map((linkInfo) => (
             <Link href={linkInfo.url} key={linkInfo.text}>
-              <div
-                className={
-                  router.pathname.includes(linkInfo.url) ? "bg-gray-300" : ""
-                }
-                key={linkInfo.text}
-              >
+              <div key={linkInfo.text}>
                 <ListItem button key={linkInfo.url}>
                   <ListItemText primary={linkInfo.text} />
                 </ListItem>
