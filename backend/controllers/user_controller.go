@@ -33,8 +33,13 @@ func GetUser(db *gorm.DB) echo.HandlerFunc {
 
 func CreateUser(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		userName := c.QueryParam("name")
-		user := model.User{Name: userName}
+		post := new(model.User)
+		// userName := c.FormValue("name")
+		if err := c.Bind(post); err != nil {
+			return err
+	}
+	// user := h.userModel.Create(post.Name, post.Id);
+		user := model.User{Name: post.Name}
 		db.Create(&user)
 		return c.JSON(fasthttp.StatusOK, user)
 	}

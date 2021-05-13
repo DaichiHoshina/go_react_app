@@ -1,7 +1,13 @@
-import { InputAdornment, TextField, IconButton } from '@material-ui/core';
-import React, { FC, useState } from 'react';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { FormikErrors, FormikProps, FormikState, FormikTouched, useFormik } from 'formik';
+import { InputAdornment, TextField, IconButton } from "@material-ui/core";
+import React, { FC, useState } from "react";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import {
+  FormikErrors,
+  FormikProps,
+  FormikState,
+  FormikTouched,
+  useFormik,
+} from "formik";
 
 interface Props {
   isSubmit?: boolean;
@@ -40,19 +46,21 @@ interface Props {
 const TextFieldParts: FC<Props> = ({
   isSubmit = false,
   fullWidth = true,
-  label = '',
-  name = '',
+  label = "",
+  name = "",
   isPasswordForm = false,
-  className = 'w-full',
+  className = "w-full",
   multiline = false,
   rows = 1,
-  placeholder = '',
+  placeholder = "",
   formik,
-  type = 'text',
+  type = "text",
   directErrorMessage,
 }: Props) => {
-  const [sampleValue, setSampleValue] = useState('');
-  const [isShowPassword, setIsShowPassword] = useState(isPasswordForm ? false : true);
+  const [sampleValue, setSampleValue] = useState("");
+  const [isShowPassword, setIsShowPassword] = useState(
+    isPasswordForm ? false : true
+  );
   // const returnInfoAndErrorMessage = (infoMessages: string[] = [], errorMessages: string[] = []) => {
   //   return returnBreakMessage(infoMessages.concat(errorMessages));
   // };
@@ -80,7 +88,7 @@ const TextFieldParts: FC<Props> = ({
         rows={rows}
         fullWidth={fullWidth}
         placeholder={placeholder}
-        type={isShowPassword ? type : 'password'}
+        type={isShowPassword ? type : "password"}
         // TODO: 削除。formik && は暫定で設定している。各フォームにpropsとしてformikを設定した段階で取り除く。
         value={formik?.values[name]}
         onChange={formik?.handleChange}
@@ -118,6 +126,8 @@ const TextFieldParts: FC<Props> = ({
 // export default TextFieldParts;
 
 export default React.memo(TextFieldParts, (prevProps, nextProps) => {
-  prevProps.formik?.values[prevProps.name] === nextProps.formik?.values[nextProps.name] &&
-    prevProps.formik?.errors[prevProps.name] === nextProps.formik?.errors[nextProps.name];
+  prevProps.formik?.values[prevProps.name] ===
+    nextProps.formik?.values[nextProps.name] &&
+    prevProps.formik?.errors[prevProps.name] ===
+      nextProps.formik?.errors[nextProps.name];
 });

@@ -41,17 +41,6 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
-// export const fetchUser = async (id: string): Promise<TUser | undefined> => {
-//   try {
-//     const url = `http://localhost:3002/users/${id}`;
-//     // TODO: intercepterの実装。
-//     const response = await axios.get(url);
-//     return response.data;
-//   } catch (error) {
-//     //   return thunkAPI.rejectWithValue({ errorMessage: error.message });
-//   }
-// };
-
 export const createUser = createAsyncThunk(
   "users/createUser",
   async (arg: { user?: TUser }, thunkAPI) => {
@@ -61,9 +50,8 @@ export const createUser = createAsyncThunk(
 
     try {
       const url = `http://localhost:3002/users`;
-      const response = await axios.post(url, {
-        user: postUser,
-      });
+      debugger;
+      const response = await axios.post(url, postUser);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });

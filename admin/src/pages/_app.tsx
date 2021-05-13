@@ -10,10 +10,6 @@ function MyApp({ Component, pageProps }: AppProps): any {
     <SnackbarProvider>
       <Provider store={store()}>
         <Component {...pageProps} />
-        <div className="min-h-screen flex justify-center items-center">
-          Weather Application
-        </div>
-        ;
       </Provider>
     </SnackbarProvider>
   );

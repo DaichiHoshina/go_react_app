@@ -15,6 +15,7 @@ import {
   Link,
 } from "@material-ui/core";
 import Layout from "../../components/Layout";
+import RecordAddLinkButton from "../../components/atoms/share/RecordAddLinkButton";
 
 export const UsersContext = createContext<{
   users?: UsersApiInterface;
@@ -68,6 +69,9 @@ const UsersList: React.FC = () => {
 
   return (
     <Layout title="ユーザー一覧">
+      <div className="flex justify-end mb-5">
+        <RecordAddLinkButton pathString="users" />
+      </div>
       <Paper className={classes.root}>
         <TableContainer>
           <Table className={classes.table}>
