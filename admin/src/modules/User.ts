@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUsers } from "../services/User";
+import {
+  createUser,
+  deleteUser,
+  fetchUser,
+  fetchUsers,
+} from "../services/User";
 
 // state
 export type TUser = {
@@ -46,6 +51,24 @@ export const userSlice = createSlice({
     builder.addCase(fetchUsers.rejected, (state, action) => {
       state.error = true;
       state.errorMessage = (action.payload as any)!.errorMessage;
+    });
+
+    // ユーザー取得
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      state.user = action.payload?.[0];
+      state.error = false;
+    });
+
+    // ユーザー登録/更新
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      console.log("ユーザー登録/更新");
+      state.error = false;
+    });
+
+    // ユーザー削除
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      console.log("ユーザー削除");
+      state.error = false;
     });
   },
 });

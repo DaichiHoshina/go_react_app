@@ -32,7 +32,7 @@ export const fetchUser = createAsyncThunk(
   async (arg: { id?: number }, thunkAPI) => {
     const { id } = arg;
     try {
-      const url = `${process.env.API_URL}/users/${id}`;
+      const url = `http://localhost:3002/users/${id}`;
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
@@ -41,17 +41,28 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
+// export const fetchUser = async (id: string): Promise<TUser | undefined> => {
+//   try {
+//     const url = `http://localhost:3002/users/${id}`;
+//     // TODO: intercepterの実装。
+//     const response = await axios.get(url);
+//     return response.data;
+//   } catch (error) {
+//     //   return thunkAPI.rejectWithValue({ errorMessage: error.message });
+//   }
+// };
+
 export const createUser = createAsyncThunk(
   "users/createUser",
-  async (arg: { unitGroup?: TUser }, thunkAPI) => {
-    const { unitGroup } = arg;
+  async (arg: { user?: TUser }, thunkAPI) => {
+    const { user } = arg;
 
-    const postUser = Object.assign({}, unitGroup!);
+    const postUser = Object.assign({}, user!);
 
     try {
-      const url = `${process.env.API_URL}/users`;
+      const url = `http://localhost:3002/users`;
       const response = await axios.post(url, {
-        tbm_unit_group: postUser,
+        user: postUser,
       });
       return response.data;
     } catch (error) {
@@ -62,11 +73,12 @@ export const createUser = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
-  async (arg: { id?: number }, thunkAPI) => {
+  async (arg: { id?: string }, thunkAPI) => {
     const { id } = arg;
     try {
-      const url = `${process.env.API_URL}/users/${id}`;
+      const url = `http://localhost:3002/users/${id}`;
       const response = await axios.delete(url);
+      debugger;
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });
