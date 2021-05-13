@@ -50,8 +50,25 @@ export const createUser = createAsyncThunk(
 
     try {
       const url = `http://localhost:3002/users`;
-      debugger;
       const response = await axios.post(url, postUser);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ errorMessage: error.message });
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "users/ updateUser",
+  async (arg: { id?: string; user?: TUser }, thunkAPI) => {
+    const { user } = arg;
+    const { id } = arg;
+
+    const postUser = Object.assign({}, user!);
+
+    try {
+      const url = `http://localhost:3002/users/${id}`;
+      const response = await axios.put(url, postUser);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });
@@ -66,7 +83,6 @@ export const deleteUser = createAsyncThunk(
     try {
       const url = `http://localhost:3002/users/${id}`;
       const response = await axios.delete(url);
-      debugger;
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });

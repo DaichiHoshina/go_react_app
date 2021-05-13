@@ -34,11 +34,9 @@ func GetUser(db *gorm.DB) echo.HandlerFunc {
 func CreateUser(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		post := new(model.User)
-		// userName := c.FormValue("name")
 		if err := c.Bind(post); err != nil {
 			return err
 	}
-	// user := h.userModel.Create(post.Name, post.Id);
 		user := model.User{Name: post.Name}
 		db.Create(&user)
 		return c.JSON(fasthttp.StatusOK, user)
@@ -50,9 +48,14 @@ func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 		if id := c.Param("id"); id != "" {
 			var user []model.User
 			db.First(&user, id)
-			newUser := c.QueryParam("name")
+			post := new(model.User)
 
-			db.Model(&user).Update("name", newUser)
+			if err := c.Bind(post); err != nil {
+				return err
+		}
+			// newUser := c.QueryParam("name")
+
+			db.Model(&user).Update("name", post.Name)
 			return c.JSON(fasthttp.StatusOK, user)
 		} else {
 			return c.JSON(fasthttp.StatusNotFound, nil)

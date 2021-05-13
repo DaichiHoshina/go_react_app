@@ -4,6 +4,7 @@ import {
   deleteUser,
   fetchUser,
   fetchUsers,
+  updateUser,
 } from "../services/User";
 
 // state
@@ -59,14 +60,20 @@ export const userSlice = createSlice({
       state.error = false;
     });
 
-    // ユーザー登録/更新
-    builder.addCase(createUser.fulfilled, (state, action) => {
-      console.log("ユーザー登録/更新");
+    // ユーザー登録
+    builder.addCase(createUser.fulfilled, (state) => {
+      console.log("ユーザー登録");
+      state.error = false;
+    });
+
+    // ユーザー更新
+    builder.addCase(updateUser.fulfilled, (state) => {
+      console.log("ユーザー更新");
       state.error = false;
     });
 
     // ユーザー削除
-    builder.addCase(deleteUser.fulfilled, (state, action) => {
+    builder.addCase(deleteUser.fulfilled, (state) => {
       console.log("ユーザー削除");
       state.error = false;
     });
