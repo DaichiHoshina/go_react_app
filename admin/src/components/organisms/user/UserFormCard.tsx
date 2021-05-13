@@ -29,17 +29,15 @@ const UserFormCard: React.FC<Props> = ({
 
   useEffect(() => {
     dispatch(fetchUser({ id: id }));
+  }, [router.query]);
+
+  useEffect(() => {
     if (state?.userState?.user) {
       formik.setValues(state?.userState?.user!);
     }
-  }, [router.query]);
+  }, [state?.userState?.user]);
 
-  useEffect(() => {}, []);
-
-  interface tempPassword {
-    password2?: string;
-  }
-  const formik = useFormik<TUser & tempPassword>({
+  const formik = useFormik<TUser>({
     initialValues: {},
     onSubmit: async (values) => {
       const response = (await isEditPage)

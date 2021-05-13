@@ -1,13 +1,7 @@
 import { InputAdornment, TextField, IconButton } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import {
-  FormikErrors,
-  FormikProps,
-  FormikState,
-  FormikTouched,
-  useFormik,
-} from "formik";
+import { useFormik } from "formik";
 
 interface Props {
   isSubmit?: boolean;
@@ -22,26 +16,8 @@ interface Props {
   placeholder?: string;
   formik?: ReturnType<typeof useFormik>;
   type?: string;
-  // 直接指定するコンポーネント外から直接指定するエラーメッセージ。
   directErrorMessage?: string;
 }
-
-// interface formikType {
-//   initialValues: {
-// userId: string;
-// password: string;
-// };
-// initialErrors: FormikErrors<unknown>;
-// initialTouched: FormikTouched<unknown>;
-// initialStatus: any;
-// handleBlur: {
-// (e: React.FocusEvent<any>): void;
-// <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-// };
-// ... 32 more ...;
-// submitCount: number;
-// }
-// }
 
 const TextFieldParts: FC<Props> = ({
   isSubmit = false,
@@ -57,23 +33,9 @@ const TextFieldParts: FC<Props> = ({
   type = "text",
   directErrorMessage,
 }: Props) => {
-  const [sampleValue, setSampleValue] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(
     isPasswordForm ? false : true
   );
-  // const returnInfoAndErrorMessage = (infoMessages: string[] = [], errorMessages: string[] = []) => {
-  //   return returnBreakMessage(infoMessages.concat(errorMessages));
-  // };
-
-  // const returnBreakMessage = (messages: string[] = []) => {
-  //   return (
-  //     <div>
-  //       {messages.map((message) => (
-  //         <p key={message}>{message}</p>
-  //       ))}
-  //     </div>
-  //   );
-  // };
 
   const handleClickShowPassword = () => setIsShowPassword(!isShowPassword);
 
@@ -89,13 +51,9 @@ const TextFieldParts: FC<Props> = ({
         fullWidth={fullWidth}
         placeholder={placeholder}
         type={isShowPassword ? type : "password"}
-        // TODO: 削除。formik && は暫定で設定している。各フォームにpropsとしてformikを設定した段階で取り除く。
         value={formik?.values[name]}
         onChange={formik?.handleChange}
         onBlur={formik?.handleBlur}
-        // 多分不要だけど、とりあえず取っといている。
-        // error={isSubmit && true}
-        // helperText={returnInfoAndErrorMessage()}
         error={Boolean(formik?.errors[name])}
         helperText={formik?.errors[name]}
         inputProps={{
