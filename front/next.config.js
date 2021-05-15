@@ -1,6 +1,15 @@
 require("dotenv").config();
 
 module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/posts",
+        permanent: true,
+      },
+    ];
+  },
   typescript: {
     // TODO: プロジェクトに型エラーがあったとしても、プロダクションビルドを正常に完了するために危険な許可をする。
     ignoreBuildErrors: true,

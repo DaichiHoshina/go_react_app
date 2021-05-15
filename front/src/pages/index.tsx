@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/Layout";
 
 const HomePage: React.FC = () => {
-  return <Layout title="トップページ">トップページ内容</Layout>;
+  return <Layout title=""></Layout>;
 };
 
 export default HomePage;
