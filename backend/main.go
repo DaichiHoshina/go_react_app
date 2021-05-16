@@ -1,29 +1,9 @@
-// package main
-
-// import (
-// 	"net/http"
-
-// 	"github.com/labstack/echo"
-// )
-
-// func main() {
-// 	e := echo.New()
-// 	e.GET("/users/:name", getUserName)
-// 	e.Logger.Fatal(e.Start(":3002"))
-
-// }
-
-// func getUserName(c echo.Context) error {
-// 	name := c.Param("name")
-// 	return c.String(http.StatusOK, name)
-// }
-
 package main
 
 import (
 	"os"
 
-	"github.com/DaichiHoshina/go_react_app/tree/develop/backend/infrastructure"
+	"github.com/DaichiHoshina/go_react_app/infrastructure"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

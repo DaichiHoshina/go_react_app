@@ -1,28 +1,28 @@
 version: "3"
 services:
-  admin:
-    container_name: admin
-    build: ./admin
-    ports:
-      - 3000:3000
-    depends_on:
-      - backend
-    tty: true
-    volumes:
-      - ./admin:/usr/src/app
-    working_dir: "/usr/src/app"
+  # admin:
+  #   container_name: admin
+  #   build: ./admin
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - backend
+  #   tty: true
+  #   volumes:
+  #     - ./admin:/usr/src/app
+  #   working_dir: "/usr/src/app"
 
-  front:
-    container_name: front
-    build: ./front
-    ports:
-      - 3001:3001
-    depends_on:
-      - backend
-    tty: true
-    volumes:
-      - ./front:/usr/src/app
-    working_dir: "/usr/src/app"
+  # front:
+  #   container_name: front
+  #   build: ./front
+  #   ports:
+  #     - 3001:3001
+  #   depends_on:
+  #     - backend
+  #   tty: true
+  #   volumes:
+  #     - ./front:/usr/src/app
+  #   working_dir: "/usr/src/app"
 
   backend:
     container_name: backend
@@ -35,9 +35,16 @@ services:
     volumes:
       - ./backend:/go/src/api
     working_dir: "/go/src/api"
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: dockerMySQL
 
   db:
     image: mysql
+    container_name: dockerMySQL
     command: >
       mysqld
       --default-authentication-plugin=mysql_native_password
@@ -46,6 +53,8 @@ services:
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+      MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
