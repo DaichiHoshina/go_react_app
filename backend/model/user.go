@@ -8,6 +8,8 @@ type Users struct {
 }
 type User struct {
 	gorm.Model
-	Id   int    `json:"id" gorm:"primary_key;AUTO_INCREMENT"`
-	Name string `json:"name"`
+	ID        uint   `json:"id"`
+	Name      string `json:"name"`
+	Email     string `gorm:"unique"`
+	Password  string `json:"password"`
 }

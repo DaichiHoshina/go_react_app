@@ -9,6 +9,11 @@ import (
 // ルーティング設定
 func Init(e *echo.Echo, db *gorm.DB) {
 
+	auth := e.Group("/auth")
+	{
+		auth.POST("", controllers.Register(db))
+	}
+
 	users := e.Group("/users")
 	{
 		users.GET("", controllers.GetUsers(db))
