@@ -9,3 +9,4 @@ codeStyleConfig.xml
 .pry_history
 db
 .env
+backend/tmp/build-errors.log

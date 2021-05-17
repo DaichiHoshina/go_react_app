@@ -13,6 +13,8 @@ func Init(e *echo.Echo, db *gorm.DB) {
 	{
 		auth.POST("", controllers.Register(db))
 		auth.POST("/login", controllers.Login(db))
+		auth.GET("/user", controllers.User(db))
+		auth.GET("/logout", controllers.Logout(db))
 	}
 
 	users := e.Group("/users")
