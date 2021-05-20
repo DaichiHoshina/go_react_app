@@ -5,9 +5,6 @@ import { Provider } from "react-redux";
 import store from "../store";
 import { SnackbarProvider } from "notistack";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import Axios from 'axios';
-
-Axios.defaults.withCredentials = true
 
 function MyApp({ Component, pageProps }: AppProps): any {
   const darkTheme = createMuiTheme({
