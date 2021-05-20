@@ -21,15 +21,16 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false);
 
+  // ログイン中か確認する
+  const userLoginConfirm = async () => {
+    const result = await dispatch(loginConfirm());
+    const user: TUser = result.payload?.data;
+    setIsLogin(!!user);
+  };
+
   useEffect(() => {
-    const result = dispatch(loginConfirm());
-    if (result.payload?.status === 200) {
-      console.log("ログイン中");
-      router.push("/posts");
-    } else {
-      console.log("ログインしていません");
-    }
-  }, [router.pathname]);
+    userLoginConfirm();
+  }, []);
 
   return (
     <div className="min-h-screen pt-10">
@@ -38,14 +39,18 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         position="fixed"
         style={{ zIndex: 1201, color: "#FFFFFF", backgroundColor: "#000000" }}
       >
-        <Toolbar variant="dense">
-          <Link href="/" color="inherit" underline="none">
-            <Typography variant="h6" color="inherit" className="flex-grow">
-              Repgram
-            </Typography>
-          </Link>
-          {isLogin && <HeaderUserIcon />}
-        </Toolbar>
+        <div className="flex">
+          <div>
+            <Toolbar variant="dense">
+              <Link href="/" color="inherit" underline="none">
+                <Typography variant="h6" color="inherit" className="flex-grow">
+                  Repgram
+                </Typography>
+              </Link>
+            </Toolbar>
+          </div>
+          <div className="ml-auto">{isLogin && <HeaderUserIcon />}</div>
+        </div>
       </AppBar>
       <div className="p-7">
         <Typography component="h2" variant="h6" color="inherit">

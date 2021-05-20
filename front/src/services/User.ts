@@ -130,10 +130,9 @@ export const loginConfirm = createAsyncThunk(
   "auth/loginConfirm",
   async (_, thunkAPI) => {
     try {
-      console.log("url", `${process.env.API_URL}/auth/user`);
       const url = `${process.env.API_URL}/auth/user`;
-      const response = axios.get(url);
-      return response;
+      const response = await axios.get(url);
+      return { status: response.status, data: response.data };
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue({ error: error.payload });

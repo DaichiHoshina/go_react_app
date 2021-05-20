@@ -50,19 +50,6 @@ const UserDetailCard: React.FC<Props> = () => {
         </ul>
         <SeparateHr />
         <div className="flex justify-end">
-          <DeleteButton
-            deleteFunc={async () => {
-              const response = await dispatch(
-                deleteUser({
-                  id: state.userState?.user?.id!,
-                })
-              );
-              if (response.payload?.[0]) {
-                enqueueSnackbar("削除しました。", { variant: "success" });
-                router.push("/users");
-              }
-            }}
-          />
           <div className="ml-5">
             <EditLinkButton />
           </div>
