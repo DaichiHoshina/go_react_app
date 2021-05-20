@@ -6,7 +6,7 @@ import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useRouter } from "next/router";
 import KeyValueColonPair from "../common/KeyValueColonPair";
 import { useFormik } from "formik";
-import { loginSchema } from "../../../const/validation";
+import { useSnackbar } from "notistack";
 interface Props {
   isSubmit: boolean;
 }
@@ -14,6 +14,7 @@ interface Props {
 const LoginForm: FC<Props> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -26,6 +27,9 @@ const LoginForm: FC<Props> = () => {
         // クッキーに保存
         // result.cookie("token", result.payload.data, { httpOnly: true });
         router.push("/posts");
+        enqueueSnackbar("ログインしました。", {
+          variant: "success",
+        });
       } else {
         // 認証失敗
         console.log("ログイン失敗");

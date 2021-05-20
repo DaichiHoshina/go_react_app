@@ -1,13 +1,13 @@
 import { IconButton } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { useDispatch } from "react-redux";
 import { TUser } from "../../../modules/User";
 import { useRouter } from "next/router";
-import { loginConfirm } from "../../../services/User";
+import { loginConfirm, logoutUser } from "../../../services/User";
+import { useSnackbar } from "notistack";
 
 const HeaderUserIcon: React.FC = () => {
   const router = useRouter();
@@ -16,6 +16,7 @@ const HeaderUserIcon: React.FC = () => {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -25,9 +26,19 @@ const HeaderUserIcon: React.FC = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const clickLogout = () => {
-    router.push("/auth/logout");
-    setAnchorEl(null);
+  const clickLogout = async () => {
+    const result = await dispatch(logoutUser());
+    if (result?.payload?.status === 200) {
+      enqueueSnackbar("ログアウトしました。", {
+        variant: "success",
+      });
+      router.push(`/login`);
+      setAnchorEl(null);
+    } else {
+      enqueueSnackbar("ログアウトに失敗しました。", {
+        variant: "error",
+      });
+    }
   };
 
   const clickUserSetting = () => {
@@ -46,14 +57,6 @@ const HeaderUserIcon: React.FC = () => {
   useEffect(() => {
     userLoginConfirm();
   }, []);
-
-  useEffect(() => {
-    // const user = localStorage.getItem('tbmUser');
-
-    return () => {
-      //
-    };
-  }, [router.pathname]);
 
   return (
     <>

@@ -140,6 +140,10 @@ func Logout(db *gorm.DB) echo.HandlerFunc {
 		cookie := new(http.Cookie)
 		cookie.Name = "jwt"
 		cookie.Value = ""
+		cookie.Path = "/"
+		cookie.Secure = true
+		cookie.HttpOnly = true
+		cookie.SameSite = http.SameSiteNoneMode
 		cookie.Expires = time.Now().Add(-time.Hour) // マイナス値を入れて期限切れにする
 		c.SetCookie(cookie)
 

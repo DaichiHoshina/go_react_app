@@ -2,7 +2,7 @@ import { Card } from "@material-ui/core";
 import Router, { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { TUser, TUserState } from "../../../modules/User";
-import { deleteUser, fetchUser } from "../../../services/User";
+import { deleteUser, fetchUser, loginConfirm } from "../../../services/User";
 import DeleteButton from "../../atoms/share/DeleteButton";
 import EditLinkButton from "../../atoms/share/EditLinkButton";
 import SeparateHr from "../../atoms/share/SeparateHr";
@@ -21,10 +21,23 @@ const UserDetailCard: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);
   const { enqueueSnackbar } = useSnackbar();
+  const [userId, setUserId] = useState("");
+
+  // アクセス制限
+  const userLoginConfirm = async () => {
+    await dispatch(fetchUser({ id: id }));
+    const result = await dispatch(loginConfirm());
+    if (id != result.payload?.data.id) {
+      router.push("/posts");
+      enqueueSnackbar("権限のないページにアクセスしました", {
+        variant: "error",
+      });
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchUser({ id: id }));
-  }, [router.query]);
+    userLoginConfirm();
+  }, []);
 
   return (
     <>

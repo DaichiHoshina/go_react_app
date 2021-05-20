@@ -113,11 +113,11 @@ export const loginUser = createAsyncThunk(
 
 // ログアウト処理
 export const logoutUser = createAsyncThunk(
-  "users/logout",
+  "auth/logout",
   async (_, thunkAPI) => {
     try {
       const url = `${process.env.API_URL}/auth/logout`;
-      const response = await axios.delete(url);
+      const response = await axios.get(url);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });

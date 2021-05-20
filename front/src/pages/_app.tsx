@@ -21,7 +21,12 @@ function MyApp({ Component, pageProps }: AppProps): any {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <SnackbarProvider>
+      <SnackbarProvider
+        maxSnack={5}
+        anchorOrigin={{ horizontal: "right", vertical: "top" }}
+        variant="error"
+        autoHideDuration={3000}
+      >
         <Provider store={store()}>
           <Component {...pageProps} />
         </Provider>
