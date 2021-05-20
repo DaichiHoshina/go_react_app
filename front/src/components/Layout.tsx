@@ -9,6 +9,8 @@ import Footer from "./organisms/common/Footer";
 import { Link } from "@material-ui/core";
 import { TUser } from "../modules/User";
 import HeaderUserIcon from "../components/atoms/share/HeaderUserIcon";
+import { loginConfirm } from "../services/User";
+import { useDispatch } from "react-redux";
 export interface LayoutProps {
   children: React.ReactNode;
   title: string;
@@ -16,15 +18,17 @@ export interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const user: TUser =
-      localStorage && JSON.parse(localStorage.getItem("token") ?? '""');
-    setIsLogin(!!user);
-    return () => {
-      // cleanup
-    };
+    const result = dispatch(loginConfirm());
+    if (result.payload?.status === 200) {
+      console.log("ログイン中");
+      router.push("/posts");
+    } else {
+      console.log("ログインしていません");
+    }
   }, [router.pathname]);
 
   return (
@@ -40,8 +44,8 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
               Repgram
             </Typography>
           </Link>
+          {isLogin && <HeaderUserIcon />}
         </Toolbar>
-        {isLogin && <HeaderUserIcon />}
       </AppBar>
       <div className="p-7">
         <Typography component="h2" variant="h6" color="inherit">

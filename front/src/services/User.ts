@@ -102,7 +102,6 @@ export const loginUser = createAsyncThunk(
         email: loginForm.email,
         password: loginForm.password,
       });
-      debugger;
 
       return { status: response.status, data: response.data };
     } catch (error) {
@@ -122,6 +121,22 @@ export const logoutUser = createAsyncThunk(
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });
+    }
+  }
+);
+
+// ログイン確認
+export const loginConfirm = createAsyncThunk(
+  "auth/loginConfirm",
+  async (_, thunkAPI) => {
+    try {
+      console.log("url", `${process.env.API_URL}/auth/user`);
+      const url = `${process.env.API_URL}/auth/user`;
+      const response = axios.get(url);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({ error: error.payload });
     }
   }
 );

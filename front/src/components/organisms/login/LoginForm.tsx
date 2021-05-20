@@ -15,27 +15,16 @@ const LoginForm: FC<Props> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("ログイン情報削除");
-    localStorage.removeItem("token");
-    localStorage.removeItem("tbmUser");
-  }, [router.pathname]);
-
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     // validationSchema: loginSchema,
     onSubmit: async (values) => {
       const result = await dispatch(loginUser({ loginForm: values }));
-      debugger;
       if (result.payload.status === 200) {
-        // ログイン成功
-        const token = result.payload.data.app_token;
-        const tbmUser = result.payload.data.tbm_asp_user;
-        // トークン、ASPユーザー情報保持
-        localStorage.setItem("token", token);
-        localStorage.setItem("tbmUser", JSON.stringify(tbmUser));
         console.log("ログイン成功");
         console.log(result.payload.data);
+        // クッキーに保存
+        // result.cookie("token", result.payload.data, { httpOnly: true });
         router.push("/posts");
       } else {
         // 認証失敗

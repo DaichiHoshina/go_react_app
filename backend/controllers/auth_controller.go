@@ -2,6 +2,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -37,9 +38,13 @@ func Register(db *gorm.DB) echo.HandlerFunc {
 
 func Login(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
+
 		post := new(model.User)
 		if err := c.Bind(post); err != nil {
-			return err
+			jsonMap := map[string]string{
+				"message": "post error",
+			}
+			return c.JSON(http.StatusNotFound, jsonMap)
 		}
 		var user model.User
 
@@ -78,8 +83,14 @@ func Login(db *gorm.DB) echo.HandlerFunc {
 		cookie := new(http.Cookie)
 		cookie.Name = "jwt"
 		cookie.Value = token
+		cookie.SameSite = http.SameSiteNoneMode
+		cookie.Path = "/"
 		cookie.Expires = time.Now().Add(24 * time.Hour)
+		cookie.Secure = true
+		cookie.HttpOnly = true
 		c.SetCookie(cookie)
+
+		fmt.Println(c.Cookie("jwt"))
 
 		return c.JSON(fasthttp.StatusOK, token)
 	}
@@ -91,9 +102,14 @@ type Claims struct {
 
 func User(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
+
+		// cookie取得
 		cookie, err := c.Cookie("jwt")
 		if err != nil {
-			return err
+			jsonMap := map[string]string{
+				"message": "cookie is not found",
+			}
+			return c.JSON(http.StatusNotFound, jsonMap)
 		}
 
 		// token取得
