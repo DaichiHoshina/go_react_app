@@ -64,7 +64,7 @@ const UserFormCard: React.FC<Props> = ({
       <Card className="p-5 w-4/5">
         <ul className="flex flex-col space-y-2">
           <KeyValuePair
-            keyName="氏名"
+            keyName="name"
             value={
               <div className="flex">
                 <TextFieldParts name="name" formik={formik} />

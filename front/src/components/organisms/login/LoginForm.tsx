@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import KeyValueColonPair from "../common/KeyValueColonPair";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
+import { TUser } from "../../../modules/User";
 interface Props {
   isSubmit: boolean;
 }
@@ -22,37 +23,51 @@ const LoginForm: FC<Props> = () => {
     onSubmit: async (values) => {
       const result = await dispatch(loginUser({ loginForm: values }));
       if (result.payload.status === 200) {
-        console.log("ログイン成功");
-        console.log(result.payload.data);
-        // クッキーに保存
-        // result.cookie("token", result.payload.data, { httpOnly: true });
         router.push("/posts");
-        enqueueSnackbar("ログインしました。", {
+        enqueueSnackbar("Welcome!!", {
           variant: "success",
         });
       } else {
-        // 認証失敗
-        console.log("ログイン失敗");
-        console.log(result.payload.data);
-        //handleToastOpen('error');
+        enqueueSnackbar("Failure...", {
+          variant: "error",
+        });
       }
     },
   });
+
+  const testValues: TUser = {
+    email: "test@test.jp",
+    password: "test1234",
+  };
+
+  const testUserLogin = async () => {
+    const result = await dispatch(loginUser({ loginForm: testValues }));
+    if (result.payload.status === 200) {
+      router.push("/posts");
+      enqueueSnackbar("Welcome!!", {
+        variant: "success",
+      });
+    } else {
+      enqueueSnackbar("Failure...", {
+        variant: "error",
+      });
+    }
+  };
 
   return (
     <Card
       className="flex-item flex flex-col px-8 py-12 w-1/2 max-w-5xl"
       style={{ color: "#ffffff", backgroundColor: "#242323" }}
     >
-      <h1 className="pb-8 text-center text-xl">ログイン</h1>
+      <h1 className="pb-8 text-center text-xl">Sign In</h1>
       <form action="" onSubmit={formik.handleSubmit}>
         <ul className="pb-10 space-y-3">
           <KeyValueColonPair
-            keyName="メールアドレス"
+            keyName="email"
             value={<TextFieldParts name="email" formik={formik} />}
           />
           <KeyValueColonPair
-            keyName="パスワード"
+            keyName="password"
             value={
               <TextFieldParts
                 name="password"
@@ -69,8 +84,20 @@ const LoginForm: FC<Props> = () => {
           fullWidth
           className="border-none ring-transparent"
         >
-          ログイン
+          Login
         </Button>
+        <div className="mt-5">
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            className="border-none ring-transparent"
+            onClick={testUserLogin}
+          >
+            Login Test User!!
+          </Button>
+        </div>
+        <div>※ポートフォリオ閲覧用です</div>
       </form>
     </Card>
   );

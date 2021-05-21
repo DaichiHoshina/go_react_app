@@ -90,6 +90,28 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+// ユーザー登録処理
+export const signUpUser = createAsyncThunk(
+  "auth/signUp",
+  async (arg: { loginForm: any }, thunkAPI) => {
+    const { loginForm } = arg;
+    try {
+      console.log("url", `${process.env.API_URL}/auth`);
+      const url = `${process.env.API_URL}/auth`;
+      const response = await axios.post(url, {
+        name: loginForm.name,
+        email: loginForm.email,
+        password: loginForm.password,
+      });
+
+      return { status: response.status, data: response.data };
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({ error: error.payload });
+    }
+  }
+);
+
 // ログイン処理
 export const loginUser = createAsyncThunk(
   "auth/login",

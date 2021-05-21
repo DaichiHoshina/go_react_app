@@ -1,11 +1,9 @@
-import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal';
-import { useFormik, useFormikContext } from 'formik';
-import { useRouter } from 'next/router';
-import { returnDatetimeSecondString } from '../../../utils/DateUtil';
-import { waitForDebugger } from 'node:inspector';
+import React from "react";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
+import { useFormik, useFormikContext } from "formik";
+import { useRouter } from "next/router";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -25,14 +23,14 @@ function getModalStyle() {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      position: 'absolute',
+      position: "absolute",
       width: 400,
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
+      border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
-  }),
+  })
 );
 
 interface Props {
@@ -41,7 +39,10 @@ interface Props {
   // 設定をする
 }
 
-const CreateOrEditButton: React.FC<Props> = ({ isEditPage = false, formik }) => {
+const CreateOrEditButton: React.FC<Props> = ({
+  isEditPage = false,
+  formik,
+}) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -56,14 +57,19 @@ const CreateOrEditButton: React.FC<Props> = ({ isEditPage = false, formik }) => 
     setOpen(false);
   };
 
-  const buttonString = isEditPage ? '更新' : '登録';
+  const buttonString = isEditPage ? "UPDATE!" : "CREATE!";
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <p id="simple-modal-description">{buttonString}します。本当によろしいでしょうか。</p>
+      <p id="simple-modal-description">OK???</p>
       <div className="flex justify-between mt-10">
-        <Button variant="contained" color="primary" className="bg-red" onClick={handleClose}>
-          キャンセル
+        <Button
+          variant="contained"
+          color="primary"
+          className="bg-red"
+          onClick={handleClose}
+        >
+          CANCEL
         </Button>
         <Button
           variant="contained"

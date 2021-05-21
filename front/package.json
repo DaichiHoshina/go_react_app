@@ -23,6 +23,7 @@
     "axios": "^0.21.1",
     "axios-cookiejar-support": "^1.0.1",
     "cookie-parser": "^1.4.5",
+    "dayjs": "^1.10.4",
     "dotenv-webpack": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",

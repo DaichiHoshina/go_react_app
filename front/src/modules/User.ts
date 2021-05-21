@@ -11,8 +11,9 @@ import {
 export type TUser = {
   id?: string | null;
   name?: string | null;
-  createdAt?: Date | null;
-  updatedAt?: Date | null;
+  email?: string | null;
+  password?: string | null;
+  created_at?: Date | null;
 };
 
 export type TUserState = {

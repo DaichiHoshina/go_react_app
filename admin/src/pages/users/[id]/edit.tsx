@@ -6,7 +6,7 @@ import UserFormCard from "../../../components/organisms/user/UserFormCard";
 
 const UserEditArea: React.FC = () => {
   return (
-    <Layout title="ユーザー編集">
+    <Layout title="User Edit">
       <div className="flex justify-center m-5">
         <UserFormCard isEditPage={true} accountInfo={{}} />
       </div>

@@ -11,6 +11,7 @@ import { TUser } from "../modules/User";
 import HeaderUserIcon from "../components/atoms/share/HeaderUserIcon";
 import { loginConfirm } from "../services/User";
 import { useDispatch } from "react-redux";
+import LoginIcon from "./atoms/share/LoginIcon";
 export interface LayoutProps {
   children: React.ReactNode;
   title: string;
@@ -40,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         style={{ zIndex: 1201, color: "#FFFFFF", backgroundColor: "#000000" }}
       >
         <div className="flex">
-          <div>
+          <div className="mt-2">
             <Toolbar variant="dense">
               <Link href="/" color="inherit" underline="none">
                 <Typography variant="h6" color="inherit" className="flex-grow">
@@ -49,7 +50,9 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
               </Link>
             </Toolbar>
           </div>
-          <div className="ml-auto">{isLogin && <HeaderUserIcon />}</div>
+          <div className="ml-auto mt-2 mr-2">
+            {isLogin ? <HeaderUserIcon /> : <LoginIcon />}
+          </div>
         </div>
       </AppBar>
       <div className="p-7">
