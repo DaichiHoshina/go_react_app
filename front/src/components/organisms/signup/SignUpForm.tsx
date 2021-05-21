@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import KeyValueColonPair from "../common/KeyValueColonPair";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
+import { AccountCreateSchema } from "../../../const/validation";
 interface Props {
   isSubmit: boolean;
 }
@@ -18,6 +19,7 @@ const SignUpForm: FC<Props> = () => {
 
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },
+    validationSchema: AccountCreateSchema,
     onSubmit: async (values) => {
       const result = await dispatch(signUpUser({ loginForm: values }));
       if (result.payload.status === 200) {

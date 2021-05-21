@@ -10,6 +10,7 @@ import SeparateHr from "../../atoms/share/SeparateHr";
 import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
+import { UserSettingUpdateSchema } from "../../../const/validation";
 
 interface Props {
   isEditPage: boolean;
@@ -39,6 +40,7 @@ const UserFormCard: React.FC<Props> = ({
 
   const formik = useFormik<TUser>({
     initialValues: {},
+    validationSchema: UserSettingUpdateSchema,
     onSubmit: async (values) => {
       const response = (await isEditPage)
         ? dispatch(updateUser({ user: values, id: id }))
