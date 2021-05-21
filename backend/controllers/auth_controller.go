@@ -31,7 +31,37 @@ func Register(db *gorm.DB) echo.HandlerFunc {
 			Password: password,
 		}
 
-		db.Create(&user)
+		if result := db.Create(&user); result.Error != nil {
+			return c.JSON(http.StatusNotFound, result.Error)
+		}
+
+		// JWT
+		claims := jwt.StandardClaims{
+			Issuer:    strconv.Itoa(int(user.ID)),
+			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+		}
+		jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+		token, err := jwtToken.SignedString([]byte("secret"))
+		if err != nil {
+			jsonMap := map[string]string{
+				"message": "JWT error",
+			}
+			return c.JSON(http.StatusNotFound, jsonMap)
+		}
+
+		// Cookieをセット
+		cookie := new(http.Cookie)
+		cookie.Name = "jwt"
+		cookie.Value = token
+		cookie.SameSite = http.SameSiteNoneMode
+		cookie.Path = "/"
+		cookie.Expires = time.Now().Add(24 * time.Hour)
+		cookie.Secure = true
+		cookie.HttpOnly = true
+		c.SetCookie(cookie)
+
+		fmt.Println(c.Cookie("jwt"))
+
 		return c.JSON(fasthttp.StatusOK, user)
 	}
 }
@@ -79,7 +109,7 @@ func Login(db *gorm.DB) echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, jsonMap)
 		}
 
-		// Cookie
+		// Cookieをセット
 		cookie := new(http.Cookie)
 		cookie.Name = "jwt"
 		cookie.Value = token
@@ -136,7 +166,7 @@ func User(db *gorm.DB) echo.HandlerFunc {
 
 func Logout(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		// Cookie
+		// Cookieをセット
 		cookie := new(http.Cookie)
 		cookie.Name = "jwt"
 		cookie.Value = ""
