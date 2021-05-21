@@ -8,6 +8,7 @@ import KeyValueColonPair from "../common/KeyValueColonPair";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { TUser } from "../../../modules/User";
+import { loginSchema } from "../../../const/validation";
 interface Props {
   isSubmit: boolean;
 }
@@ -19,12 +20,12 @@ const LoginForm: FC<Props> = () => {
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
-    // validationSchema: loginSchema,
+    validationSchema: loginSchema,
     onSubmit: async (values) => {
       const result = await dispatch(loginUser({ loginForm: values }));
       if (result.payload.status === 200) {
         router.push("/posts");
-        enqueueSnackbar("Welcome!!", {
+        enqueueSnackbar(`Welcome!!`, {
           variant: "success",
         });
       } else {

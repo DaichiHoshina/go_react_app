@@ -41,7 +41,9 @@ const validate = {
 };
 
 export const loginSchema = Yup.object().shape({
-  userId: Yup.string().required(`ユーザーID${validate.ValidMessageRequired}`),
+  email: Yup.string().required(
+    `メールアドレス${validate.ValidMessageRequired}`
+  ),
   password: Yup.string()
     .required(`パスワード${validate.ValidMessageRequired}`)
     .min(4, validate.ValidMessagePassword)
