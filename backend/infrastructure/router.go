@@ -26,10 +26,10 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		users.DELETE("/:id", controllers.DeleteUser(db))
 	}
 
-	hospitals := e.Group("/hospitals")
+	presentations := e.Group("/presentations")
 	{
-		hospitals.GET("", controllers.GetHospitals(db))
-		hospitals.POST("/add", controllers.CreateHospital(db))
+		presentations.GET("", controllers.GetPresentations(db))
+		presentations.POST("", controllers.CreatePresentation(db))
 	}
 
 }

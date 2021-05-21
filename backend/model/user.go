@@ -12,10 +12,9 @@ type Users struct {
 }
 type User struct {
 	gorm.Model
-	ID        uint      `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email" gorm:"unique"`
-	CreatedAt time.Time `json:"created_at"`
-	Password  []byte    `json:"password"`
-	Posts     []Post
+	Name          string         `json:"name"`
+	Email         string         `json:"email" gorm:"unique"`
+	CreatedAt     time.Time      `json:"created_at"`
+	Password      []byte         `json:"password"`
+	Presentations []Presentation `gorm:"foreignKey:UserID"`
 }
