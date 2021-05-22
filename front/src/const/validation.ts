@@ -41,6 +41,11 @@ export const AccountCreateSchema = Yup.object({
     .required(`パスワード${validate.ValidMessageRequired}`),
 }).shape({});
 
+export const PresentationCreateSchema = Yup.object({
+  discription: Yup.string().required(`本文${validate.ValidMessageRequired}`),
+  title: Yup.string().required(`タイトル${validate.ValidMessageRequired}`),
+}).shape({});
+
 export const UserSettingUpdateSchema = Yup.object().shape({
   name: Yup.string().required(`名前${validate.ValidMessageRequired}`),
 });

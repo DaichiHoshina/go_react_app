@@ -13,6 +13,7 @@ export type TPresentation = {
   discription?: string | null;
   title?: string | null;
   created_at?: Date | null;
+  user_id?: number | null;
 };
 
 export type TPresentationState = {

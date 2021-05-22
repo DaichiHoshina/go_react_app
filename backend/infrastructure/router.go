@@ -30,6 +30,8 @@ func Init(e *echo.Echo, db *gorm.DB) {
 	{
 		presentations.GET("", controllers.GetPresentations(db))
 		presentations.POST("", controllers.CreatePresentation(db))
+		presentations.PUT("/:id", controllers.UpdatePresentation(db))
+		presentations.DELETE("/:id", controllers.DeletePresentation(db))
 	}
 
 }

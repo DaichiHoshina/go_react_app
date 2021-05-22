@@ -13,9 +13,7 @@ func GetPresentations(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var presentations []model.Presentation
 		db.Find(&presentations)
-		// arrayPresentation := model.Presentations{}
 		return c.JSON(fasthttp.StatusOK, presentations)
-		// return c.JSON(fasthttp.StatusOK, presentations)
 	}
 }
 
@@ -42,7 +40,9 @@ func CreatePresentation(db *gorm.DB) echo.HandlerFunc {
 			UserID:      post.UserID,
 			Discription: post.Discription,
 		}
-		db.Create(&presentation)
+		if result := db.Create(&presentation); result.Error != nil {
+			return c.JSON(http.StatusNotFound, result.Error)
+		}
 		return c.JSON(fasthttp.StatusOK, presentation)
 	}
 }

@@ -1,9 +1,7 @@
-import { Fab } from "@material-ui/core";
+import { Fab, makeStyles } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import Link from "next/link";
-
 import React from "react";
-
 interface Props {
   pathString: string;
 }

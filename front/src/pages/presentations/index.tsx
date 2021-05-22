@@ -33,6 +33,7 @@ import {
   presentationSlice,
   TPresentationState,
 } from "../../modules/Presentation";
+import { returnDatetimeString } from "../../utils/DateUtil";
 
 export const UsersContext = createContext<{
   users?: UsersApiInterface;
@@ -64,10 +65,6 @@ const PresentationList: React.FC = () => {
     (state: { presentationState: TPresentationState }) => state
   );
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
@@ -90,6 +87,11 @@ const PresentationList: React.FC = () => {
       avatar: {
         backgroundColor: red[500],
       },
+      fab: {
+        position: "fixed" /* ←表示場所を固定 */,
+        bottom: 25 /* ←下端からの距離 */,
+        right: 25,
+      },
     })
   );
 
@@ -106,7 +108,7 @@ const PresentationList: React.FC = () => {
 
   return (
     <Layout title="">
-      <Grid container spacing={40} justify="center">
+      <Grid container justify="center">
         {state.presentationState?.presentations!.map((presentation) => {
           return (
             <div style={{ marginTop: 20, padding: 30 }}>
@@ -123,7 +125,7 @@ const PresentationList: React.FC = () => {
                     </IconButton>
                   }
                   title={presentation.title}
-                  subheader={presentation.created_at}
+                  subheader={returnDatetimeString(presentation.created_at)}
                 />
                 <CardMedia
                   className={classes.media}
@@ -147,22 +149,15 @@ const PresentationList: React.FC = () => {
                   <IconButton aria-label="share">
                     <ShareIcon />
                   </IconButton>
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
                 </CardActions>
               </Card>
             </div>
           );
         })}
       </Grid>
+      <div className={classes.fab}>
+        <RecordAddLinkButton pathString="presentations" />
+      </div>
     </Layout>
   );
 };
