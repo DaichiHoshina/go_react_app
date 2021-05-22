@@ -23,7 +23,7 @@ const SignUpForm: FC<Props> = () => {
     onSubmit: async (values) => {
       const result = await dispatch(signUpUser({ loginForm: values }));
       if (result.payload.status === 200) {
-        router.push("/posts");
+        router.push("/presentations");
         enqueueSnackbar("Success!!", {
           variant: "success",
         });

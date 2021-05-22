@@ -24,7 +24,7 @@ const LoginForm: FC<Props> = () => {
     onSubmit: async (values) => {
       const result = await dispatch(loginUser({ loginForm: values }));
       if (result.payload.status === 200) {
-        router.push("/posts");
+        router.push("/presentations");
         enqueueSnackbar(`Welcome!!`, {
           variant: "success",
         });
@@ -44,7 +44,7 @@ const LoginForm: FC<Props> = () => {
   const testUserLogin = async () => {
     const result = await dispatch(loginUser({ loginForm: testValues }));
     if (result.payload.status === 200) {
-      router.push("/posts");
+      router.push("/presentations");
       enqueueSnackbar("Welcome!!", {
         variant: "success",
       });

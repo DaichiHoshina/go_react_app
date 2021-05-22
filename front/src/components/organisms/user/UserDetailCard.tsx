@@ -26,7 +26,7 @@ const UserDetailCard: React.FC<Props> = () => {
     await dispatch(fetchUser({ id: id }));
     const result = await dispatch(loginConfirm());
     if (id != result.payload?.data.id) {
-      router.push("/posts");
+      router.push("/presentations");
       enqueueSnackbar("権限のないページにアクセスしました", {
         variant: "error",
       });

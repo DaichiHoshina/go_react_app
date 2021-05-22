@@ -49,7 +49,7 @@ const UserFormCard: React.FC<Props> = ({
         enqueueSnackbar(isEditPage ? "更新しました。" : "登録しました。", {
           variant: "success",
         });
-        router.push(isUserSettingPage ? `/users/${id}` : "/posts");
+        router.push(isUserSettingPage ? `/users/${id}` : "/presentations");
       } else {
         enqueueSnackbar(
           isEditPage ? "更新に失敗しました。" : "登録に失敗しました。",

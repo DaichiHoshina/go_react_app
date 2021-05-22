@@ -43,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         <div className="flex">
           <div className="mt-2">
             <Toolbar variant="dense">
-              <Link href="/" color="inherit" underline="none">
+              <Link href="/presentations" color="inherit" underline="none">
                 <Typography variant="h6" color="inherit" className="flex-grow">
                   Repgram
                 </Typography>
