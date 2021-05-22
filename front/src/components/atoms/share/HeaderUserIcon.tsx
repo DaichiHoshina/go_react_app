@@ -41,22 +41,23 @@ const HeaderUserIcon: React.FC = () => {
     }
   };
 
-  const clickUserSetting = () => {
-    router.push(`/users/${userId}`);
-    setAnchorEl(null);
-  };
-
   // ログイン中か確認する
   const userLoginConfirm = async () => {
     const result = await dispatch(loginConfirm());
-    const user: TUser = result.payload?.data;
-    user && setUserName(user?.name!);
-    user && setUserId(user?.id!);
+    const user: TUser = await result.payload?.data;
+    user && (await setUserName(user?.name!));
+    user && (await setUserId(user?.id!));
+    debugger;
   };
 
   useEffect(() => {
     userLoginConfirm();
   }, []);
+
+  const clickUserSetting = () => {
+    router.push(`/users/${userId}`);
+    setAnchorEl(null);
+  };
 
   return (
     <>

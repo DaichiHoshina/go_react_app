@@ -12,7 +12,7 @@ import (
 func GetPresentations(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var presentations []model.Presentation
-		db.Find(&presentations)
+		db.Order("created_at DESC").Find(&presentations)
 		return c.JSON(fasthttp.StatusOK, presentations)
 	}
 }

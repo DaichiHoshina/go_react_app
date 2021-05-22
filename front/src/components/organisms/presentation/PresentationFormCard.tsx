@@ -58,9 +58,7 @@ const PresentationFormCard: React.FC<Props> = ({
         enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
           variant: "success",
         });
-        router.push(
-          isPresentationSettingPage ? `/presentations/${id}` : "/presentations"
-        );
+        router.push("/presentations");
       } else {
         enqueueSnackbar("Failure...", {
           variant: "error",
