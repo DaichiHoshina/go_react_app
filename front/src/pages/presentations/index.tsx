@@ -1,7 +1,7 @@
 import React, { createContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TUser } from "../../modules/User";
-import { fetchUsers } from "../../services/User";
+import { TPresentation } from "../../modules/Presentation";
+import { deletePresentation } from "../../services/Presentation";
 import {
   makeStyles,
   Avatar,
@@ -10,12 +10,13 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Collapse,
   createStyles,
   IconButton,
   Theme,
   Typography,
   Grid,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
 import Layout from "../../components/Layout";
 import RecordAddLinkButton from "../../components/atoms/share/RecordAddLinkButton";
@@ -34,14 +35,16 @@ import {
   TPresentationState,
 } from "../../modules/Presentation";
 import { returnDatetimeString } from "../../utils/DateUtil";
+import router from "next/router";
+import { useSnackbar } from "notistack";
 
-export const UsersContext = createContext<{
-  users?: UsersApiInterface;
-  setUsers?: any;
+export const PresentationsContext = createContext<{
+  presentations?: PresentationsApiInterface;
+  setPresentations?: any;
 }>({});
 
-export interface UsersApiInterface {
-  tbm_users?: TUser[];
+export interface PresentationsApiInterface {
+  tbm_presentations?: TPresentation[];
 }
 
 interface formType {
@@ -60,10 +63,20 @@ interface formType {
 
 const PresentationList: React.FC = () => {
   const dispatch = useDispatch();
-  const [expanded, setExpanded] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
   const state = useSelector(
     (state: { presentationState: TPresentationState }) => state
   );
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -106,6 +119,24 @@ const PresentationList: React.FC = () => {
     );
   }, []);
 
+  const clickPresentationDelete = (presentation: TPresentation) => {
+    const response = dispatch(
+      deletePresentation({
+        id: presentation.id,
+      })
+    );
+    if (response.payload?.[0]) {
+      enqueueSnackbar("削除しました。", { variant: "success" });
+      router.push("/presentations");
+    }
+    setAnchorEl(null);
+  };
+
+  const clickPresentationEdit = (presentation: TPresentation) => {
+    // router.push(`/presentations/${presentation.id}`);
+    setAnchorEl(null);
+  };
+
   return (
     <Layout title="">
       <Grid container justify="center">
@@ -116,17 +147,41 @@ const PresentationList: React.FC = () => {
                 <CardHeader
                   avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
-                      R
+                      {presentation.id!}
                     </Avatar>
                   }
                   action={
-                    <IconButton aria-label="settings">
+                    <IconButton aria-label="settings" onClick={handleMenu}>
                       <MoreVertIcon />
                     </IconButton>
                   }
                   title={presentation.title}
                   subheader={returnDatetimeString(presentation.created_at)}
                 />
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={() => console.log(presentation)}>
+                    Edit
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => clickPresentationDelete(presentation)}
+                  >
+                    Delete
+                  </MenuItem>
+                </Menu>
                 <CardMedia
                   className={classes.media}
                   image="/img/test.jpg"
