@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface Props {
   keyName: string;
@@ -11,11 +11,11 @@ interface Props {
 const Div = () => <div />;
 
 const KeyValueColonPair: React.FC<Props> = ({
-  keyName = '',
+  keyName = "",
   value = <Div />,
-  className = '',
-  keyClassName = 'w-48',
-  valueClassName = '',
+  className = "",
+  keyClassName = "w-48",
+  valueClassName = "bg-gray-700",
 }) => {
   return (
     <>

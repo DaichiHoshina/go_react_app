@@ -5,7 +5,7 @@ import UserDetailCard from "../../components/organisms/user/UserDetailCard";
 
 const UserDetail: React.FC = () => {
   return (
-    <Layout title="ユーザー詳細">
+    <Layout title="User Detail">
       <>
         <div className="flex justify-center">
           <UserDetailCard />

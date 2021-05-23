@@ -8,7 +8,7 @@ export const fetchUsers = createAsyncThunk(
   async (arg: { page?: number; per?: number }, thunkAPI) => {
     const { page, per } = arg;
     try {
-      const url = `http://localhost:3002/users`;
+      const url = `${process.env.API_URL}/users`;
 
       const response = await axios.get(url, {
         params: {
@@ -32,7 +32,7 @@ export const fetchUser = createAsyncThunk(
   async (arg: { id?: number }, thunkAPI) => {
     const { id } = arg;
     try {
-      const url = `http://localhost:3002/users/${id}`;
+      const url = `${process.env.API_URL}/users/${id}`;
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
@@ -49,7 +49,7 @@ export const createUser = createAsyncThunk(
     const postUser = Object.assign({}, user!);
 
     try {
-      const url = `http://localhost:3002/users`;
+      const url = `${process.env.API_URL}/users`;
       const response = await axios.post(url, postUser);
       return response.data;
     } catch (error) {
@@ -67,7 +67,7 @@ export const updateUser = createAsyncThunk(
     const postUser = Object.assign({}, user!);
 
     try {
-      const url = `http://localhost:3002/users/${id}`;
+      const url = `${process.env.API_URL}/users/${id}`;
       const response = await axios.put(url, postUser);
       return response.data;
     } catch (error) {
@@ -81,11 +81,83 @@ export const deleteUser = createAsyncThunk(
   async (arg: { id?: string }, thunkAPI) => {
     const { id } = arg;
     try {
-      const url = `http://localhost:3002/users/${id}`;
+      const url = `${process.env.API_URL}/users/${id}`;
       const response = await axios.delete(url);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });
+    }
+  }
+);
+
+// ユーザー登録処理
+export const signUpUser = createAsyncThunk(
+  "auth/signUp",
+  async (arg: { loginForm: any }, thunkAPI) => {
+    const { loginForm } = arg;
+    try {
+      console.log("url", `${process.env.API_URL}/auth`);
+      const url = `${process.env.API_URL}/auth`;
+      const response = await axios.post(url, {
+        name: loginForm.name,
+        email: loginForm.email,
+        password: loginForm.password,
+      });
+
+      return { status: response.status, data: response.data };
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({ error: error.payload });
+    }
+  }
+);
+
+// ログイン処理
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async (arg: { loginForm: any }, thunkAPI) => {
+    const { loginForm } = arg;
+    try {
+      console.log("url", `${process.env.API_URL}/auth/login`);
+      const url = `${process.env.API_URL}/auth/login`;
+      const response = await axios.post(url, {
+        email: loginForm.email,
+        password: loginForm.password,
+      });
+
+      return { status: response.status, data: response.data };
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({ error: error.payload });
+    }
+  }
+);
+
+// ログアウト処理
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async (_, thunkAPI) => {
+    try {
+      const url = `${process.env.API_URL}/auth/logout`;
+      const response = await axios.get(url);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ errorMessage: error.message });
+    }
+  }
+);
+
+// ログイン確認
+export const loginConfirm = createAsyncThunk(
+  "auth/loginConfirm",
+  async (_, thunkAPI) => {
+    try {
+      const url = `${process.env.API_URL}/auth/user`;
+      const response = await axios.get(url);
+      return { status: response.status, data: response.data };
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({ error: error.payload });
     }
   }
 );

@@ -6,7 +6,7 @@ import UserFormCard from "../../components/organisms/user/UserFormCard";
 
 const AuthAccountCreatePage: React.FC = () => {
   return (
-    <Layout title="ユーザー新規作成">
+    <Layout title="Sign Up">
       <div className="flex justify-center m-5">
         <UserFormCard isEditPage={false} />
       </div>

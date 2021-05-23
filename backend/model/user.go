@@ -1,6 +1,10 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 // User ユーザ
 type Users struct {
@@ -8,8 +12,10 @@ type Users struct {
 }
 type User struct {
 	gorm.Model
-	ID       uint   `json:"id"`
-	Name     string `json:"name"`
-	Email    string `gorm:"unique"`
-	Password []byte `json:"password"`
+	ID       			int    				 `json:"id"`
+	Name          string         `json:"name"`
+	Email         string         `json:"email" gorm:"unique"`
+	CreatedAt     time.Time      `json:"created_at"`
+	Password      []byte         `json:"password"`
+	Presentations []Presentation `gorm:"foreignKey:UserID"`
 }

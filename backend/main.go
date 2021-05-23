@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/DaichiHoshina/go_react_app/infrastructure"
@@ -23,9 +24,30 @@ func init() {
 func main() {
 	e := echo.New()
 
+	// CORS設定
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:3000", "http://localhost:3002"},
+		AllowHeaders: []string{
+			echo.HeaderAccessControlAllowHeaders,
+			echo.HeaderContentType,
+			echo.HeaderContentLength,
+			echo.HeaderAcceptEncoding,
+			echo.HeaderXCSRFToken,
+			echo.HeaderAuthorization,
+		},
+		AllowMethods: []string{
+			http.MethodGet,
+			http.MethodPut,
+			http.MethodPatch,
+			http.MethodPost,
+			http.MethodDelete,
+		},
+		AllowCredentials: true,
+	}))
+
 	// Middleware
 	e.Use(middleware.Logger())
-	e.Use(middleware.CORS())
+	// e.Use(middleware.CORS())
 
 	// DB Connect
 	db := infrastructure.Connect()

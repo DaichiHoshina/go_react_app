@@ -44,17 +44,14 @@ const UserFormCard: React.FC<Props> = ({
         ? dispatch(updateUser({ user: values, id: id }))
         : dispatch(createUser({ user: values }));
       if (response.arg) {
-        enqueueSnackbar(isEditPage ? "更新しました。" : "登録しました。", {
+        enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
           variant: "success",
         });
         router.push(isUserSettingPage ? `/users/${id}` : "/users");
       } else {
-        enqueueSnackbar(
-          isEditPage ? "更新に失敗しました。" : "登録に失敗しました。",
-          {
-            variant: "error",
-          }
-        );
+        enqueueSnackbar("Failure...", {
+          variant: "error",
+        });
       }
     },
   });

@@ -10,6 +10,7 @@ import SeparateHr from "../../atoms/share/SeparateHr";
 import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
+import { UserSettingUpdateSchema } from "../../../const/validation";
 
 interface Props {
   isEditPage: boolean;
@@ -39,22 +40,20 @@ const UserFormCard: React.FC<Props> = ({
 
   const formik = useFormik<TUser>({
     initialValues: {},
+    validationSchema: UserSettingUpdateSchema,
     onSubmit: async (values) => {
       const response = (await isEditPage)
         ? dispatch(updateUser({ user: values, id: id }))
         : dispatch(createUser({ user: values }));
       if (response.arg) {
-        enqueueSnackbar(isEditPage ? "更新しました。" : "登録しました。", {
+        enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
           variant: "success",
         });
-        router.push(isUserSettingPage ? `/users/${id}` : "/users");
+        router.push(isUserSettingPage ? `/users/${id}` : "/presentations");
       } else {
-        enqueueSnackbar(
-          isEditPage ? "更新に失敗しました。" : "登録に失敗しました。",
-          {
-            variant: "error",
-          }
-        );
+        enqueueSnackbar("Failure...", {
+          variant: "error",
+        });
       }
     },
   });
@@ -64,7 +63,7 @@ const UserFormCard: React.FC<Props> = ({
       <Card className="p-5 w-4/5">
         <ul className="flex flex-col space-y-2">
           <KeyValuePair
-            keyName="氏名"
+            keyName="name"
             value={
               <div className="flex">
                 <TextFieldParts name="name" formik={formik} />

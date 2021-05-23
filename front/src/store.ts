@@ -2,13 +2,21 @@ import { combineReducers } from "redux";
 import logger from "redux-logger";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { userSlice, initialState as userInitialState } from "./modules/User";
+import {
+  presentationSlice,
+  initialState as presentationInitialState,
+} from "./modules/Presentation";
 
 const rootReducer = combineReducers({
   userState: userSlice.reducer,
+  presentationState: presentationSlice.reducer,
 });
 
 const preloadedState = () => {
-  return { userState: userInitialState };
+  return {
+    userState: userInitialState,
+    presentationState: presentationInitialState,
+  };
 };
 
 const store = () => {

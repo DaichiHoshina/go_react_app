@@ -68,7 +68,7 @@ const UsersList: React.FC = () => {
   }, []);
 
   return (
-    <Layout title="ユーザー一覧">
+    <Layout title="User List">
       <div className="flex justify-end mb-5">
         <RecordAddLinkButton pathString="users" />
       </div>
@@ -77,8 +77,8 @@ const UsersList: React.FC = () => {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell style={{ minWidth: 140 }}>ユーザーID</TableCell>
-                <TableCell style={{ minWidth: 140 }}>氏名</TableCell>
+                <TableCell style={{ minWidth: 140 }}>id</TableCell>
+                <TableCell style={{ minWidth: 140 }}>name</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
