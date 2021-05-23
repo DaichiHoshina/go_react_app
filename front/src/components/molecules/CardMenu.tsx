@@ -15,7 +15,10 @@ import { useSnackbar } from "notistack";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { TPresentation } from "../../modules/Presentation";
-import { deletePresentation } from "../../services/Presentation";
+import {
+  deletePresentation,
+  fetchPresentations,
+} from "../../services/Presentation";
 import { returnDatetimeString } from "../../utils/DateUtil";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
@@ -73,7 +76,12 @@ const CardMenu = (props: TProps): JSX.Element => {
     );
     if (response.payload?.[0]) {
       enqueueSnackbar("削除しました。", { variant: "success" });
-      router.reload();
+      await dispatch(
+        fetchPresentations({
+          page: 1,
+          per: 1,
+        })
+      );
     }
     setAnchorEl(null);
   };
