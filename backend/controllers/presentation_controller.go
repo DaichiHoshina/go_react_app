@@ -41,7 +41,7 @@ func CreatePresentation(db *gorm.DB) echo.HandlerFunc {
 			Discription: post.Discription,
 		}
 		if result := db.Create(&presentation); result.Error != nil {
-			return c.JSON(http.StatusNotFound, result.Error)
+			return c.JSON(http.StatusBadRequest, result.Error)
 		}
 		return c.JSON(fasthttp.StatusOK, presentation)
 	}
@@ -65,7 +65,7 @@ func UpdatePresentation(db *gorm.DB) echo.HandlerFunc {
 			)
 			return c.JSON(fasthttp.StatusOK, presentation)
 		} else {
-			return c.JSON(fasthttp.StatusNotFound, nil)
+			return c.JSON(fasthttp.StatusBadRequest, nil)
 		}
 	}
 }
@@ -78,7 +78,7 @@ func DeletePresentation(db *gorm.DB) echo.HandlerFunc {
 			db.Delete(&presentation)
 			return c.JSON(http.StatusOK, presentation)
 		} else {
-			return c.JSON(http.StatusNotFound, nil)
+			return c.JSON(http.StatusBadRequest, nil)
 		}
 	}
 }

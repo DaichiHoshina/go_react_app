@@ -13,9 +13,7 @@ func GetUsers(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var users []model.User
 		db.Find(&users)
-		// arrayUser := model.Users{}
 		return c.JSON(fasthttp.StatusOK, users)
-		// return c.JSON(fasthttp.StatusOK, users)
 	}
 }
 
@@ -53,12 +51,11 @@ func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 			if err := c.Bind(post); err != nil {
 				return err
 		}
-			// newUser := c.QueryParam("name")
 
 			db.Model(&user).Update("name", post.Name)
 			return c.JSON(fasthttp.StatusOK, user)
 		} else {
-			return c.JSON(fasthttp.StatusNotFound, nil)
+			return c.JSON(fasthttp.StatusBadRequest, nil)
 		}
 	}
 }
@@ -71,7 +68,7 @@ func DeleteUser(db *gorm.DB) echo.HandlerFunc {
 			db.Delete(&user)
 			return c.JSON(http.StatusOK, user)
 		} else {
-			return c.JSON(http.StatusNotFound, nil)
+			return c.JSON(http.StatusBadRequest, nil)
 		}
 	}
 }
