@@ -47,7 +47,6 @@ const HeaderUserIcon: React.FC = () => {
     const user: TUser = await result.payload?.data;
     user && (await setUserName(user?.name!));
     user && (await setUserId(user?.id!));
-    debugger;
   };
 
   useEffect(() => {
