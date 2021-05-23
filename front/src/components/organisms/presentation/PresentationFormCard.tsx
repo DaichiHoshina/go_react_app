@@ -10,6 +10,7 @@ import {
 import {
   createPresentation,
   fetchPresentation,
+  loginConfirm,
   updatePresentation,
 } from "../../../services/Presentation";
 import CreateOrEditButton from "../../atoms/share/CreateOrEditButton";
@@ -18,6 +19,8 @@ import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
 import { PresentationCreateSchema } from "../../../const/validation";
+import { TUser } from "../../../modules/User";
+import { setFormString } from "../../../utils/FormUtil";
 
 interface Props {
   isEditPage: boolean;
@@ -25,11 +28,9 @@ interface Props {
   isPresentationSettingPage?: boolean;
 }
 
-const PresentationFormCard: React.FC<Props> = ({
-  isEditPage = false,
-  isPresentationSettingPage = false,
-}) => {
+const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
   const router = useRouter();
+  const [userId, setUserId] = React.useState<null | number | string>(null);
   const { id } = router.query;
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
@@ -37,20 +38,37 @@ const PresentationFormCard: React.FC<Props> = ({
     (state: { presentationState: TPresentationState }) => state
   );
 
-  useEffect(() => {
-    dispatch(fetchPresentation({ id: id }));
-  }, [router.query]);
+  // ログイン中のユーザーを取得
+  const userLoginConfirm = async () => {
+    const result = await dispatch(loginConfirm());
+    if (result.payload?.data?.id!) {
+      await setUserId(result.payload?.data?.id!.toString());
+    }
+  };
+
+  const getPresentation = async () => {
+    await dispatch(fetchPresentation({ id: id }));
+  };
 
   useEffect(() => {
+    userLoginConfirm();
+    getPresentation();
     if (state?.presentationState?.presentation) {
       formik.setValues(state?.presentationState?.presentation!);
     }
-  }, [state?.presentationState?.presentation]);
+  }, [state?.presentationState?.presentation?.id]);
 
   const formik = useFormik<TPresentation>({
-    initialValues: { user_id: 1 },
+    initialValues: {
+      user_id: isEditPage
+        ? state.presentationState.presentation?.user_id
+        : userId,
+    },
     validationSchema: PresentationCreateSchema,
     onSubmit: async (values) => {
+      console.log("aaaaaaaaaaaaaaaaaaaa");
+      console.log(userId);
+      console.log(values);
       const response = (await isEditPage)
         ? dispatch(updatePresentation({ presentation: values, id: id }))
         : dispatch(createPresentation({ presentation: values }));
