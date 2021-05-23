@@ -48,6 +48,7 @@ interface formType {
 const PresentationList: React.FC = () => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [isPush, setIsPush] = React.useState(false);
   const open = Boolean(anchorEl);
   const state = useSelector(
     (state: { presentationState: TPresentationState }) => state
@@ -94,6 +95,10 @@ const PresentationList: React.FC = () => {
     );
   }, []);
 
+  const handleOpen = () => {
+    setIsPush(!isPush);
+  };
+
   return (
     <Layout title="">
       <Grid container justify="center">
@@ -102,6 +107,8 @@ const PresentationList: React.FC = () => {
             <div style={{ marginTop: 20, padding: 30 }}>
               <Card className={classes.root}>
                 <CardMenu presentation={presentation} />
+
+                {/* 画像 */}
                 <CardMedia
                   className={classes.media}
                   image="/img/test.jpg"
@@ -117,14 +124,17 @@ const PresentationList: React.FC = () => {
                     {presentation.discription}
                   </Typography>
                 </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
+
+                <div className="float-right">
+                  <CardActions disableSpacing>
+                    <IconButton
+                      aria-label="add to favorites"
+                      onClick={handleOpen}
+                    >
+                      <FavoriteIcon color={isPush ? "secondary" : "disabled"} />
+                    </IconButton>
+                  </CardActions>
+                </div>
               </Card>
             </div>
           );

@@ -60,7 +60,9 @@ func UpdatePresentation(db *gorm.DB) echo.HandlerFunc {
 
 			db.Model(&presentation).Update(
 				"discription", post.Discription,
-			).Update("title", post.Title)
+			).Update(
+				"title", post.Title,
+			)
 			return c.JSON(fasthttp.StatusOK, presentation)
 		} else {
 			return c.JSON(fasthttp.StatusNotFound, nil)
