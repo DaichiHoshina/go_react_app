@@ -4,12 +4,13 @@ import {
   deleteUser,
   fetchUser,
   fetchUsers,
+  loginConfirm,
   updateUser,
 } from "../services/User";
 
 // state
 export type TUser = {
-  id?: string | null;
+  id?: number | null;
   name?: string | null;
   email?: string | null;
   password?: string | null;
@@ -58,6 +59,12 @@ export const userSlice = createSlice({
     // ユーザー取得
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.user = action.payload?.[0];
+      state.error = false;
+    });
+
+    // ユーザー取得
+    builder.addCase(loginConfirm.fulfilled, (state, action) => {
+      state.user = action.payload?.data;
       state.error = false;
     });
 

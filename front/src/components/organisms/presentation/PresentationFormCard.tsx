@@ -1,7 +1,7 @@
 import { Card } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TPresentation,
@@ -10,7 +10,6 @@ import {
 import {
   createPresentation,
   fetchPresentation,
-  loginConfirm,
   updatePresentation,
 } from "../../../services/Presentation";
 import CreateOrEditButton from "../../atoms/share/CreateOrEditButton";
@@ -19,8 +18,8 @@ import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
 import { PresentationCreateSchema } from "../../../const/validation";
-import { TUser } from "../../../modules/User";
-import { setFormString } from "../../../utils/FormUtil";
+import { TUser, TUserState } from "../../../modules/User";
+import { loginConfirm } from "../../../services/User";
 
 interface Props {
   isEditPage: boolean;
@@ -30,29 +29,20 @@ interface Props {
 
 const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
   const router = useRouter();
-  const [userId, setUserId] = React.useState<null | number | string>(null);
   const { id } = router.query;
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const state = useSelector(
-    (state: { presentationState: TPresentationState }) => state
+    (state: { presentationState: TPresentationState; userState: TUserState }) =>
+      state
   );
 
-  // ログイン中のユーザーを取得
-  const userLoginConfirm = async () => {
-    const result = await dispatch(loginConfirm());
-    if (result.payload?.data?.id!) {
-      await setUserId(result.payload?.data?.id!.toString());
-    }
-  };
-
-  const getPresentation = async () => {
-    await dispatch(fetchPresentation({ id: id }));
-  };
+  useEffect(() => {
+    dispatch(loginConfirm());
+  }, [state?.userState?.user?.id]);
 
   useEffect(() => {
-    userLoginConfirm();
-    getPresentation();
+    dispatch(fetchPresentation({ id: id }));
     if (state?.presentationState?.presentation) {
       formik.setValues(state?.presentationState?.presentation!);
     }
@@ -61,17 +51,19 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
   const formik = useFormik<TPresentation>({
     initialValues: {
       user_id: isEditPage
-        ? state.presentationState.presentation?.user_id
-        : userId,
+        ? state.presentationState?.presentation?.user_id
+        : state.userState?.user?.id,
     },
     validationSchema: PresentationCreateSchema,
     onSubmit: async (values) => {
-      console.log("aaaaaaaaaaaaaaaaaaaa");
-      console.log(userId);
-      console.log(values);
       const response = (await isEditPage)
         ? dispatch(updatePresentation({ presentation: values, id: id }))
-        : dispatch(createPresentation({ presentation: values }));
+        : dispatch(
+            createPresentation({
+              presentation: values,
+              user_id: state.userState?.user?.id!,
+            })
+          );
       if (response.arg) {
         enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
           variant: "success",

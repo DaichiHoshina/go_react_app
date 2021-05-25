@@ -43,11 +43,11 @@ export const fetchPresentation = createAsyncThunk(
 
 export const createPresentation = createAsyncThunk(
   "presentations/createPresentation",
-  async (arg: { presentation?: TPresentation }, thunkAPI) => {
-    const { presentation } = arg;
+  async (arg: { presentation?: TPresentation; user_id?: number }, thunkAPI) => {
+    const { presentation, user_id } = arg;
 
     const postPresentation = Object.assign({}, presentation!);
-
+    postPresentation.user_id = user_id;
     try {
       const url = `${process.env.API_URL}/presentations`;
       const response = await axios.post(url, postPresentation);
