@@ -12,9 +12,10 @@ type Presentations struct {
 
 type Presentation struct {
 	gorm.Model
-	ID       		int    		`json:"id"`
+	ID          int       `json:"id"`
 	Title       string    `json:"title"`
 	UserID      uint      `json:"user_id"`
 	Discription string    `json:"discription"`
 	CreatedAt   time.Time `json:"created_at"`
+	Name        string    `json:"name"`
 }

@@ -11,8 +11,12 @@ import (
 
 func GetPresentations(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		var presentations []model.Results
-		db.Table("presentations").Select("presentations.*, users.name").Joins("LEFT JOIN users ON users.id = presentations.user_id").Order("created_at DESC").Scan(&presentations)
+		var presentations []model.Presentation
+		db.Model(&presentations).
+			Select("users.name, presentations.*").
+			Joins("INNER JOIN users ON users.id = presentations.user_id").
+			Order("created_at DESC").
+			Scan(&presentations)
 		return c.JSON(fasthttp.StatusOK, presentations)
 	}
 }

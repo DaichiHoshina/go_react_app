@@ -112,15 +112,12 @@ const CardMenu = (props: TProps): JSX.Element => {
             aria-label="settings"
             onClick={handleMenu}
             disabled={props.presentation?.user_id != props.loginUser?.id}
+            size="small"
           >
-            {props.presentation?.user_id == props.loginUser?.id ? (
-              <MoreVertIcon />
-            ) : (
-              " "
-            )}
+            <MoreVertIcon />
           </Button>
         }
-        title={props.presentation.title}
+        title={`@ ${props.presentation?.name!}`}
         subheader={returnDatetimeString(props.presentation.created_at)}
       />
 

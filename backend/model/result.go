@@ -1,6 +1,8 @@
 package model
 
 type Results struct {
-	UserName string
+	UserName string `json:"name"`
+	UserID   uint   `json:"user_id"`
 	Presentation
+	OtherName string
 }
