@@ -1,6 +1,6 @@
 package model
 
 type Results struct {
-	Users
-	Presentations
+	UserName string
+	Presentation
 }
