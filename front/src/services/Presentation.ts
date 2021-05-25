@@ -46,6 +46,7 @@ export const createPresentation = createAsyncThunk(
   async (arg: { presentation?: TPresentation; user_id?: number }, thunkAPI) => {
     const { presentation, user_id } = arg;
 
+    // ログインしているユーザーのIDをuser_idに設定する。
     const postPresentation = Object.assign({}, presentation!);
     postPresentation.user_id = user_id;
     try {

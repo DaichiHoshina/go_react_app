@@ -21,6 +21,8 @@ import ShareIcon from "@material-ui/icons/Share";
 import { TPresentationState } from "../../modules/Presentation";
 import CardMenu from "../../components/molecules/CardMenu";
 import { fetchPresentations } from "../../services/Presentation";
+import { loginConfirm, loginUser } from "../../services/User";
+import { TUserState } from "../../modules/User";
 
 export const PresentationsContext = createContext<{
   presentations?: PresentationsApiInterface;
@@ -51,7 +53,8 @@ const PresentationList: React.FC = () => {
   const [isPush, setIsPush] = React.useState(false);
   const open = Boolean(anchorEl);
   const state = useSelector(
-    (state: { presentationState: TPresentationState }) => state
+    (state: { presentationState: TPresentationState; userState: TUserState }) =>
+      state
   );
 
   const useStyles = makeStyles((theme: Theme) =>
@@ -93,6 +96,7 @@ const PresentationList: React.FC = () => {
         per: 1,
       })
     );
+    dispatch(loginConfirm());
   }, []);
 
   const handleOpen = () => {
@@ -106,7 +110,10 @@ const PresentationList: React.FC = () => {
           return (
             <div style={{ marginTop: 20, padding: 30 }}>
               <Card className={classes.root}>
-                <CardMenu presentation={presentation} />
+                <CardMenu
+                  presentation={presentation}
+                  loginUser={state?.userState?.user!}
+                />
 
                 {/* 画像 */}
                 <CardMedia

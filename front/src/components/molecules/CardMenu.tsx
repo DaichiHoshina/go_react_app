@@ -1,6 +1,7 @@
 import classes from "*.module.css";
 import {
   Avatar,
+  Button,
   CardHeader,
   createStyles,
   IconButton,
@@ -21,8 +22,10 @@ import {
 } from "../../services/Presentation";
 import { returnDatetimeString } from "../../utils/DateUtil";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { TUser } from "../../modules/User";
 
 interface TProps {
+  loginUser: TUser;
   presentation: TPresentation;
 }
 
@@ -104,13 +107,23 @@ const CardMenu = (props: TProps): JSX.Element => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings" onClick={handleMenu}>
-            <MoreVertIcon />
-          </IconButton>
+          // 投稿したユーザー自身のみが編集できるようにする
+          <Button
+            aria-label="settings"
+            onClick={handleMenu}
+            disabled={props.presentation?.user_id != props.loginUser?.id}
+          >
+            {props.presentation?.user_id == props.loginUser?.id ? (
+              <MoreVertIcon />
+            ) : (
+              " "
+            )}
+          </Button>
         }
         title={props.presentation.title}
         subheader={returnDatetimeString(props.presentation.created_at)}
       />
+
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
