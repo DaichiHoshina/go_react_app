@@ -17,5 +17,6 @@ type Presentation struct {
 	UserID      uint      `json:"user_id"`
 	Discription string    `json:"discription"`
 	CreatedAt   time.Time `json:"created_at"`
-	Name        string    `json:"name"`
+	User        User      `json:"user"`
+	Likes       []Like    `json:"likes" gorm:"foreignKey:PresentationID"`
 }

@@ -17,4 +17,5 @@ func main() {
 
 	db.AutoMigrate(&model.User{})
 	db.AutoMigrate(&model.Presentation{})
+	db.AutoMigrate(&model.Like{})
 }
