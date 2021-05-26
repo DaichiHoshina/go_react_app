@@ -117,7 +117,7 @@ const CardMenu = (props: TProps): JSX.Element => {
             <MoreVertIcon />
           </Button>
         }
-        title={`@ ${props.presentation?.name!}`}
+        title={`@ ${props.presentation?.user?.name!}`}
         subheader={returnDatetimeString(props.presentation.created_at)}
       />
 

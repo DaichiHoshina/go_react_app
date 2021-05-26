@@ -23,6 +23,7 @@ import CardMenu from "../../components/molecules/CardMenu";
 import { fetchPresentations } from "../../services/Presentation";
 import { loginConfirm, loginUser } from "../../services/User";
 import { TUserState } from "../../modules/User";
+import { Label } from "@material-ui/icons";
 
 export const PresentationsContext = createContext<{
   presentations?: PresentationsApiInterface;
@@ -100,6 +101,7 @@ const PresentationList: React.FC = () => {
   }, []);
 
   const handleOpen = () => {
+    debugger;
     setIsPush(!isPush);
   };
 
@@ -138,7 +140,18 @@ const PresentationList: React.FC = () => {
                       aria-label="add to favorites"
                       onClick={handleOpen}
                     >
-                      <FavoriteIcon color={isPush ? "secondary" : "disabled"} />
+                      <FavoriteIcon
+                        color={
+                          presentation?.likes?.length ? "secondary" : "disabled"
+                        }
+                      />
+                      <div className="ml-1">
+                        <Typography
+                          color={presentation?.likes?.length ? "" : "error"}
+                        >
+                          {presentation?.likes?.length}
+                        </Typography>
+                      </div>
                     </IconButton>
                   </CardActions>
                 </div>

@@ -13,9 +13,11 @@ func GetPresentations(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var presentations []model.Presentation
 		db.Model(&presentations).
+			Order("created_at DESC").
 			Preload("User").
 			Preload("Likes").
 			Find(&presentations)
+
 
 		return c.JSON(fasthttp.StatusOK, presentations)
 	}

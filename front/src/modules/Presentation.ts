@@ -6,6 +6,8 @@ import {
   fetchPresentations,
   updatePresentation,
 } from "../services/Presentation";
+import { TLike } from "./Like";
+import { TUser } from "./User";
 
 // state
 export type TPresentation = {
@@ -14,6 +16,8 @@ export type TPresentation = {
   title?: string | null;
   created_at?: Date | null;
   user_id?: number | null;
+  user?: TUser | null;
+  likes?: Array<TLike> | null;
 };
 
 export type TPresentationState = {
