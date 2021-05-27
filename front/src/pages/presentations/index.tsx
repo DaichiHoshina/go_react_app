@@ -24,6 +24,7 @@ import { fetchPresentations } from "../../services/Presentation";
 import { loginConfirm, loginUser } from "../../services/User";
 import { TUserState } from "../../modules/User";
 import { Label } from "@material-ui/icons";
+import { createLike } from "../../services/Like";
 
 export const PresentationsContext = createContext<{
   presentations?: PresentationsApiInterface;
@@ -100,9 +101,22 @@ const PresentationList: React.FC = () => {
     dispatch(loginConfirm());
   }, []);
 
-  const handleOpen = () => {
-    debugger;
-    setIsPush(!isPush);
+  const handleOpen = async (user_id: number, presentation_id: number) => {
+    const likeValue = {
+      user_id: user_id,
+      presentation_id: presentation_id,
+    };
+    await dispatch(
+      createLike({
+        like: likeValue,
+      })
+    );
+    await dispatch(
+      fetchPresentations({
+        page: 1,
+        per: 1,
+      })
+    );
   };
 
   return (
@@ -138,7 +152,9 @@ const PresentationList: React.FC = () => {
                   <CardActions disableSpacing>
                     <IconButton
                       aria-label="add to favorites"
-                      onClick={handleOpen}
+                      onClick={() =>
+                        handleOpen(state?.userState?.user?.id, presentation?.id)
+                      }
                     >
                       <FavoriteIcon
                         color={

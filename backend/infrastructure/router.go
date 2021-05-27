@@ -35,4 +35,10 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		presentations.DELETE("/:id", controllers.DeletePresentation(db))
 	}
 
+	likes := e.Group("/likes")
+	{
+		likes.POST("", controllers.CreateLike(db))
+		likes.DELETE("/:id", controllers.DeleteLike(db))
+	}
+
 }
