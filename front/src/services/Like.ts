@@ -22,11 +22,13 @@ export const createLike = createAsyncThunk(
 
 export const deleteLike = createAsyncThunk(
   "likes/deleteLike",
-  async (arg: { id?: string }, thunkAPI) => {
-    const { id } = arg;
+  async (arg: { user_id?: number; presentation_id?: number }, thunkAPI) => {
+    const { like } = arg;
+
+    const postLike = Object.assign({}, like!);
     try {
-      const url = `${process.env.API_URL}/likes/${id}`;
-      const response = await axios.delete(url);
+      const url = `${process.env.API_URL}/likes`;
+      const response = await axios.delete(url, postLike);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });

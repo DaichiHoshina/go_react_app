@@ -28,13 +28,19 @@ func CreateLike(db *gorm.DB) echo.HandlerFunc {
 
 func DeleteLike(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		if id := c.Param("id"); id != "" {
-			var presentation []model.Like
-			db.First(&presentation, id)
-			db.Delete(&presentation)
-			return c.JSON(http.StatusOK, presentation)
-		} else {
-			return c.JSON(http.StatusBadRequest, nil)
+		post := new(model.Like)
+		if err := c.Bind(post); err != nil {
+			return err
 		}
+		presentation := model.Like{
+			ID: post.ID,
+			UserID:      post.UserID,
+			PresentationID: post.PresentationID,
+		}
+		db.First(&presentation, presentation)
+		if result := db.Delete(&presentation); result.Error != nil {
+			return c.JSON(http.StatusBadRequest, result.Error)
+		}
+		return c.JSON(fasthttp.StatusOK, presentation)
 	}
 }

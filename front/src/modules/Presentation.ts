@@ -11,7 +11,7 @@ import { TUser } from "./User";
 
 // state
 export type TPresentation = {
-  id?: string | null;
+  id?: number | null;
   discription?: string | null;
   title?: string | null;
   created_at?: Date | null;

@@ -16,15 +16,12 @@ import {
 import Layout from "../../components/Layout";
 import RecordAddLinkButton from "../../components/atoms/share/RecordAddLinkButton";
 import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import { TPresentationState } from "../../modules/Presentation";
 import CardMenu from "../../components/molecules/CardMenu";
 import { fetchPresentations } from "../../services/Presentation";
 import { loginConfirm, loginUser } from "../../services/User";
 import { TUserState } from "../../modules/User";
-import { Label } from "@material-ui/icons";
-import { createLike } from "../../services/Like";
+import FavoriteIconButton from "../../components/atoms/FavoriteIconButton";
 
 export const PresentationsContext = createContext<{
   presentations?: PresentationsApiInterface;
@@ -101,24 +98,6 @@ const PresentationList: React.FC = () => {
     dispatch(loginConfirm());
   }, []);
 
-  const handleOpen = async (user_id: number, presentation_id: number) => {
-    const likeValue = {
-      user_id: user_id,
-      presentation_id: presentation_id,
-    };
-    await dispatch(
-      createLike({
-        like: likeValue,
-      })
-    );
-    await dispatch(
-      fetchPresentations({
-        page: 1,
-        per: 1,
-      })
-    );
-  };
-
   return (
     <Layout title="">
       <Grid container justify="center">
@@ -149,27 +128,10 @@ const PresentationList: React.FC = () => {
                 </CardContent>
 
                 <div className="float-right">
-                  <CardActions disableSpacing>
-                    <IconButton
-                      aria-label="add to favorites"
-                      onClick={() =>
-                        handleOpen(state?.userState?.user?.id, presentation?.id)
-                      }
-                    >
-                      <FavoriteIcon
-                        color={
-                          presentation?.likes?.length ? "secondary" : "disabled"
-                        }
-                      />
-                      <div className="ml-1">
-                        <Typography
-                          color={presentation?.likes?.length ? "" : "error"}
-                        >
-                          {presentation?.likes?.length}
-                        </Typography>
-                      </div>
-                    </IconButton>
-                  </CardActions>
+                  <FavoriteIconButton
+                    presentation={presentation}
+                    loginUser={state?.userState?.user!}
+                  />
                 </div>
               </Card>
             </div>
