@@ -38,7 +38,7 @@ func Init(e *echo.Echo, db *gorm.DB) {
 	likes := e.Group("/likes")
 	{
 		likes.POST("", controllers.CreateLike(db))
-		likes.DELETE("", controllers.DeleteLike(db))
+		likes.POST("/delete", controllers.DeleteLike(db))
 	}
 
 }

@@ -101,40 +101,43 @@ const PresentationList: React.FC = () => {
   return (
     <Layout title="">
       <Grid container justify="center">
-        {state.presentationState?.presentations!.map((presentation) => {
+        {state.presentationState?.presentations!.map((presentation, index) => {
           return (
-            <div style={{ marginTop: 20, padding: 30 }}>
-              <Card className={classes.root}>
-                <CardMenu
-                  presentation={presentation}
-                  loginUser={state?.userState?.user!}
-                />
-
-                {/* 画像 */}
-                <CardMedia
-                  className={classes.media}
-                  image="/img/test.jpg"
-                  title="Paella dish"
-                ></CardMedia>
-
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {presentation.discription}
-                  </Typography>
-                </CardContent>
-
-                <div className="float-right">
-                  <FavoriteIconButton
+            <React.Fragment key={index}>
+              <div key={index} style={{ marginTop: 20, padding: 30 }}>
+                <Card className={classes.root}>
+                  <CardMenu
                     presentation={presentation}
                     loginUser={state?.userState?.user!}
                   />
-                </div>
-              </Card>
-            </div>
+
+                  {/* 画像 */}
+                  <CardMedia
+                    className={classes.media}
+                    image="/img/test.jpg"
+                    title="Paella dish"
+                  ></CardMedia>
+
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {presentation.discription}
+                    </Typography>
+                  </CardContent>
+
+                  <div className="float-right">
+                    <FavoriteIconButton
+                      presentation={presentation}
+                      loginUser={state?.userState?.user!}
+                      key={index}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </React.Fragment>
           );
         })}
       </Grid>

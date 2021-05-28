@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/DaichiHoshina/go_react_app/model"
@@ -15,6 +16,7 @@ func CreateLike(db *gorm.DB) echo.HandlerFunc {
 		if err := c.Bind(post); err != nil {
 			return err
 		}
+		fmt.Println(post.UserID, post.PresentationID)
 		presentation := model.Like{
 			UserID:      post.UserID,
 			PresentationID: post.PresentationID,
@@ -32,8 +34,8 @@ func DeleteLike(db *gorm.DB) echo.HandlerFunc {
 		if err := c.Bind(post); err != nil {
 			return err
 		}
+		fmt.Println(post.UserID, post.PresentationID)
 		presentation := model.Like{
-			ID: post.ID,
 			UserID:      post.UserID,
 			PresentationID: post.PresentationID,
 		}

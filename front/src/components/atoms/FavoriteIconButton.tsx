@@ -1,5 +1,5 @@
 import { CardActions, IconButton, Typography } from "@material-ui/core";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { TPresentation } from "../../modules/Presentation";
 import { useDispatch } from "react-redux";
@@ -10,11 +10,26 @@ import { fetchPresentations } from "../../services/Presentation";
 interface Props {
   presentation?: TPresentation;
   loginUser?: TUser;
+  key?: number;
 }
 
-const FavoriteIconButton: FC<Props> = ({ presentation, loginUser }: Props) => {
+const FavoriteIconButton: FC<Props> = ({
+  presentation,
+  loginUser,
+  key,
+}: Props) => {
   const dispatch = useDispatch();
-  const [likeId, setLikeId] = React.useState<number | null>(null);
+
+  const handleClick = () => {
+    const result = presentation?.likes?.some(
+      (like) => like.user_id! == loginUser?.id!
+    );
+    if (result) {
+      likeDelete(loginUser?.id!, presentation?.id!);
+    } else {
+      likeCreate(loginUser?.id!, presentation?.id!);
+    }
+  };
 
   const likeCreate = async (
     user_id: number,
@@ -38,12 +53,10 @@ const FavoriteIconButton: FC<Props> = ({ presentation, loginUser }: Props) => {
   };
 
   const likeDelete = async (
-    id: number,
     user_id: number,
     presentation_id: number | string
   ) => {
     const likeValue = {
-      id: id,
       user_id: user_id,
       presentation_id: presentation_id,
     };
@@ -63,31 +76,18 @@ const FavoriteIconButton: FC<Props> = ({ presentation, loginUser }: Props) => {
   return (
     <>
       <CardActions disableSpacing>
-        <IconButton
-          aria-label="add to favorites"
-          onClick={() => {
-            if (presentation?.likes?.length > 0) {
-              presentation?.likes?.some((like) =>
-                like.user_id! == loginUser?.id! &&
-                like.presentation_id! == presentation?.id!
-                  ? likeDelete(like?.id!, loginUser?.id!, presentation?.id!)
-                  : likeCreate(loginUser?.id!, presentation?.id!)
-              );
-              //likeがない場合は、そもそも動かなくなるので、条件分岐で動かす必要がある。
-            } else {
-              likeCreate(loginUser?.id!, presentation?.id!);
-            }
-          }}
-        >
-          <FavoriteIcon
-            color={presentation?.likes?.length ? "secondary" : "disabled"}
-          />
-          <div className="ml-1">
-            <Typography color={presentation?.likes?.length ? "" : "error"}>
-              {presentation?.likes?.length}
-            </Typography>
-          </div>
-        </IconButton>
+        <div onClick={handleClick} key={key}>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon
+              color={presentation?.likes?.length ? "secondary" : "disabled"}
+            />
+            <div className="ml-1">
+              <Typography color={presentation?.likes?.length ? "" : "error"}>
+                {presentation?.likes?.length}
+              </Typography>
+            </div>
+          </IconButton>
+        </div>
       </CardActions>
     </>
   );
