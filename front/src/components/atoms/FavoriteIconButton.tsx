@@ -21,15 +21,16 @@ const FavoriteIconButton: FC<Props> = ({
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    const result = presentation?.likes?.some(
-      (like) => like.user_id! == loginUser?.id!
-    );
-    if (result) {
+    if (isLikeCreate) {
       likeDelete(loginUser?.id!, presentation?.id!);
     } else {
       likeCreate(loginUser?.id!, presentation?.id!);
     }
   };
+
+  const isLikeCreate = presentation?.likes?.some(
+    (like) => like.user_id! == loginUser?.id!
+  );
 
   const likeCreate = async (
     user_id: number,
@@ -78,11 +79,9 @@ const FavoriteIconButton: FC<Props> = ({
       <CardActions disableSpacing>
         <div onClick={handleClick} key={key}>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon
-              color={presentation?.likes?.length ? "secondary" : "disabled"}
-            />
+            <FavoriteIcon color={isLikeCreate ? "secondary" : "disabled"} />
             <div className="ml-1">
-              <Typography color={presentation?.likes?.length ? "" : "error"}>
+              <Typography color={isLikeCreate ? "" : "error"}>
                 {presentation?.likes?.length}
               </Typography>
             </div>
