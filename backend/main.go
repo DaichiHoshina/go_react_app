@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
 	"github.com/DaichiHoshina/go_react_app/infrastructure"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -24,11 +24,6 @@ func init() {
 
 func main() {
 	e := echo.New()
-
-	err := godotenv.Load(fmt.Sprintf("../%s.env", os.Getenv("GO_ENV")))
-	if err != nil {
-		// .env読めなかった場合の処理
-	}
 
 	var (
 		file  *os.File

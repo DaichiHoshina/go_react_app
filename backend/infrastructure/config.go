@@ -1,5 +1,13 @@
 package infrastructure
 
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
 type Config struct {
 	Aws struct {
 		S3 struct {
@@ -13,9 +21,9 @@ type Config struct {
 
 func NewConfig() *Config {
 
-	err := godotenv.Load(fmt.Sprintf("../.env"))
+	err := godotenv.Load()
 	if err != nil {
-		panic("Error loading .env file")
+		log.Fatal("Error loading .env file")
 	}
 
 	c := new(Config)
