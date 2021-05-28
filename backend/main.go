@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 
@@ -24,32 +23,6 @@ func init() {
 
 func main() {
 	e := echo.New()
-
-	var (
-		file  *os.File
-		err   error
-		awsS3 *infrastructure.AwsS3
-		url   string
-	)
-
-	file, err = os.Open("./IMG_7931.PNG")
-
-	if err != nil {
-		fmt.Printf(err.Error())
-		return
-	}
-	defer file.Close()
-
-	awsS3 = infrastructure.NewAwsS3()
-
-	// multipart.File と os.File は同じように扱える
-	url, err = awsS3.UploadTest(file, "test", "png")
-
-	if err != nil {
-		fmt.Print(err.Error())
-		return
-	}
-	fmt.Print(url)
 
 	// CORS設定
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{

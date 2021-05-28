@@ -33,6 +33,7 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		presentations.POST("", controllers.CreatePresentation(db))
 		presentations.PUT("/:id", controllers.UpdatePresentation(db))
 		presentations.DELETE("/:id", controllers.DeletePresentation(db))
+		presentations.POST("/image", controllers.Image(db))
 	}
 
 	likes := e.Group("/likes")
