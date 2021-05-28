@@ -55,6 +55,7 @@ const PresentationList: React.FC = () => {
     (state: { presentationState: TPresentationState; userState: TUserState }) =>
       state
   );
+  const loginUser = state?.userState?.user;
 
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -142,7 +143,7 @@ const PresentationList: React.FC = () => {
         })}
       </Grid>
       <div className={classes.fab}>
-        <RecordAddLinkButton pathString="presentations" />
+        {!!loginUser && <RecordAddLinkButton pathString="presentations" />}
       </div>
     </Layout>
   );

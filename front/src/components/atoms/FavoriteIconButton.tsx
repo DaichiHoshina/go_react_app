@@ -77,16 +77,17 @@ const FavoriteIconButton: FC<Props> = ({
   return (
     <>
       <CardActions disableSpacing>
-        <div onClick={handleClick} key={key}>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon color={isLikeCreate ? "secondary" : "disabled"} />
-            <div className="ml-1">
-              <Typography color={isLikeCreate ? "" : "error"}>
-                {presentation?.likes?.length}
-              </Typography>
-            </div>
-          </IconButton>
-        </div>
+        <IconButton aria-label="add to favorites" disabled={!loginUser}>
+          <FavoriteIcon
+            color={isLikeCreate ? "secondary" : "disabled"}
+            onClick={handleClick}
+          />
+          <div className="ml-1">
+            <Typography color={isLikeCreate ? "" : "error"}>
+              {presentation?.likes?.length}
+            </Typography>
+          </div>
+        </IconButton>
       </CardActions>
     </>
   );
