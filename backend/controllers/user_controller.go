@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/DaichiHoshina/go_react_app/model"
@@ -34,7 +35,7 @@ func CreateUser(db *gorm.DB) echo.HandlerFunc {
 		post := new(model.User)
 		if err := c.Bind(post); err != nil {
 			return err
-	}
+		}
 		user := model.User{Name: post.Name}
 		db.Create(&user)
 		return c.JSON(fasthttp.StatusOK, user)
@@ -43,16 +44,42 @@ func CreateUser(db *gorm.DB) echo.HandlerFunc {
 
 func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
+		var (
+			err   error
+			awsS3 *model.AwsS3
+			url   string
+		)
+		upload_file, err := c.FormFile("file")
+		if err != nil {
+			return err
+		}
+		src, err := upload_file.Open()
+		if err != nil {
+			return err
+		}
+		defer src.Close()
+		awsS3 = model.NewAwsS3()
+		url, err = awsS3.UploadTest(src, upload_file.Filename, "png")
+		if err != nil {
+			fmt.Print(err.Error())
+			return err
+		}
+
+		name := c.FormValue("name")
+
+		fmt.Println("333333333333")
+		postUser := model.User{
+			Name:  name,
+			Image: url,
+		}
+		fmt.Println("333333333333")
+		// userをIDで探す
 		if id := c.Param("id"); id != "" {
 			var user []model.User
 			db.First(&user, id)
-			post := new(model.User)
 
-			if err := c.Bind(post); err != nil {
-				return err
-		}
-
-			db.Model(&user).Update("name", post.Name)
+			db.Model(&user).Update("name", postUser.Name)
+			db.Model(&user).Update("image", postUser.Image)
 			return c.JSON(fasthttp.StatusOK, user)
 		} else {
 			return c.JSON(fasthttp.StatusBadRequest, nil)

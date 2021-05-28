@@ -35,24 +35,6 @@ func GetPresentation(db *gorm.DB) echo.HandlerFunc {
 	}
 }
 
-func CreatePresentation(db *gorm.DB) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		post := new(model.Presentation)
-		if err := c.Bind(post); err != nil {
-			return err
-		}
-		presentation := model.Presentation{
-			Title:       post.Title,
-			UserID:      post.UserID,
-			Discription: post.Discription,
-		}
-		if result := db.Create(&presentation); result.Error != nil {
-			return c.JSON(http.StatusBadRequest, result.Error)
-		}
-		return c.JSON(fasthttp.StatusOK, presentation)
-	}
-}
-
 func UpdatePresentation(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		if id := c.Param("id"); id != "" {
@@ -89,7 +71,7 @@ func DeletePresentation(db *gorm.DB) echo.HandlerFunc {
 	}
 }
 
-func Image(db *gorm.DB) echo.HandlerFunc {
+func CreatePresentation(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var (
 			err   error
@@ -110,7 +92,7 @@ func Image(db *gorm.DB) echo.HandlerFunc {
 
 		awsS3 = model.NewAwsS3()
 
-		url, err = awsS3.UploadTest(src, "test", "png")
+		url, err = awsS3.UploadTest(src, upload_file.Filename, "png")
 
 		if err != nil {
 			fmt.Print(err.Error())

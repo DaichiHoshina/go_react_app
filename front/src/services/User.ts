@@ -58,6 +58,7 @@ export const createUser = createAsyncThunk(
   }
 );
 
+// ユーザー更新
 export const updateUser = createAsyncThunk(
   "users/ updateUser",
   async (arg: { id?: string; user?: TUser }, thunkAPI) => {
@@ -67,8 +68,19 @@ export const updateUser = createAsyncThunk(
     const postUser = Object.assign({}, user!);
 
     try {
+      const FormData = require("form-data");
+      const formData = new FormData();
+      Object.entries(postUser).forEach(([key, value]) => {
+        if (key === "files") return;
+        formData.append(key, value);
+      });
+      formData.append("file", user?.image![0]);
       const url = `${process.env.API_URL}/users/${id}`;
-      const response = await axios.put(url, postUser);
+      const response = await axios.post(url, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });

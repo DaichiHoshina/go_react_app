@@ -50,8 +50,20 @@ export const createPresentation = createAsyncThunk(
     const postPresentation = Object.assign({}, presentation!);
     postPresentation.user_id = user_id;
     try {
+      const FormData = require("form-data");
+      const formData = new FormData();
+      Object.entries(postPresentation).forEach(([key, value]) => {
+        if (key === "files") return;
+        formData.append(key, value);
+      });
+      formData.append("user_id", user_id);
+      formData.append("file", presentation?.image![0]);
       const url = `${process.env.API_URL}/presentations`;
-      const response = await axios.post(url, postPresentation);
+      const response = await axios.post(url, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ errorMessage: error.message });

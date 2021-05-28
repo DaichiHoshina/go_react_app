@@ -13,6 +13,7 @@ export type TUser = {
   id?: number | null;
   name?: string | null;
   email?: string | null;
+  image?: string | null;
   password?: string | null;
   created_at?: Date | null;
 };

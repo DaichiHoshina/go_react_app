@@ -11,6 +11,7 @@ import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
 import { UserSettingUpdateSchema } from "../../../const/validation";
+import { DropzoneArea } from "material-ui-dropzone";
 
 interface Props {
   isEditPage: boolean;
@@ -62,6 +63,35 @@ const UserFormCard: React.FC<Props> = ({
     <>
       <Card className="p-5 w-4/5">
         <ul className="flex flex-col space-y-2">
+          <KeyValuePair
+            keyName="image"
+            value={
+              <>
+                <DropzoneArea
+                  dropzoneText={
+                    "ここにファイルをドロップ\nまたはファイルを選択"
+                  }
+                  showPreviews={true}
+                  showPreviewsInDropzone={false}
+                  showFileNamesInPreview={true}
+                  getFileAddedMessage={(fileName: string) =>
+                    `${fileName}を選択しました。`
+                  }
+                  getFileRemovedMessage={(fileName: string) =>
+                    `${fileName}を削除しました。`
+                  }
+                  filesLimit={1}
+                  previewText="アップロードファイル"
+                  onChange={(files) => {
+                    formik.setFieldValue("image", files);
+                  }}
+                />
+                {(formik.values?.image ?? []).length === 0 && (
+                  <p className="pl-3 pt-2 text-white text-xs">select image.</p>
+                )}
+              </>
+            }
+          />
           <KeyValuePair
             keyName="name"
             value={

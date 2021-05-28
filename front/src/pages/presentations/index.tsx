@@ -115,9 +115,9 @@ const PresentationList: React.FC = () => {
                   {/* 画像 */}
                   <CardMedia
                     className={classes.media}
-                    image="/img/test.jpg"
+                    image={presentation?.image ? presentation?.image : "/img/test.jpg"}
                     title="Paella dish"
-                  ></CardMedia>
+                  />
 
                   <CardContent>
                     <Typography

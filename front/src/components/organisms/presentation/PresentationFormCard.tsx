@@ -10,6 +10,7 @@ import {
 import {
   createPresentation,
   fetchPresentation,
+  fetchPresentations,
   updatePresentation,
 } from "../../../services/Presentation";
 import CreateOrEditButton from "../../atoms/share/CreateOrEditButton";
@@ -20,6 +21,8 @@ import KeyValuePair from "../common/KeyValuePair";
 import { PresentationCreateSchema } from "../../../const/validation";
 import { TUser, TUserState } from "../../../modules/User";
 import { loginConfirm } from "../../../services/User";
+import FileUploadForm from "../FileUploadForm";
+import { DropzoneArea } from "material-ui-dropzone";
 
 interface Props {
   isEditPage: boolean;
@@ -68,6 +71,12 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
         enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
           variant: "success",
         });
+        dispatch(
+          fetchPresentations({
+            page: 1,
+            per: 1,
+          })
+        );
         router.push("/presentations");
       } else {
         enqueueSnackbar("Failure...", {
@@ -81,6 +90,40 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
     <>
       <Card className="p-5 w-4/5">
         <ul className="flex flex-col space-y-2">
+          {!isEditPage && (
+            <KeyValuePair
+              keyName="image"
+              value={
+                <>
+                  <DropzoneArea
+                    dropzoneText={
+                      "ここにファイルをドロップ\nまたはファイルを選択"
+                    }
+                    showPreviews={true}
+                    showPreviewsInDropzone={false}
+                    showFileNamesInPreview={true}
+                    getFileAddedMessage={(fileName: string) =>
+                      `${fileName}を選択しました。`
+                    }
+                    getFileRemovedMessage={(fileName: string) =>
+                      `${fileName}を削除しました。`
+                    }
+                    filesLimit={1}
+                    previewText="アップロードファイル"
+                    onChange={(files) => {
+                      formik.setFieldValue("image", files);
+                    }}
+                  />
+                  {(formik.values?.image ?? []).length === 0 && (
+                    <p className="pl-3 pt-2 text-red-500 text-xs">
+                      select image.
+                    </p>
+                  )}
+                </>
+              }
+            />
+          )}
+
           <KeyValuePair
             keyName="title"
             value={
