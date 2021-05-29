@@ -102,7 +102,7 @@ const CardMenu = (props: TProps): JSX.Element => {
     <>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar src={props.presentation?.user?.image! ? props.presentation?.user?.image! : ""} aria-label="recipe" className={classes.avatar}>
             {props.presentation.id!}
           </Avatar>
         }

@@ -67,12 +67,10 @@ func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 
 		name := c.FormValue("name")
 
-		fmt.Println("333333333333")
 		postUser := model.User{
 			Name:  name,
 			Image: url,
 		}
-		fmt.Println("333333333333")
 		// userをIDで探す
 		if id := c.Param("id"); id != "" {
 			var user []model.User

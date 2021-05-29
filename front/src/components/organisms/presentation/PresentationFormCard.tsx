@@ -59,6 +59,13 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
     },
     validationSchema: PresentationCreateSchema,
     onSubmit: async (values) => {
+      // ファイルがないとき用のバリデーション。
+      if ((formik.values?.image ?? []).length === 0) {
+        enqueueSnackbar("画像を添付してください", {
+          variant: "error",
+        });
+        return;
+      }
       const response = (await isEditPage)
         ? dispatch(updatePresentation({ presentation: values, id: id }))
         : dispatch(
@@ -91,37 +98,39 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
       <Card className="p-5 w-4/5">
         <ul className="flex flex-col space-y-2">
           {!isEditPage && (
-            <KeyValuePair
-              keyName="image"
-              value={
-                <>
-                  <DropzoneArea
-                    dropzoneText={
-                      "ここにファイルをドロップ\nまたはファイルを選択"
-                    }
-                    showPreviews={true}
-                    showPreviewsInDropzone={false}
-                    showFileNamesInPreview={true}
-                    getFileAddedMessage={(fileName: string) =>
-                      `${fileName}を選択しました。`
-                    }
-                    getFileRemovedMessage={(fileName: string) =>
-                      `${fileName}を削除しました。`
-                    }
-                    filesLimit={1}
-                    previewText="アップロードファイル"
-                    onChange={(files) => {
-                      formik.setFieldValue("image", files);
-                    }}
-                  />
-                  {(formik.values?.image ?? []).length === 0 && (
-                    <p className="pl-3 pt-2 text-red-500 text-xs">
-                      select image.
-                    </p>
-                  )}
-                </>
-              }
-            />
+            <div className="mb-3">
+              <KeyValuePair
+                keyName="image"
+                value={
+                  <>
+                    <DropzoneArea
+                      dropzoneText={
+                        "ここにファイルをドロップ\nまたはファイルを選択"
+                      }
+                      showPreviews={true}
+                      showPreviewsInDropzone={false}
+                      showFileNamesInPreview={true}
+                      getFileAddedMessage={(fileName: string) =>
+                        `${fileName}を選択しました。`
+                      }
+                      getFileRemovedMessage={(fileName: string) =>
+                        `${fileName}を削除しました。`
+                      }
+                      filesLimit={1}
+                      previewText="アップロードファイル"
+                      onChange={(files) => {
+                        formik.setFieldValue("image", files);
+                      }}
+                    />
+                    {(formik.values?.image ?? []).length === 0 && (
+                      <p className="pl-3 pt-2 text-red-500 text-xs">
+                        select image.
+                      </p>
+                    )}
+                  </>
+                }
+              />
+            </div>
           )}
 
           <KeyValuePair

@@ -43,6 +43,8 @@ const UserFormCard: React.FC<Props> = ({
     initialValues: {},
     validationSchema: UserSettingUpdateSchema,
     onSubmit: async (values) => {
+      // ファイルがないとき用のバリデーション。
+      if ((formik.values?.image ?? []).length === 0) return;
       const response = (await isEditPage)
         ? dispatch(updateUser({ user: values, id: id }))
         : dispatch(createUser({ user: values }));
@@ -63,35 +65,37 @@ const UserFormCard: React.FC<Props> = ({
     <>
       <Card className="p-5 w-4/5">
         <ul className="flex flex-col space-y-2">
-          <KeyValuePair
-            keyName="image"
-            value={
-              <>
-                <DropzoneArea
-                  dropzoneText={
-                    "ここにファイルをドロップ\nまたはファイルを選択"
-                  }
-                  showPreviews={true}
-                  showPreviewsInDropzone={false}
-                  showFileNamesInPreview={true}
-                  getFileAddedMessage={(fileName: string) =>
-                    `${fileName}を選択しました。`
-                  }
-                  getFileRemovedMessage={(fileName: string) =>
-                    `${fileName}を削除しました。`
-                  }
-                  filesLimit={1}
-                  previewText="アップロードファイル"
-                  onChange={(files) => {
-                    formik.setFieldValue("image", files);
-                  }}
-                />
-                {(formik.values?.image ?? []).length === 0 && (
-                  <p className="pl-3 pt-2 text-white text-xs">select image.</p>
-                )}
-              </>
-            }
-          />
+          <div className="mb-3">
+            <KeyValuePair
+              keyName="image"
+              value={
+                <>
+                  <DropzoneArea
+                    dropzoneText={
+                      "ここにファイルをドロップ\nまたはファイルを選択"
+                    }
+                    showPreviews={true}
+                    showPreviewsInDropzone={false}
+                    showFileNamesInPreview={true}
+                    getFileAddedMessage={(fileName: string) =>
+                      `${fileName}を選択しました。`
+                    }
+                    getFileRemovedMessage={(fileName: string) =>
+                      `${fileName}を削除しました。`
+                    }
+                    filesLimit={1}
+                    previewText="アップロードファイル"
+                    onChange={(files) => {
+                      formik.setFieldValue("image", files);
+                    }}
+                  />
+                  {(formik.values?.image ?? []).length === 0 && (
+                    <p className="pl-3 pt-2 text-white text-xs">select image.</p>
+                  )}
+                </>
+              }
+            />
+          </div>
           <KeyValuePair
             keyName="name"
             value={
