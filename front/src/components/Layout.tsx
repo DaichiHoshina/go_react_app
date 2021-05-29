@@ -55,7 +55,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           </div>
         </div>
       </AppBar>
-      <div className="p-7">
+      <div className="p-7 mt-3">
         <Typography component="h2" variant="h6" color="inherit">
           {title}
         </Typography>

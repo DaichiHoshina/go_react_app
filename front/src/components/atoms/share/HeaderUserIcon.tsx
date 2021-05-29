@@ -1,4 +1,4 @@
-import { IconButton } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,6 +14,7 @@ const HeaderUserIcon: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [userName, setUserName] = useState("");
+  const [userImage, setUserImage] = useState("");
   const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -47,6 +48,7 @@ const HeaderUserIcon: React.FC = () => {
     const user: TUser = await result.payload?.data;
     user && (await setUserName(user?.name!));
     user && (await setUserId(user?.id!));
+    user && (await setUserImage(user?.image!));
   };
 
   useEffect(() => {
@@ -68,7 +70,8 @@ const HeaderUserIcon: React.FC = () => {
         onClick={handleMenu}
         color="inherit"
       >
-        <AccountCircle />
+        <Avatar src={userImage ? userImage : ""} aria-label="recipe"></Avatar>
+        {/* <AccountCircle /> */}
       </IconButton>
       <Menu
         id="menu-appbar"

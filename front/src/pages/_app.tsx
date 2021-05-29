@@ -15,6 +15,9 @@ function MyApp({ Component, pageProps }: AppProps): any {
       secondary: {
         main: "#c2185b",
       },
+      error: {
+        main: "#7e7e7e",
+      },
       type: "dark",
     },
   });

@@ -12,9 +12,12 @@ type Presentations struct {
 
 type Presentation struct {
 	gorm.Model
-	ID       		int    		`json:"id"`
+	ID          int       `json:"id"`
 	Title       string    `json:"title"`
-	UserID      uint      `json:"user_id"`
+	UserID      string    `json:"user_id"`
 	Discription string    `json:"discription"`
+	Image       string    `json:"image"`
 	CreatedAt   time.Time `json:"created_at"`
+	User        User      `json:"user"`
+	Likes       []Like    `json:"likes" gorm:"foreignKey:PresentationID"`
 }

@@ -22,7 +22,7 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		users.GET("", controllers.GetUsers(db))
 		users.GET("/:id", controllers.GetUser(db))
 		users.POST("", controllers.CreateUser(db))
-		users.PUT("/:id", controllers.UpdateUser(db))
+		users.POST("/:id", controllers.UpdateUser(db))
 		users.DELETE("/:id", controllers.DeleteUser(db))
 	}
 
@@ -33,6 +33,12 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		presentations.POST("", controllers.CreatePresentation(db))
 		presentations.PUT("/:id", controllers.UpdatePresentation(db))
 		presentations.DELETE("/:id", controllers.DeletePresentation(db))
+	}
+
+	likes := e.Group("/likes")
+	{
+		likes.POST("", controllers.CreateLike(db))
+		likes.POST("/delete", controllers.DeleteLike(db))
 	}
 
 }

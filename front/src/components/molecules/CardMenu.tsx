@@ -1,6 +1,6 @@
-import classes from "*.module.css";
 import {
   Avatar,
+  Button,
   CardHeader,
   createStyles,
   IconButton,
@@ -9,7 +9,6 @@ import {
   MenuItem,
   Theme,
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import router from "next/router";
 import { useSnackbar } from "notistack";
 import React from "react";
@@ -21,8 +20,10 @@ import {
 } from "../../services/Presentation";
 import { returnDatetimeString } from "../../utils/DateUtil";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { TUser } from "../../modules/User";
 
 interface TProps {
+  loginUser: TUser;
   presentation: TPresentation;
 }
 
@@ -31,38 +32,6 @@ const CardMenu = (props: TProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { enqueueSnackbar } = useSnackbar();
-
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        maxWidth: 345,
-      },
-      media: {
-        height: 0,
-        paddingTop: "56.25%", // 16:9
-      },
-      expand: {
-        transform: "rotate(0deg)",
-        marginLeft: "auto",
-        transition: theme.transitions.create("transform", {
-          duration: theme.transitions.duration.shortest,
-        }),
-      },
-      expandOpen: {
-        transform: "rotate(180deg)",
-      },
-      avatar: {
-        backgroundColor: red[500],
-      },
-      fab: {
-        position: "fixed" /* ←表示場所を固定 */,
-        bottom: 25 /* ←下端からの距離 */,
-        right: 25,
-      },
-    })
-  );
-
-  const classes = useStyles();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -99,18 +68,30 @@ const CardMenu = (props: TProps): JSX.Element => {
     <>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {props.presentation.id!}
-          </Avatar>
+          <Avatar
+            src={
+              props.presentation?.user?.image!
+                ? props.presentation?.user?.image!
+                : ""
+            }
+            aria-label="recipe"
+          ></Avatar>
         }
         action={
-          <IconButton aria-label="settings" onClick={handleMenu}>
+          // 投稿したユーザー自身のみが編集できるようにする
+          <Button
+            aria-label="settings"
+            onClick={handleMenu}
+            disabled={props.presentation?.user_id != props.loginUser?.id}
+            size="small"
+          >
             <MoreVertIcon />
-          </IconButton>
+          </Button>
         }
-        title={props.presentation.title}
+        title={`@ ${props.presentation?.user?.name!}`}
         subheader={returnDatetimeString(props.presentation.created_at)}
       />
+
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
