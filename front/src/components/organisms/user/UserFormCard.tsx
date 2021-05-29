@@ -12,6 +12,7 @@ import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
 import { UserSettingUpdateSchema } from "../../../const/validation";
 import { DropzoneArea } from "material-ui-dropzone";
+import { fetchPresentations } from "../../../services/Presentation";
 
 interface Props {
   isEditPage: boolean;
@@ -43,16 +44,23 @@ const UserFormCard: React.FC<Props> = ({
     initialValues: {},
     validationSchema: UserSettingUpdateSchema,
     onSubmit: async (values) => {
-      // ファイルがないとき用のバリデーション。
-      if ((formik.values?.image ?? []).length === 0) return;
       const response = (await isEditPage)
         ? dispatch(updateUser({ user: values, id: id }))
         : dispatch(createUser({ user: values }));
       if (response.arg) {
-        enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
-          variant: "success",
-        });
-        router.push(isUserSettingPage ? `/users/${id}` : "/presentations");
+        // 画像が保存されるまでタイムラグがあるため、○秒後に実行するようにしている
+        setTimeout(function () {
+          enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
+            variant: "success",
+          });
+          dispatch(
+            fetchPresentations({
+              page: 1,
+              per: 1,
+            })
+          );
+          router.push(isUserSettingPage ? `/users/${id}` : "/presentations");
+        }, 3000);
       } else {
         enqueueSnackbar("Failure...", {
           variant: "error",
@@ -90,7 +98,9 @@ const UserFormCard: React.FC<Props> = ({
                     }}
                   />
                   {(formik.values?.image ?? []).length === 0 && (
-                    <p className="pl-3 pt-2 text-white text-xs">select image.</p>
+                    <p className="pl-3 pt-2 text-white text-xs">
+                      select image.
+                    </p>
                   )}
                 </>
               }

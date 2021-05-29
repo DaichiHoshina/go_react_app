@@ -59,7 +59,6 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
     },
     validationSchema: PresentationCreateSchema,
     onSubmit: async (values) => {
-      // ファイルがないとき用のバリデーション。
       if ((formik.values?.image ?? []).length === 0) {
         enqueueSnackbar("画像を添付してください", {
           variant: "error",
@@ -75,16 +74,19 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
             })
           );
       if (response.arg) {
-        enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
-          variant: "success",
-        });
-        dispatch(
-          fetchPresentations({
-            page: 1,
-            per: 1,
-          })
-        );
-        router.push("/presentations");
+        // 画像が保存されるまでタイムラグがあるため、○秒後に実行するようにしている
+        setTimeout(function () {
+          enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
+            variant: "success",
+          });
+          dispatch(
+            fetchPresentations({
+              page: 1,
+              per: 1,
+            })
+          );
+          router.push("/presentations");
+        }, 3000);
       } else {
         enqueueSnackbar("Failure...", {
           variant: "error",

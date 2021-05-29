@@ -48,6 +48,10 @@ const UserDetailCard: React.FC<Props> = () => {
             keyName="created_at"
             value={returnDatetimeString(state.userState?.user?.created_at)}
           />
+          <KeyValuePair
+            keyName="user_image"
+            value={state.userState.user?.image ? "設定済み" : "未設定"}
+          />
         </ul>
         <SeparateHr />
         <div className="flex justify-end">

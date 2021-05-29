@@ -7,7 +7,7 @@ const UserDetail: React.FC = () => {
   return (
     <Layout title="User Detail">
       <>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-3">
           <UserDetailCard />
         </div>
 

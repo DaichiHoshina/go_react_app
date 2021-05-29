@@ -10,7 +10,7 @@ import {
 
 // state
 export type TUser = {
-  id?: number | null;
+  id?: number | string | null;
   name?: string | null;
   email?: string | null;
   image?: string | null;
