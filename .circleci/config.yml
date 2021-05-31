@@ -8,7 +8,8 @@ jobs:
         name: default
       steps:
         - checkout
-        - run: go mod download
+        - run:
+            command: go mod download
         #   # - restore_cache:
         #   #     keys:
         #   #       - go-mod-v4-{{ checksum "go.sum" }}
