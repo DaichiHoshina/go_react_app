@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:latest
-    working_directory: backend
+    working_directory: ~/backend
     steps:
       - checkout
       - run: go mod init github.com/DaichiHoshina/go_react_app/backend
