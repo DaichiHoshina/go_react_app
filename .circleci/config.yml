@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:latest
+    working_directory: backend
     steps:
       - checkout
       - run: go mod init github.com/DaichiHoshina/go_react_app/backend
@@ -10,9 +11,9 @@ jobs:
       #   # - restore_cache:
       #   #     keys:
       #   #       - go-mod-v4-{{ checksum "go.sum" }}
-      - run: cd backend | go get
-      - run: cd backend | go test
-      - run: cd backend | go build main.go
+      - run: go get
+      - run: go test
+      - run: go build main.go
       - store_artifacts:
           path: main
           destination: main
