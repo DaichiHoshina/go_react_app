@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: cd backend
+      - run: go mod init github.com/DaichiHoshina/go_react_app/backend
       - run: go mod download
       #   # - restore_cache:
       #   #     keys:
