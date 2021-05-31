@@ -128,7 +128,7 @@ workflows:
           filters:
             branches:
               only: master
-          region: AWS_REGION
+          region: AWS_DEFAULT_REGION
           account-url: AWS_ECR_ACCOUNT_URL
           repo: ${ECR_DOMAIN}
           tag: "${CIRCLE_SHA1}"
