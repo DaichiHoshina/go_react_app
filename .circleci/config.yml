@@ -11,9 +11,10 @@ jobs:
       #   # - restore_cache:
       #   #     keys:
       #   #       - go-mod-v4-{{ checksum "go.sum" }}
-      - run: go get
-      - run: go test
-      - run: go build main.go
+      - run: ls
+      # - run: go get
+      # - run: go test
+      # - run: go build main.go
       - store_artifacts:
           path: main
           destination: main
