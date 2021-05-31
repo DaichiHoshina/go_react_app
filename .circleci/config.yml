@@ -10,9 +10,9 @@ jobs:
       #   # - restore_cache:
       #   #     keys:
       #   #       - go-mod-v4-{{ checksum "go.sum" }}
-      - run: go get ./backend
-      - run: go test -v ./backend
-      - run: go build ./backend/main.go
+      - run: cd backend | go get
+      - run: cd backend | go test
+      - run: cd backend | go build main.go
       - store_artifacts:
           path: main
           destination: main
