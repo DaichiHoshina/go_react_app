@@ -5,16 +5,15 @@ jobs:
       - image: circleci/golang:latest
     steps:
       - checkout
-      - run:
-          command: cd backend
-      - run:
-          command: go mod download
+      - run: cd backend
+      # - run:
+      #     command: go mod download
       #   # - restore_cache:
       #   #     keys:
       #   #       - go-mod-v4-{{ checksum "go.sum" }}
-      # - run: go get ./...
-      # - run: go test -v ./...
-      # - run: go build -o main main.go
+      - run: go get ./...
+      - run: go test -v ./...
+      - run: go build -o main main.go
       - store_artifacts:
           path: main
           destination: main
