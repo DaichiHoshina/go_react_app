@@ -97,37 +97,38 @@ orbs:
   aws-ecs: circleci/aws-ecs@1.1.0
 
 jobs:
-  test:
-    machine: true
+#   test:
+#     machine: true
 
-    steps:
-      - checkout
-      # - run:
-      #     name: create docker network
-      #     command: docker network create test-network
-      # - run:
-      #     name: コンテナ起動
-      #     command: docker-compose up -d
-      # - run:
-      #     name: 静的デバッグ
-      #     command: make lint
-      # - run:
-      #     name: テスト
-      #     command: make test
+#     steps:
+#       - checkout
+# - run:
+#     name: create docker network
+#     command: docker network create test-network
+# - run:
+#     name: コンテナ起動
+#     command: docker-compose up -d
+# - run:
+#     name: 静的デバッグ
+#     command: make lint
+# - run:
+#     name: テスト
+#     command: make test
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - test
+      # - test
       # dockerイメージのビルド & ECRへプッシュ
       - aws-ecr/build-and-push-image:
           # テストをパスしたら実行
-          requires:
-            - test
+          # requires:
+          #   - test
           filters:
             branches:
               only: master
+          working_directory: ~/backend
           region: AWS_DEFAULT_REGION
           account-url: AWS_ECR_ACCOUNT_URL
           repo: ${ECR_DOMAIN}
