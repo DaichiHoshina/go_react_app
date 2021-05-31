@@ -9,21 +9,21 @@ jobs:
       steps:
         - checkout
         - run: go mod download
-    steps:
-      - checkout
-      # - restore_cache:
-      #     keys:
-      #       - go-mod-v4-{{ checksum "go.sum" }}
-      - run: go get ./...
-      - run: go test -v ./...
-      - run: go build -o main main.go
-      - store_artifacts:
-          path: main
-          destination: main
-      - save_cache:
-          key: go-mod-v4-{{ checksum "go.sum" }}
-          paths:
-            - $GOPATH/pkg/mod
+    # steps:
+    #   - checkout
+    #   # - restore_cache:
+    #   #     keys:
+    #   #       - go-mod-v4-{{ checksum "go.sum" }}
+    #   - run: go get ./...
+    #   - run: go test -v ./...
+    #   - run: go build -o main main.go
+    #   - store_artifacts:
+    #       path: main
+    #       destination: main
+    #   - save_cache:
+    #       key: go-mod-v4-{{ checksum "go.sum" }}
+    #       paths:
+    #         - $GOPATH/pkg/mod
   build_image:
     docker:
       - image: docker:18.09.0
