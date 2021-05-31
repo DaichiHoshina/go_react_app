@@ -120,7 +120,6 @@ workflows:
   workflow:
     jobs:
       - test
-      working_directory: ~/backend
       # dockerイメージのビルド & ECRへプッシュ
       - aws-ecr/build-and-push-image:
           # テストをパスしたら実行
@@ -133,6 +132,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           repo: ${ECR_DOMAIN}
           tag: "${CIRCLE_SHA1}"
+          dockerfile: ./backend/Dockerfile
       # - aws-ecs/deploy-service-update:
       #     # イメージのビルド & プッシュが成功したら実行
       #     requires:
