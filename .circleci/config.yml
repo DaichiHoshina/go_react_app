@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: mod-{{ checksum "go.sum" }}
+          - go-mod-v4-{{ checksum "go.sum" }}
       - run: go get
       - run: go test -v ./...
       - run: go build -o main main.go
@@ -14,7 +14,7 @@ jobs:
           path: main
           destination: main
       - save_cache:
-          key: mod-{{ checksum "go.sum" }}
+          key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
             - $GOPATH/pkg/mod
   build_image:
