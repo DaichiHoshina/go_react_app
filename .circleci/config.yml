@@ -5,7 +5,6 @@ jobs:
       - image: circleci/golang:latest
     steps:
       - checkout
-      - run: cd backend
       - run: go mod init github.com/DaichiHoshina/go_react_app/backend
       - run: go mod download
       #   # - restore_cache:
@@ -13,8 +12,7 @@ jobs:
       #   #       - go-mod-v4-{{ checksum "go.sum" }}
       # - run: go get
       # - run: go test -v ./...
-      - run: ls
-      - run: go build main.go
+      - run: go build ./backend/main.go
       - store_artifacts:
           path: main
           destination: main
