@@ -3,6 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/golang:latest
+    setup:
+      executor:
+        name: default
+      steps:
+        - checkout
+        - run: go mod download
     steps:
       - checkout
       # - restore_cache:
