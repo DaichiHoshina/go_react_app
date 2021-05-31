@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/golang:latest
+    executor:
+      name: default
     steps:
       - checkout
       - run:
