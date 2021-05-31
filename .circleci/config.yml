@@ -102,12 +102,12 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: create docker network
-          command: docker network create test-network
-      - run:
-          name: コンテナ起動
-          command: docker-compose up -d
+      # - run:
+      #     name: create docker network
+      #     command: docker network create test-network
+      # - run:
+      #     name: コンテナ起動
+      #     command: docker-compose up -d
       # - run:
       #     name: 静的デバッグ
       #     command: make lint
