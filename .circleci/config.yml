@@ -11,14 +11,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: update-npm
-          command: "yarn global add npm@latest"
+          name: install yarn
+          command: npm install -g yarn
           working_directory: front
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: install-npm-wee
-          command: yarn
+          name: yarn
+          command: yarn build
           working_directory: front
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
