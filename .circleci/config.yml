@@ -11,26 +11,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: npm install -g n
-          command: npm install -g n
-          working_directory: front
-      - run:
-          name: n latest
-          command: n latest
-          working_directory: front
-      - run:
           name: install yarn
           command: npm install -g yarn
           working_directory: front
       - run:
           name: yarn upgrade
-          command: yarn upgrade
+          command: yarn upgrade --ignore-engines
           working_directory: front
       # - restore_cache:
       #     key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: yarn build
-          command: yarn build
+          command: yarn build --ignore-engines
           working_directory: front
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
