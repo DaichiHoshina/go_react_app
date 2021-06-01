@@ -1,4 +1,5 @@
 FROM node:14.15.3-alpine
+ENV NODE_ENV=production
 WORKDIR /usr/src/app
 COPY front/package.json .
 COPY front/yarn.lock .
