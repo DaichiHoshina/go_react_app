@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - checkout
-       - run:
+      - run:
           name: npm install -g n
           command: npm install -g n
           working_directory: front
