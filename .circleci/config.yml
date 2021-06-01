@@ -10,6 +10,14 @@ jobs:
 
     steps:
       - checkout
+       - run:
+          name: npm install -g n
+          command: npm install -g n
+          working_directory: front
+      - run:
+          name: n latest
+          command: n latest
+          working_directory: front
       - run:
           name: install yarn
           command: npm install -g yarn
