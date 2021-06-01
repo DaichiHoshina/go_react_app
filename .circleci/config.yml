@@ -14,10 +14,14 @@ jobs:
           name: install yarn
           command: npm install -g yarn
           working_directory: front
+      - run:
+          name: yarn upgrade
+          command: yarn upgrade
+          working_directory: front
       # - restore_cache:
       #     key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: yarn
+          name: yarn build
           command: yarn build
           working_directory: front
       - save_cache:
