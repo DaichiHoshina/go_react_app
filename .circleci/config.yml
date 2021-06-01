@@ -24,10 +24,10 @@ jobs:
           name: yarn build
           command: yarn build --ignore-engines
           working_directory: front
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
+      # - save_cache:
+      #     key: dependency-cache-{{ checksum "package.json" }}
+      #     paths:
+      #       - ./node_modules
       # - run:
       #     name: test
       #     command: npm test
