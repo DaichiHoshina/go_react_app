@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "nasum-sample-terraform"
+    bucket = "terrafor-test"
     key    = "sample/service/terraform.tfstate"
     region = "ap-northeast-1"
   }

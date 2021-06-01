@@ -1,3 +1,7 @@
-resource "aws_ecr_repository" "sample-image" {
-  name = "sample-image"
+resource "aws_ecr_repository" "frontend" {
+  name = "frontend"
+}
+
+resource "aws_ecr_repository" "backend" {
+  name = "backend"
 }
