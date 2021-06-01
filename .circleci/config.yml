@@ -39,7 +39,7 @@ workflows:
           region: AWS_DEFAULT_REGION
           account-url: AWS_ECR_ACCOUNT_URL
           repo: ${FRONT_REPO}
-          tag: "${CIRCLE_SHA1}"
+          tag: "latest"
           dockerfile: ./front/Dockerfile
       # - aws-ecr/build-and-push-image:
       #     # テストをパスしたら実行
