@@ -10,29 +10,29 @@ jobs:
 
     steps:
       - checkout
-        - run:
-            name: update-npm
-            command: 'yarn global add npm@latest'
-            working_directory: front
-        - restore_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-        - run:
-            name: install-npm-wee
-            command: yarn
-            working_directory: front
-        - save_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-            paths:
-              - ./node_modules
-        # - run:
-        #     name: test
-        #     command: npm test
-        #     background: true
-        #     working_directory: front
-        - run:
-            name: Run the application
-            command: yarn start
-            background: true
+      - run:
+          name: update-npm
+          command: "yarn global add npm@latest"
+          working_directory: front
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: yarn
+          working_directory: front
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      # - run:
+      #     name: test
+      #     command: npm test
+      #     background: true
+      #     working_directory: front
+      - run:
+          name: Run the application
+          command: yarn start
+          background: true
       # - run:
       #     name: create docker network
       #     command: docker network create test-network
