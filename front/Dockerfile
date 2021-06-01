@@ -3,6 +3,6 @@ WORKDIR /usr/src/app
 COPY front/package.json .
 COPY front/yarn.lock .
 RUN yarn install
+RUN yarn build
 # COPY frontend .
 EXPOSE 3000
-ENTRYPOINT [ "yarn", "start" ]
