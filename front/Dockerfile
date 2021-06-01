@@ -5,5 +5,6 @@ COPY front/package.json .
 COPY front/yarn.lock .
 COPY ./front .
 RUN yarn install
+RUN yarn add --dev @types/node
 RUN yarn build
 EXPOSE 3000
