@@ -7,4 +7,3 @@ COPY ./front .
 RUN yarn install
 RUN yarn add --dev @types/node
 RUN yarn build
-EXPOSE 3000
