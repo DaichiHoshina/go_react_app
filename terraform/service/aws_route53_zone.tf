@@ -1,3 +1,3 @@
-data "aws_route53_zone" "nasum" {
-  name = "ドメイン名"
-}
+# data "aws_route53_zone" "main" {
+#   name = "repgram.com"
+# }

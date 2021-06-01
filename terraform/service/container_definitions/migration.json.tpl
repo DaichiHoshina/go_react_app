@@ -1,7 +1,7 @@
 [
   {
-    "name": "sample-webapp",
-    "image": "ECRのURL/sample-image:latest",
+    "name": "repgram",
+    "image": "326324184951.dkr.ecr.ap-northeast-1.amazonaws.com/frontend:latest",
     "cpu": 200,
     "memory": null,
     "memoryReservation": 600,

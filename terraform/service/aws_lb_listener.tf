@@ -17,5 +17,5 @@ resource "aws_lb_listener" "https" {
         target_group_arn = aws_lb_target_group.http.arn
         type = "forward"
     }
-    certificate_arn = aws_acm_certificate.nasum.arn
+    certificate_arn = aws_acm_certificate.cert.arn
 }
