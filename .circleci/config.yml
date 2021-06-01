@@ -60,7 +60,7 @@ workflows:
           filters:
             branches:
               only: master
-          aws-region: ${AWS_REGION}
+          aws-region: ${AWS_DEFAULT_REGION}
           family: ${ECS_SERVICE}
           cluster-name: "${ECS_CLUSTER}"
           container-image-name-updates: "container=${ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:${CIRCLE_SHA1}"
