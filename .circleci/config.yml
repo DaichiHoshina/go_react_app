@@ -49,9 +49,6 @@ jobs:
       # - run:
       #     name: テスト
       #     command: make test
-
-
-jobs:
   deploy:
     docker:
       - image: circleci/python:3.7
