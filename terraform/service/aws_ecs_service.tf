@@ -8,6 +8,6 @@ resource "aws_ecs_service" "webapp-service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.http.arn
     container_name   = "repgram"
-    container_port   = "4567"
+    container_port   = "3000"
   }
 }

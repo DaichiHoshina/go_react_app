@@ -9,7 +9,7 @@
       {
         "hostPort": 0,
         "protocol": "tcp",
-        "containerPort": 4567
+        "containerPort": 3000
       }
     ],
     "command": ["bundle", "exec", "ruby", "app.rb", "-o", "0.0.0.0"],
