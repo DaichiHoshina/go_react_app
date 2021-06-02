@@ -80,31 +80,26 @@ workflows:
       #     repo: ${BACKEND_REPO}
       #     tag: "${CIRCLE_SHA1}"
       #     dockerfile: ./backend/Dockerfile
-      - aws-ecs/deploy-service-update:
-          # イメージのビルド & プッシュが成功したら実行
-          # requires:
-          #   - aws-ecr/build-and-push-image
-          # filters:
-          #   branches:
-          #     only: master
-          # aws-region: ${AWS_DEFAULT_REGION}
-          # family: ${ECS_SERVICE}
-          # cluster-name: "${ECS_CLUSTER}"
-          # container-image-name-updates: "container=${ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:${CIRCLE_SHA1}"
-          docker:
-            - image: circleci/python:3.7 steps:
-            - run:
-                name: install aws cli command: |
-            sudo pip install awscli - run:
-                      name: download jq
-                      command: |
-            wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-            mv jq-linux64 jq - run:
-                      name: login
-                      command: |
-            $(aws ecr get-login --no-include-email --region ap-northeast-1) - run:
-                      name: deploy
-                      command: |
-            aws ecs describe-task-definition --task-definition webapp-servi ce | jq '.taskDefinition | { containerDefinitions: .containerDefinitions ' > definition.json}
-            aws ecs register-task-definition --execution-role-arn arn:aws:iam:: 262576183096:role/ecs-task-role --family webapp-service --cli-input-json file:/ /definition.json
-            aws ecs update-service --cluster sample-ecs-cluster --service webap p-service --task-definition webapp-service
+      - deploy:
+        docker:
+          - image: circleci/python:3.7
+        steps:
+          - run:
+              name: install aws cli
+              command: |
+                sudo pip install awscli
+          - run:
+              name: download jq
+              command: |
+                wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+                mv jq-linux64 jq
+          - run:
+              name: login
+              command: |
+                $(aws ecr get-login --no-include-email --region ap-northeast-1)
+          - run:
+              name: deploy
+              command: |
+                aws ecs describe-task-definition --task-definition webapp-service | jq  '.taskDefinition | { containerDefinitions: .containerDefinitions }' > definition.json
+                aws ecs register-task-definition --execution-role-arn roleのarn --family webapp-service --cli-input-json file://definition.json
+                aws ecs update-service --cluster sample-ecs-cluster --service webapp-service --task-definition webapp-service
