@@ -21,9 +21,9 @@ RUN go build \
 EXPOSE 3001
 FROM scratch as runner
 
-COPY --from=builder /go/bin/main /app/main
+COPY --from=builder /go/bin/main /go/bin/main
 
-ENTRYPOINT ["/app/main"]
+ENTRYPOINT ["/go/bin/main"]
 
 # Goアプリケーションのビルド
 # ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
