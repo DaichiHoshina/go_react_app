@@ -9,7 +9,10 @@ RUN GO111MODULE=on
 # COPY go.mod go.sum ./
 # RUN go mod download
 WORKDIR /go/src/github.com/DaichiHoshina/go_react_app/backend
-
+COPY go.mod go.sum ./
 COPY . .
 RUN go mod download
-RUN go run ./tools/migrate.go
+
+# Goアプリケーションのビルド
+ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build main.go
