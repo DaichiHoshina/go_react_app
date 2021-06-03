@@ -23,7 +23,7 @@ resource "aws_instance" "backend" {
   monitoring                  = true
   iam_instance_profile        = data.terraform_remote_state.aws_iam.outputs.ecs_instance_profile_name
   subnet_id                   = data.terraform_remote_state.vpc.outputs.public_subnet_1_id
-  user_data                   = file("./user_data.sh")
+  user_data                   = file("./backend_user_data.sh")
   associate_public_ip_address = true
 
   vpc_security_group_ids = [
