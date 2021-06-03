@@ -21,6 +21,29 @@ resource "aws_acm_certificate" "cert" {
   validation_method         = "DNS"
 }
 
+resource "aws_route53_record" "backend" {
+  zone_id = data.aws_route53_zone.domain.zone_id
+  name    = "repgram-api.net"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.lb.dns_name
+    zone_id                = aws_lb.lb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+data "aws_route53_zone" "backend" {
+  name         = "repgram-api.net"
+  private_zone = false
+}
+
+resource "aws_acm_certificate" "backend_cert" {
+  domain_name               = "repgram-api.net"
+  subject_alternative_names = ["*.repgram-api.net"]
+  validation_method         = "DNS"
+}
+
 resource "aws_route53_record" "cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {

@@ -15,6 +15,8 @@ COPY backend/go.sum .
 COPY ./backend .
 
 RUN go mod download
+EXPOSE 3001
+RUN go run main.go
 
 # Goアプリケーションのビルド
 # ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
