@@ -91,6 +91,18 @@ workflows:
           repo: ${FRONT_REPO}
           tag: "latest"
           dockerfile: ./front/Dockerfile
+      - aws-ecr/build-and-push-image:
+          # テストをパスしたら実行
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+          region: AWS_DEFAULT_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: ${BACKEND_REPO}
+          tag: "latest"
+          dockerfile: ./backend/Dockerfile
       # - deploy:
       #     requires:
       #       - test
