@@ -49,29 +49,29 @@ jobs:
       # - run:
       #     name: テスト
       #     command: make test
-  deploy:
-    docker:
-      - image: circleci/python:3.7
-    steps:
-      - run:
-          name: install aws cli
-          command: |
-            sudo pip install awscli
-      - run:
-          name: download jq
-          command: |
-            wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-            mv jq-linux64 jq
-      - run:
-          name: login
-          command: |
-            $(aws ecr get-login --no-include-email --region ap-northeast-1)
-      - run:
-          name: deploy
-          command: |
-            aws ecs describe-task-definition --task-definition webapp-service | jq  '.taskDefinition | { containerDefinitions: .containerDefinitions }' > definition.json
-            aws ecs register-task-definition --execution-role-arn roleのarn --family webapp-service --cli-input-json file://definition.json
-            aws ecs update-service --cluster sample-ecs-cluster --service webapp-service --task-definition webapp-service
+  # deploy:
+  #   docker:
+  #     - image: circleci/python:3.7
+  #   steps:
+  #     - run:
+  #         name: install aws cli
+  #         command: |
+  #           sudo pip install awscli
+  #     - run:
+  #         name: download jq
+  #         command: |
+  #           wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+  #           mv jq-linux64 jq
+  #     - run:
+  #         name: login
+  #         command: |
+  #           $(aws ecr get-login --no-include-email --region ap-northeast-1)
+  #     - run:
+  #         name: deploy
+  #         command: |
+  #           aws ecs describe-task-definition --task-definition webapp-service | jq  '.taskDefinition | { containerDefinitions: .containerDefinitions }' > definition.json
+  #           aws ecs register-task-definition --execution-role-arn roleのarn --family webapp-service --cli-input-json file://definition.json
+  #           aws ecs update-service --cluster sample-ecs-cluster --service webapp-service --task-definition webapp-service
 
 workflows:
   version: 2
@@ -91,10 +91,12 @@ workflows:
           repo: ${FRONT_REPO}
           tag: "latest"
           dockerfile: ./front/Dockerfile
-      - deploy:
-          filters:
-            branches:
-              only: master
+      # - deploy:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: master
       # - aws-ecr/build-and-push-image:
       #     # テストをパスしたら実行
       #     requires:
