@@ -18,4 +18,4 @@ COPY . .
 
 # Goアプリケーションのビルド
 # ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
-RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build main.go
+# RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build main.go
