@@ -1,4 +1,4 @@
-FROM golang:1.16.3-alpine
+FROM golang:1.16.3-alpine as build-step
 RUN apk update && apk add git
 RUN apk add --no-cache alpine-sdk git
 RUN GO111MODULE=on
