@@ -22,7 +22,7 @@ EXPOSE 3001
 FROM scratch as runner
 
 WORKDIR /root/
-COPY --from=build-step /go/src/github.com/DaichiHoshina/go_react_app/backend/app .
+COPY --from=build-step /go/src/github.com/DaichiHoshina/go_react_app/backend/ .
 # COPY --from=build-step /go/bin/main /go/bin/main
 CMD ["./app"]
 # ENTRYPOINT ["/go/bin/main"]
