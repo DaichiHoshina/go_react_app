@@ -109,12 +109,12 @@ workflows:
           repo: ${BACKEND_REPO}
           tag: "latest"
           dockerfile: ./backend/Dockerfile
-      # - deploy:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
       # - aws-ecr/build-and-push-image:
       #     # テストをパスしたら実行
       #     requires:
