@@ -41,4 +41,9 @@ func Init(e *echo.Echo, db *gorm.DB) {
 		likes.POST("/delete", controllers.DeleteLike(db))
 	}
 
+	health_check := e.Group("/health_check")
+	{
+		health_check.GET("", controllers.HealthCheck(db))
+	}
+
 }

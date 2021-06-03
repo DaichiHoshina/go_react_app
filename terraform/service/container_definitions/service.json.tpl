@@ -12,7 +12,7 @@
         "containerPort": 3000
       }
     ],
-    "command": ["bundle", "exec", "ruby", "app.rb", "-o", "0.0.0.0"],
+    "command": ["yarn ", "start"],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

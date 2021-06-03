@@ -1,34 +1,22 @@
 version: "3"
 services:
-  # admin:
-  #   container_name: admin
-  #   build: ./admin
-  #   ports:
-  #     - 3000:3000
-  #   depends_on:
-  #     - backend
-  #   tty: true
-  #   volumes:
-  #     - ./admin:/usr/src/app
-  #   working_dir: "/usr/src/app"
-
-  # front:
-  #   container_name: front
-  #   build: ./front
-  #   ports:
-  #     - 3001:3001
-  #   depends_on:
-  #     - backend
-  #   tty: true
-  #   volumes:
-  #     - ./front:/usr/src/app
-  #   working_dir: "/usr/src/app"
+  front:
+    container_name: front
+    build: ./front
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    tty: true
+    volumes:
+      - ./front:/usr/src/app
+    working_dir: "/usr/src/app"
 
   backend:
     container_name: backend
     build: ./backend
     ports:
-      - 3002:3002
+      - 3001:3001
     depends_on:
       - db
     tty: true
