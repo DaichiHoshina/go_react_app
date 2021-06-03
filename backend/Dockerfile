@@ -21,9 +21,11 @@ RUN go build \
 EXPOSE 3001
 FROM scratch as runner
 
-COPY --from=build-step /go/bin/main /go/bin/main
-
-ENTRYPOINT ["/go/bin/main"]
+WORKDIR /root/
+COPY --from=build-step /go/src/github.com/DaichiHoshina/go_react_app/backend/app .
+# COPY --from=build-step /go/bin/main /go/bin/main
+CMD ["./app"]
+# ENTRYPOINT ["/go/bin/main"]
 
 # Goアプリケーションのビルド
 # ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
