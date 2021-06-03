@@ -21,7 +21,7 @@ RUN go build \
 EXPOSE 3001
 FROM scratch as runner
 
-COPY --from=builder /go/bin/main /go/bin/main
+COPY --from=build-step /go/bin/main /go/bin/main
 
 ENTRYPOINT ["/go/bin/main"]
 
