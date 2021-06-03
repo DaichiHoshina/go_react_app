@@ -12,9 +12,9 @@ WORKDIR /go/src/github.com/DaichiHoshina/go_react_app/backend
 # COPY go.mod go.sum ./
 COPY backend/go.mod .
 COPY backend/go.sum .
+COPY ./backend .
 
 RUN go mod download
-COPY . .
 
 # Goアプリケーションのビルド
 # ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
