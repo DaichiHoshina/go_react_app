@@ -1,9 +1,7 @@
 FROM golang:1.16.3-alpine
-RUN mkdir /go/src/app
-WORKDIR /go/src/app
+WORKDIR /go/src/
 
-COPY ./go.mod .
-COPY ./go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY ./main.go  .
