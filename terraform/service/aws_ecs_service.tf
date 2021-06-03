@@ -20,7 +20,7 @@ resource "aws_ecs_service" "backend-service" {
   launch_type     = "EC2"
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.http.arn
+    target_group_arn = aws_lb_target_group.backend-http.arn
     container_name   = "repgram-backend"
     container_port   = "3001"
   }
