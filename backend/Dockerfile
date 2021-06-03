@@ -10,8 +10,8 @@ RUN GO111MODULE=on
 RUN mkdir /go/src/api
 WORKDIR /go/src/github.com/DaichiHoshina/go_react_app/backend
 # COPY go.mod go.sum ./
-COPY go.mod .
-COPY go.sum .
+COPY backend/go.mod .
+COPY backend/go.sum .
 
 RUN go mod download
 COPY . .
