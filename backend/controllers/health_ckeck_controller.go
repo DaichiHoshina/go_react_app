@@ -12,6 +12,6 @@ func HealthCheck(db *gorm.DB) echo.HandlerFunc {
 		jsonMap := map[string]string{
 			"status": "ok",
 		}
-		return c.JSON(http.StatusNotFound, jsonMap)
+		return c.JSON(http.StatusOK, jsonMap)
 	}
 }
