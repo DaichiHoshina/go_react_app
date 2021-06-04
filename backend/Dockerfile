@@ -1,8 +1,13 @@
 FROM golang:1.16.3-alpine as build-step
+
+ENV GOROOT=/usr/local/go
+ENV GOPATH=/go
+ENV GOBIN=$GOPATH/bin
+ENV PATH $PATH:$GOROOT:$GOPATH:$GOBIN
+ENV GO111MODULE=on
+
 RUN apk update && apk add git
 RUN apk add --no-cache alpine-sdk git
-RUN GO111MODULE=on
-
 WORKDIR /go/src/github.com/DaichiHoshina/go_react_app/backend
 
 COPY backend/go.mod .
@@ -21,12 +26,9 @@ RUN go build \
 EXPOSE 3001
 FROM scratch as runner
 
+# app
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=build-step /go/src/github.com/DaichiHoshina/go_react_app/backend/ .
-# COPY --from=build-step /go/bin/main /go/bin/main
 CMD ["./app"]
-# ENTRYPOINT ["/go/bin/main"]
-
-# Goアプリケーションのビルド
-# ADD . /go/src/github.com/DaichiHoshina/go_react_app/backend
-# RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build main.go
