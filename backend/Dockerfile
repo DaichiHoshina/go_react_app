@@ -26,4 +26,4 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=build-step /go/src/github.com/DaichiHoshina/go_react_app/backend/ .
 EXPOSE 3001
-CMD ["./app"]
+CMD ["./backend"]
