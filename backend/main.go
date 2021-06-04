@@ -15,9 +15,11 @@ func init() {
 	logrus.SetLevel(logrus.DebugLevel)
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 
-	err := godotenv.Load(".env")
-	if err != nil {
-		logrus.Fatalf("Error loading env: %v", err)
+	if "" == os.Getenv("ENV") {
+		err := godotenv.Load(".env")
+		if err != nil {
+			logrus.Fatalf("Error loading env: %v", err)
+		}
 	}
 }
 

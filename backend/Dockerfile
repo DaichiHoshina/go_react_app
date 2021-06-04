@@ -5,6 +5,7 @@ ENV GOPATH=/go
 ENV GOBIN=$GOPATH/bin
 ENV PATH $PATH:$GOROOT:$GOPATH:$GOBIN
 ENV GO111MODULE=on
+ENV ENV=production
 
 RUN apt-get update && \
     apt-get install -y wget \
