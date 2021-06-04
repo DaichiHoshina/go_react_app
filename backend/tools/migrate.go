@@ -7,6 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// マイグレーション
 func main() {
 	err := godotenv.Load(".env")
 	if err != nil {
