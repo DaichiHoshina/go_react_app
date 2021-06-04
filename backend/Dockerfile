@@ -16,14 +16,17 @@ WORKDIR /go/src/github.com/DaichiHoshina/go_react_app/backend
 COPY backend/go.mod .
 COPY backend/go.sum .
 COPY ./backend .
+COPY go.mod .
+COPY go.sum .
+COPY . .
 RUN go mod download
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 # app
 FROM alpine:latest
-RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=build-step /go/src/github.com/DaichiHoshina/go_react_app/backend/ .
+RUN apk add --update --no-cache vim git make musl-dev go curl
 EXPOSE 3001
-CMD ["./backend"]
+# CMD ["./app"]
