@@ -16,9 +16,6 @@ WORKDIR /go/src/github.com/DaichiHoshina/go_react_app/backend
 COPY backend/go.mod .
 COPY backend/go.sum .
 COPY ./backend .
-COPY go.mod .
-COPY go.sum .
-COPY . .
 RUN go mod download
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
