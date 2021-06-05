@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/DaichiHoshina/go_react_app/infrastructure"
 	"github.com/DaichiHoshina/go_react_app/model"
 	"github.com/joho/godotenv"
@@ -9,9 +11,11 @@ import (
 
 // マイグレーション
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		logrus.Fatalf("Error loading env: %v", err)
+	if "" == os.Getenv("ENV") {
+		err := godotenv.Load(".env")
+		if err != nil {
+			logrus.Fatalf("Error loading env: %v", err)
+		}
 	}
 
 	db := infrastructure.Connect()

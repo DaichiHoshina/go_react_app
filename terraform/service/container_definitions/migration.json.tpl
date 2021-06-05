@@ -16,23 +16,6 @@
       }
     },
     "environment": [],
-    "secrets": [
-      {
-        "name": "DB_HOST",
-        "valueFrom": "DB_HOST"
-      },
-      {
-        "name": "DB_USER",
-        "valueFrom": "DB_USER"
-      },
-      {
-        "name": "DB_PASSWORD",
-        "valueFrom": "DB_PASSWORD"
-      },
-      {
-        "name": "RACK_ENV",
-        "valueFrom": "APP_ENV"
-      }
-    ]
+    "secrets": []
   }
 ]
