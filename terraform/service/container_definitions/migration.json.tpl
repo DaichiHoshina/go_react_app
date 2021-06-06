@@ -10,7 +10,7 @@
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "sample-service",
+        "awslogs-group": "front-service",
         "awslogs-region": "ap-northeast-1",
         "awslogs-stream-prefix": "migration"
       }

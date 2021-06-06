@@ -1,4 +1,4 @@
-resource "aws_instance" "sample" {
+resource "aws_instance" "front" {
   ami                         = "ami-0e37e42dff65024ae"
   instance_type               = "t2.small"
   monitoring                  = true

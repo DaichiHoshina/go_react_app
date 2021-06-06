@@ -71,13 +71,13 @@ jobs:
           command: |
             aws ecs describe-task-definition --task-definition webapp-servi ce | jq '.taskDefinition | { containerDefinitions: .containerDefinitions ' > definition.json}
             aws ecs register-task-definition --execution-role-arn arn:aws:iam:: 262576183096:role/ecs-task-role --family webapp-service --cli-input-json file:/ /definition.json
-            aws ecs update-service --cluster sample-ecs-cluster --service webap p-service --task-definition webapp-service
+            aws ecs update-service --cluster repgram-front --service webap p-service --task-definition webapp-service
       - run:
           name: backend-deploy
           command: |
             aws ecs describe-task-definition --task-definition webapp-servi ce | jq '.backendTaskdefinition | { containerDefinitions: .containerDefinitions ' > backendDefinition.json}
             aws ecs register-task-definition --execution-role-arn arn:aws:iam:: 262576183096:role/ecs-task-role --family backend-service --cli-input-json file:/ /backendDefinition.json
-            aws ecs update-service --cluster sample-ecs-cluster --service webap p-service --task-definition backend-service
+            aws ecs update-service --cluster repgram-front --service webap p-service --task-definition backend-service
 
 workflows:
   version: 2

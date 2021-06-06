@@ -1,4 +1,4 @@
-resource "aws_ecs_task_definition" "sample-task" {
+resource "aws_ecs_task_definition" "front-task" {
   family                = "webapp-service"
   container_definitions = file("./container_definitions/service.json.tpl")
 
@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "backend-task" {
   network_mode       = "bridge"
 }
 
-resource "aws_ecs_task_definition" "sample-migration-task" {
+resource "aws_ecs_task_definition" "migration-task" {
   family                = "webapp-migration"
   container_definitions = file("./container_definitions/migration.json.tpl")
 

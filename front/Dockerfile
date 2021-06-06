@@ -10,4 +10,6 @@ RUN yarn install
 RUN yarn add --dev @types/node
 RUN yarn build
 
+COPY . .
+
 EXPOSE 3000

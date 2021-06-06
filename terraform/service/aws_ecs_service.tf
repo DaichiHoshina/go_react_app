@@ -1,7 +1,7 @@
 resource "aws_ecs_service" "webapp-service" {
   name            = "webapp-service"
-  cluster         = "${aws_ecs_cluster.sample-ecs-cluster.id}"
-  task_definition = "${aws_ecs_task_definition.sample-task.arn}"
+  cluster         = "${aws_ecs_cluster.repgram-front.id}"
+  task_definition = "${aws_ecs_task_definition.front-task.arn}"
   desired_count   = 1
   launch_type     = "EC2"
 

@@ -1,5 +1,5 @@
-resource "aws_ecs_cluster" "sample-ecs-cluster" {
-  name = "sample-ecs-cluster"
+resource "aws_ecs_cluster" "repgram-front" {
+  name = "repgram-front"
 }
 
 resource "aws_ecs_cluster" "repgram-backend" {

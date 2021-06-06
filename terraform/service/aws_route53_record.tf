@@ -46,7 +46,7 @@ resource "aws_acm_certificate_validation" "cert" {
 # -------------backend------------------
 
 resource "aws_route53_record" "backend" {
-  zone_id = data.aws_route53_zone.domain.zone_id
+  zone_id = data.aws_route53_zone.backend.zone_id
   name    = "repgram-api.net"
   type    = "A"
 
