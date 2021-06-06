@@ -84,7 +84,7 @@ workflows:
   workflow:
     jobs:
       - test
-      - aws-ecr/build-and-push-image1:
+      - aws-ecr/build-and-push-image:
           requires:
             - test
           filters:
@@ -95,7 +95,7 @@ workflows:
           repo: ${FRONT_REPO}
           tag: "latest"
           dockerfile: ./front/Dockerfile
-      - aws-ecr/build-and-push-image2:
+      - aws-ecr/build-and-push-image:
           requires:
             - test
           filters:
@@ -112,9 +112,9 @@ workflows:
       #     filters:
       #       branches:
       #         only: master
-      - aws-ecs/deploy-service-update1:
+      - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-and-push-image1
+            - aws-ecr/build-and-push-image
           filters:
             branches:
               only: master
@@ -122,9 +122,9 @@ workflows:
           family: ${FRONT_ECS_SERVICE}
           cluster-name: '${FRONT_ECS_CLUSTER}'
           container-image-name-updates: 'container=${FRONT_ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:latest'
-      - aws-ecs/deploy-service-update2:
+      - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-and-push-image2
+            - aws-ecr/build-and-push-image
           filters:
             branches:
               only: master
