@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "type-check": "tsc",
     "lint": "eslint src/ --ext .ts,.tsx",
     "fmt": "prettier --write src/ --ext .ts,.tsx",
