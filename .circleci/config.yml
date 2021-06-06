@@ -118,7 +118,7 @@ workflows:
           filters:
             branches:
               only: master
-          aws-region: ${AWS_REGION}
+          aws-region: ${AWS_DEFAULT_REGION}
           family: ${FRONT_ECS_SERVICE}
           cluster-name: '${FRONT_ECS_CLUSTER}'
           container-image-name-updates: 'container=${FRONT_ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:latest'
@@ -128,7 +128,7 @@ workflows:
           filters:
             branches:
               only: master
-          aws-region: ${AWS_REGION}
+          aws-region: ${AWS_DEFAULT_REGION}
           family: ${BACKEND_ECS_SERVICE}
           cluster-name: '${BACKEND_ECS_CLUSTER}'
           container-image-name-updates: 'container=${BACKEND_ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${BACKEND_REPO}:latest'
