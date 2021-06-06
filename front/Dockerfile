@@ -13,3 +13,5 @@ RUN yarn build
 COPY . .
 
 EXPOSE 3000
+
+ENTRYPOINT [ "yarn", "start" ]
