@@ -95,7 +95,7 @@ workflows:
           repo: ${FRONT_REPO}
           tag: "latest"
           dockerfile: ./front/Dockerfile
-       - aws-ecs/deploy-service-update:
+      - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
           filters:
