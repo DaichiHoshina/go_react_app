@@ -1,0 +1,15 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+&::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.MuiOutlinedInput-multiline {
+  padding: 0 !important;
+}
