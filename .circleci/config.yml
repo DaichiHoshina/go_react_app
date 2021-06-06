@@ -84,7 +84,7 @@ workflows:
   workflow:
     jobs:
       - test
-      - aws-ecr/build-and-push-image:
+      - aws-ecr/build-and-push-image1:
           requires:
             - test
           filters:
@@ -95,7 +95,7 @@ workflows:
           repo: ${FRONT_REPO}
           tag: "latest"
           dockerfile: ./front/Dockerfile
-      - aws-ecr/build-and-push-image:
+      - aws-ecr/build-and-push-image2:
           requires:
             - test
           filters:
@@ -112,25 +112,23 @@ workflows:
       #     filters:
       #       branches:
       #         only: master
-      - aws-ecr/build-and-push-image:
+      - aws-ecs/deploy-service-update1:
           requires:
-            - test
+            - aws-ecr/build-and-push-image1
           filters:
             branches:
               only: master
-          region: AWS_DEFAULT_REGION
-          account-url: BACKEND_ECR_ACCOUNT_URL
-          repo: ${BACKEND_REPO}
-          tag: "latest"
-          dockerfile: ./backend/Dockerfile
-      - aws-ecr/build-and-push-image:
+          aws-region: ${AWS_REGION}
+          family: ${FRONT_ECS_SERVICE}
+          cluster-name: '${FRONT_ECS_CLUSTER}'
+          container-image-name-updates: 'container=${FRONT_ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:latest'
+      - aws-ecs/deploy-service-update2:
           requires:
-            - test
+            - aws-ecr/build-and-push-image2
           filters:
             branches:
               only: master
-          region: AWS_DEFAULT_REGION
-          account-url: FRONT_ECR_ACCOUNT_URL
-          repo: ${FRONT_REPO}
-          tag: "latest"
-          dockerfile: ./front/Dockerfile
+          aws-region: ${AWS_REGION}
+          family: ${BACKEND_ECS_SERVICE}
+          cluster-name: '${BACKEND_ECS_CLUSTER}'
+          container-image-name-updates: 'container=${BACKEND_ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${BACKEND_REPO}:latest'

@@ -1,5 +1,5 @@
 FROM node:14.15.3-alpine
-ENV NODE_ENV=production
+ENV NODE_ENV production
 WORKDIR /usr/src/app
 
 COPY front/package.json .
