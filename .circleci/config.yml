@@ -94,7 +94,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           repo: ${FRONT_REPO}
           tag: "latest"
-          dockerfile: ./front/Dockerfile
+          dockerfile: ./front/Dockerfile_prd
       # - aws-ecs/deploy-service-update:
       #     requires:
       #       - aws-ecr/build-and-push-image
@@ -114,7 +114,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           repo: ${BACKEND_REPO}
           tag: "latest"
-          dockerfile: ./backend/Dockerfile
+          dockerfile: ./backend/Dockerfile_prd
       # - deploy:
       #     requires:
       #       - test

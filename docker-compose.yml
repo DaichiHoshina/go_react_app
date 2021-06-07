@@ -2,7 +2,9 @@ version: "3"
 services:
   front:
     container_name: front
-    build: ./front
+    build:
+      context: ./front
+      dockerfile: Dockerfile_${ENV}
     ports:
       - 3000:3000
     depends_on:
@@ -14,7 +16,9 @@ services:
 
   backend:
     container_name: backend
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile_${ENV}
     ports:
       - 3001:3001
     depends_on:

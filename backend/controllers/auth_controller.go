@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/DaichiHoshina/go_react_app/model"
+	"github.com/DaichiHoshina/go_react_app/backend/model"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"

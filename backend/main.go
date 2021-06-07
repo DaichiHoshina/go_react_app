@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/DaichiHoshina/go_react_app/infrastructure"
+	"github.com/DaichiHoshina/go_react_app/backend/infrastructure"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -28,7 +28,7 @@ func main() {
 
 	// CORS設定
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000", "http://localhost:3002"},
+		AllowOrigins: []string{"http://localhost:3000", "http://localhost:3002", "https://repgram.com"},
 		AllowHeaders: []string{
 			echo.HeaderAccessControlAllowHeaders,
 			echo.HeaderContentType,

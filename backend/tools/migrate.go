@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/DaichiHoshina/go_react_app/infrastructure"
-	"github.com/DaichiHoshina/go_react_app/model"
+	"github.com/DaichiHoshina/go_react_app/backend/infrastructure"
+	"github.com/DaichiHoshina/go_react_app/backend/model"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 )

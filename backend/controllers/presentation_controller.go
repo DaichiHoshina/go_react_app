@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/DaichiHoshina/go_react_app/model"
+	"github.com/DaichiHoshina/go_react_app/backend/model"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"
 	"gorm.io/gorm"

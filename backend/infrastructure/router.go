@@ -1,7 +1,7 @@
 package infrastructure
 
 import (
-	"github.com/DaichiHoshina/go_react_app/controllers"
+	"github.com/DaichiHoshina/go_react_app/backend/controllers"
 	"github.com/labstack/echo"
 	"gorm.io/gorm"
 )

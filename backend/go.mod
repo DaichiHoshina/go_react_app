@@ -1,4 +1,4 @@
-module github.com/DaichiHoshina/go_react_app
+module github.com/DaichiHoshina/go_react_app/backend
 
 go 1.16
 
@@ -14,7 +14,7 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
-	github.com/pelletier/go-toml v1.9.1 // indirect
+	github.com/pelletier/go-toml v1.9.2 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/valyala/fasthttp v1.24.0
 	github.com/valyala/fasttemplate v1.2.1 // indirect

@@ -1,0 +1,13 @@
+FROM golang:1.16.3-alpine
+RUN mkdir /go/src/backend
+WORKDIR /go/src/backend
+ADD . /go/src/backend
+
+RUN apk add --no-cache alpine-sdk git
+RUN go get -u github.com/cosmtrek/air
+
+RUN GO111MODULE=on
+
+# airのパスを通す
+RUN export GOPATH=$HOME/go
+RUN export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

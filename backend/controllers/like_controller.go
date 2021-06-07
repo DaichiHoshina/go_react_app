@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/DaichiHoshina/go_react_app/model"
+	"github.com/DaichiHoshina/go_react_app/backend/model"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"
 	"gorm.io/gorm"
@@ -18,7 +18,7 @@ func CreateLike(db *gorm.DB) echo.HandlerFunc {
 		}
 		fmt.Println(post.UserID, post.PresentationID)
 		presentation := model.Like{
-			UserID:      post.UserID,
+			UserID:         post.UserID,
 			PresentationID: post.PresentationID,
 		}
 		if result := db.Create(&presentation); result.Error != nil {
@@ -36,7 +36,7 @@ func DeleteLike(db *gorm.DB) echo.HandlerFunc {
 		}
 		fmt.Println(post.UserID, post.PresentationID)
 		presentation := model.Like{
-			UserID:      post.UserID,
+			UserID:         post.UserID,
 			PresentationID: post.PresentationID,
 		}
 		db.First(&presentation, presentation)
