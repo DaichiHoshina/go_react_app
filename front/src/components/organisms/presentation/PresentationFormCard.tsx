@@ -75,6 +75,9 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
           );
       if (response.arg) {
         // 画像が保存されるまでタイムラグがあるため、○秒後に実行するようにしている
+        enqueueSnackbar("データを送信中", {
+          variant: "success",
+        });
         setTimeout(function () {
           enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
             variant: "success",
@@ -135,14 +138,14 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
             </div>
           )}
 
-          <KeyValuePair
+          {/* <KeyValuePair
             keyName="title"
             value={
               <div className="flex">
                 <TextFieldParts name="title" formik={formik} />
               </div>
             }
-          />
+          /> */}
           <KeyValuePair
             keyName="discription"
             value={

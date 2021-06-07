@@ -48,6 +48,9 @@ const UserFormCard: React.FC<Props> = ({
         ? dispatch(updateUser({ user: values, id: id }))
         : dispatch(createUser({ user: values }));
       if (response.arg) {
+        enqueueSnackbar("データを送信中", {
+          variant: "success",
+        });
         // 画像が保存されるまでタイムラグがあるため、○秒後に実行するようにしている
         setTimeout(function () {
           enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {

@@ -21,6 +21,7 @@ import {
 import { returnDatetimeString } from "../../utils/DateUtil";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { TUser } from "../../modules/User";
+import DeleteOrButton from "../atoms/share/DeleteOrButton";
 
 interface TProps {
   loginUser: TUser;
@@ -28,30 +29,11 @@ interface TProps {
 }
 
 const CardMenu = (props: TProps): JSX.Element => {
-  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const clickPresentationDelete = async (presentation: TPresentation) => {
-    const response = await dispatch(
-      deletePresentation({
-        id: props.presentation.id,
-      })
-    );
-    if (response.payload?.[0]) {
-      enqueueSnackbar("削除しました。", { variant: "success" });
-      await dispatch(
-        fetchPresentations({
-          page: 1,
-          per: 1,
-        })
-      );
-    }
     setAnchorEl(null);
   };
 
@@ -110,8 +92,10 @@ const CardMenu = (props: TProps): JSX.Element => {
         <MenuItem onClick={() => clickPresentationEdit(props.presentation)}>
           Edit
         </MenuItem>
-        <MenuItem onClick={() => clickPresentationDelete(props.presentation)}>
-          Delete
+        <MenuItem>
+          <div onClick={() => handleClose()}>
+            <DeleteOrButton presentation={props.presentation} />
+          </div>
         </MenuItem>
       </Menu>
     </>

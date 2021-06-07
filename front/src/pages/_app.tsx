@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps): any {
     <ThemeProvider theme={darkTheme}>
       <SnackbarProvider
         maxSnack={5}
-        anchorOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "center", vertical: "top" }}
         variant="error"
         autoHideDuration={3000}
       >
