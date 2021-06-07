@@ -60,7 +60,9 @@ const PresentationList: React.FC = () => {
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
       root: {
-        maxWidth: 345,
+        // カードの大きさを統一する
+        minWidth: 280,
+        maxWidth: 280,
       },
       media: {
         height: 0,
@@ -115,7 +117,11 @@ const PresentationList: React.FC = () => {
                   {/* 画像 */}
                   <CardMedia
                     className={classes.media}
-                    image={presentation?.image ? presentation?.image : "/img/test.jpg"}
+                    image={
+                      presentation?.image
+                        ? presentation?.image
+                        : "/img/test.jpg"
+                    }
                     title="Paella dish"
                   />
 
