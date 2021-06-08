@@ -100,12 +100,13 @@ workflows:
             - aws-ecr/build-and-push-image
           filters:
             branches:
-              o６nly: master
+              only: master
           family: ${FRONT_ECS_SERVICE}
           cluster-name: "${FRONT_ECS_CLUSTER}"
           container-image-name-updates: "container=${FRONT_ECS_SERVICE},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:latest"
   backend:
     jobs:
+      - test
       - aws-ecr/build-and-push-image:
           requires:
             - test
