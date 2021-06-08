@@ -49,36 +49,6 @@ jobs:
       # - run:
       #     name: テスト
       #     command: make test
-  # deploy:
-  #   docker:
-  #     - image: circleci/python:3.7
-  #   steps:
-  #     - run:
-  #         name: install aws cli
-  #         command: |
-  #           sudo pip install awscli
-  #     - run:
-  #         name: download jq
-  #         command: |
-  #           wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-  #           mv jq-linux64 jq
-  #     - run:
-  #         name: login
-  #         command: |
-  #           $(aws ecr get-login --no-include-email --region ap-northeast-1)
-  #     - run:
-  #         name: front-deploy
-  #         command: |
-  #           aws ecs describe-task-definition --task-definition webapp-servi ce | jq '.taskDefinition | { containerDefinitions: .containerDefinitions ' > definition.json}
-  #           aws ecs register-task-definition --execution-role-arn arn:aws:iam:: 262576183096:role/ecs-task-role --family webapp-service --cli-input-json file:/ /definition.json
-  #           aws ecs update-service --cluster repgram-front --service webap p-service --task-definition webapp-service
-  #     - run:
-  #         name: backend-deploy
-  #         command: |
-  #           aws ecs describe-task-definition --task-definition webapp-servi ce | jq '.backendTaskdefinition | { containerDefinitions: .containerDefinitions ' > backendDefinition.json}
-  #           aws ecs register-task-definition --execution-role-arn arn:aws:iam:: 262576183096:role/ecs-task-role --family backend-service --cli-input-json file:/ /backendDefinition.json
-  #           aws ecs update-service --cluster repgram-backend --service webap p-service --task-definition backend-service
-
 workflows:
   version: 2
   front:
@@ -100,11 +70,11 @@ workflows:
             - aws-ecr/build-and-push-image
           filters:
             branches:
-              only: master¥
-          family: ${FRONT_ECS_SERVICE}
+              only: master
+          family: "${FRONT_ECS_SERVICE}"
           cluster-name: "${FRONT_ECS_CLUSTER}"
-          # container-image-name-updates: "container=,image-and-tag=${AWS_ECR_ACCOUNT_URL}/${FRONT_REPO}:latest"
-          container-image-name-updates: "container=${FRONT_ECS_SERVICE},tag=latest"
+          service-name: "${FRONT_ECS_SERVICE}"
+          container-image-name-updates: "container=${FRONT_CONTAINER_NAME},tag=latest"
   backend:
     jobs:
       - test
@@ -129,9 +99,3 @@ workflows:
           cluster-name: "${BACKEND_ECS_CLUSTER}"
           service-name: "${BACKEND_ECS_SERVICE}"
           container-image-name-updates: "container=${BACKEND_ECS_CLUSTER},tag=latest"
-          #       - deploy:
-          # requires:
-          #   - test
-          # filters:
-          #   branches:
-          #     only: master
