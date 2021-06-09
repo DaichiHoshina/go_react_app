@@ -16,6 +16,7 @@ require (
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/pelletier/go-toml v1.9.2 // indirect
 	github.com/sirupsen/logrus v1.8.1
+	github.com/steinfletcher/apitest v1.5.10 // indirect
 	github.com/valyala/fasthttp v1.24.0
 	github.com/valyala/fasttemplate v1.2.1 // indirect
 	golang.org/x/crypto v0.0.0-20210503195802-e9a32991a82e
