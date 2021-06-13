@@ -106,38 +106,18 @@ func TestCreatePresentation(t *testing.T) {
 
 func TestDeletePresentation(t *testing.T) {
 
-	url := "http://localhost:3001" + "/presentaons/1"
+	url := "http://localhost:3001" + "/presentations/1"
 
-	// Create client
 	client := &http.Client{}
-
-	// res, err := http.Delete(url, contentType, nil)
-	// res.Header.Add("Content-Type", "multipart/form-data")
-	// if err != nil {
-	// 	t.Errorf("Expected nil, got %v", err)
-	// }
-	// if res.StatusCode != http.StatusOK {
-	// 	t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
-	// }
-	// Create request
-	req, err := http.NewRequest("DELETE", url, nil)
+	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// Fetch Request
 	resp, err := client.Do(req)
-	if resp.StatusCode != 400 {
-		fmt.Println(err)
-		fmt.Println(resp.StatusCode)
+	if resp.StatusCode != 200 {
+		t.Errorf("got = %d, want = 200", resp.StatusCode)
 	}
 	defer resp.Body.Close()
-
-	// // Read Response Body
-	// respBody, err := ioutil.ReadAll(resp.Body)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
 }
