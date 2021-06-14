@@ -30,6 +30,9 @@ jobs:
           command: docker-compose exec backend env
       - run:
           name: マイグレーション
+          command: docker logs dockerMySQL
+      - run:
+          name: マイグレーション
           command: make backend-migrate
       - run:
           name: テスト
