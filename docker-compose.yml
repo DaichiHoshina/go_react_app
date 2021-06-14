@@ -34,9 +34,9 @@ services:
       DB_ROOTPASS: password
       DB_USERNAME: root
       DB_USERPASS: password
-    networks:
-      - test-network
-    restart: always
+    # networks:
+    #   - test-network
+    # restart: always
 
   db:
     image: mysql
@@ -55,6 +55,6 @@ services:
       - "3306:3306"
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql
-    networks:
-      - test-network
-    restart: always
+    # networks:
+    #   - test-network
+    # restart: always

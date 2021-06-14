@@ -16,6 +16,9 @@ jobs:
       - run:
           name: コンテナ起動
           command: docker-compose up -d
+      - run:
+          name: コンテナ起動
+          command: docker network ls
       # - run:
       #     name: 静的デバッグ
       #     command: make lint
