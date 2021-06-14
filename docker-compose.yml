@@ -54,7 +54,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./db/mysql/volumes:/var/lib/mysql
+      - "./docker/mysql/my.conf:/etc/mysql/my.conf"
     # networks:
     #   - test-network
     # restart: always
