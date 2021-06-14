@@ -10,45 +10,18 @@ jobs:
 
     steps:
       - checkout
-      # - run:
-      #     name: install yarn
-      #     command: npm install -g yarn
-      #     working_directory: front
-      # - run:
-      #     name: yarn upgrade
-      #     command: yarn upgrade --ignore-engines
-      #     working_directory: front
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
-      # - run:
-      #     name: yarn build
-      #     command: yarn build --ignore-engines
-      #     working_directory: front
-      # - save_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
-      #     paths:
-      #       - ./node_modules
-      # - run:
-      #     name: test
-      #     command: npm test
-      #     background: true
-      #     working_directory: front
       - run:
-          name: Run the application
-          command: yarn start
-          background: true
-      # - run:
-      #     name: create docker network
-      #     command: docker network create test-network
-      # - run:
-      #     name: コンテナ起動
-      #     command: docker-compose up -d
+          name: create docker network
+          command: docker network create test-network
+      - run:
+          name: コンテナ起動
+          command: docker-compose up -d
       # - run:
       #     name: 静的デバッグ
       #     command: make lint
-      # - run:
-      #     name: テスト
-      #     command: make test
+      - run:
+          name: テスト
+          command: make backend-test
 workflows:
   version: 2
   front:
