@@ -52,3 +52,5 @@ services:
       - "3306:3306"
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql
+    networks:
+      - test-network
