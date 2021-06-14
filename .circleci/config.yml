@@ -19,6 +19,9 @@ jobs:
       # - run:
       #     name: 静的デバッグ
       #     command: make lint
+       - run:
+          name: マイグレーション
+          command: docker-compose exec backend env
       - run:
           name: マイグレーション
           command: make backend-migrate
