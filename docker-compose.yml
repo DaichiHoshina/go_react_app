@@ -39,7 +39,7 @@ services:
     # restart: always
 
   db:
-    image: mysql
+    image: mariadb
     container_name: dockerMySQL
     command: >
       mysqld
