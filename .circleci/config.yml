@@ -21,6 +21,9 @@ jobs:
       #     command: make lint
       - run:
           name: マイグレーション
+          command: docker-compose ps
+      - run:
+          name: マイグレーション
           command: docker-compose exec backend env
       - run:
           name: マイグレーション
