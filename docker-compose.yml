@@ -28,11 +28,12 @@ services:
       - ./backend:/go/src/api
     working_dir: "/go/src/api"
     environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db
-      MYSQL_PASSWORD: password
-      MYSQL_HOST: dockerMySQL
+      DB_HOST: dockerMySQL
+      DB_PORT: 3306
+      DB_NAME: mydb
+      DB_ROOTPASS: password
+      DB_USERNAME: root
+      DB_USERPASS: password
 
   db:
     image: mysql

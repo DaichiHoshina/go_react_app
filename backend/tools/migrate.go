@@ -11,7 +11,7 @@ import (
 
 // マイグレーション
 func main() {
-	if os.Getenv("ENV") == "" {
+	if os.Getenv("ENV") == "local" {
 		err := godotenv.Load(".env")
 		if err != nil {
 			logrus.Fatalf("Error loading env: %v", err)
