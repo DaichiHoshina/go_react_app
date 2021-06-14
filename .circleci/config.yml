@@ -20,6 +20,9 @@ jobs:
       #     name: 静的デバッグ
       #     command: make lint
       - run:
+          name: マイグレーション
+          command: make backend-migrate
+      - run:
           name: テスト
           command: make backend-test
 workflows:
