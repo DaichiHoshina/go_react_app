@@ -1,5 +1,5 @@
 backend-test:
-	docker-compose exec backend go test -v ./usecase/interactor
+	docker-compose exec backend go test -v ./...
 
 # staticcheck
 backend-lint:
