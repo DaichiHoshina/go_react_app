@@ -35,6 +35,9 @@ jobs:
           name: マイグレーション
           command: make backend-migrate
       - run:
+          name: air
+          command: docker-compose exec backend air
+      - run:
           name: テスト
           command: make backend-test
 workflows:
