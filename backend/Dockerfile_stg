@@ -14,3 +14,4 @@ RUN GO111MODULE=on
 # airのパスを通す
 RUN export GOPATH=$HOME/go
 RUN export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+CMD ["air"]
