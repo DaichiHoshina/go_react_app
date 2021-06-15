@@ -52,7 +52,7 @@ services:
       MYSQL_DATABASE: mydb
       MYSQL_PASSWORD: password
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - "./docker/mysql/my.conf:/etc/mysql/my.conf"
     # networks:
