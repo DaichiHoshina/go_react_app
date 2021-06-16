@@ -3,7 +3,6 @@ package controllers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -12,66 +11,139 @@ import (
 	"testing"
 
 	"github.com/DaichiHoshina/go_react_app/backend/model"
-	"github.com/go-playground/assert"
 	"github.com/labstack/echo"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetPresentations(t *testing.T) {
-	url := "http://localhost:3001" + "/presentations"
-	res, err := http.Get(url)
+	db, _, err := MockDB()
 	if err != nil {
-		t.Errorf("Expected nil, got %v", err)
+		t.Fatal(err)
 	}
-	if res.StatusCode != http.StatusOK {
-		t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
+
+	e := echo.New()
+
+	req := httptest.NewRequest(
+		echo.GET,
+		"/presentations",
+		nil,
+	)
+
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	c.SetPath("/presentations")
+
+	test := GetPresentations(db)
+
+	tes := test(c)
+	if tes != nil {
+		t.Errorf("Error: %v", tes)
 	}
+
+	assert.Equal(t, err, nil)
+	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
 func TestGetPresentation(t *testing.T) {
-	url := "http://localhost:3001" + "/presentations/1"
-	res, err := http.Get(url)
+	db, _, err := MockDB()
 	if err != nil {
-		t.Errorf("Expected nil, got %v", err)
+		t.Fatal(err)
 	}
-	if res.StatusCode != http.StatusOK {
-		t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
+
+	e := echo.New()
+
+	req := httptest.NewRequest(
+		echo.GET,
+		"/presentations/1",
+		nil,
+	)
+
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	c.SetPath("/presentations/:id")
+	c.SetParamNames("id")
+	c.SetParamValues("1")
+
+	test := GetPresentation(db)
+
+	tes := test(c)
+	if tes != nil {
+		t.Errorf("Error: %v", tes)
 	}
+
+	assert.Equal(t, err, nil)
+	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
 func TestCreatePresentation(t *testing.T) {
 
-	url := "http://localhost:3001" + "/presentations"
+	// url := "http://localhost:3001" + "/presentations"
 
 	fieldname := "file"
-	filename := "test.jpg"
+	filename := ".././IMG_7931.PNG"
 	file, err := os.Open(filename)
+	if err != nil {
+		t.Errorf("Expected nil, got %v", err)
+	}
 
 	body := &bytes.Buffer{}
+
 	// データのmultipartエンコーディングを管理するmultipart.Writerを生成する。
 	// ランダムなbase-16バウンダリが生成される。
 	mw := multipart.NewWriter(body)
-
 	err = mw.WriteField("user_id", "1")
 
 	fw, err := mw.CreateFormFile(fieldname, filename)
+	if err != nil {
+		t.Errorf("Expected nil, got %v", err)
+	}
 
 	// fwで作ったパートにファイルのデータを書き込む
 	_, err = io.Copy(fw, file)
 
-	// リクエストのContent-Typeヘッダに使う値を取得する（バウンダリを含む）
-	contentType := mw.FormDataContentType()
-
 	// 書き込みが終わったので最終のバウンダリを入れる
 	err = mw.Close()
 
-	res, err := http.Post(url, contentType, body)
-	res.Header.Add("Content-Type", "multipart/form-data")
+	// res, err := http.Post(url, contentType, body)
+	// res.Header.Add("Content-Type", "multipart/form-data")
+	// if err != nil {
+	// 	t.Errorf("Expected nil, got %v", err)
+	// }
+	// if res.StatusCode == http.StatusOK {
+	// 	t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
+	// 	t.Errorf("body is %d", body)
+	// }
+
+	db, _, err := MockDB()
 	if err != nil {
-		t.Errorf("Expected nil, got %v", err)
+		t.Fatal(err)
 	}
-	if res.StatusCode != http.StatusOK {
-		t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
+
+	e := echo.New()
+
+	req, err := http.NewRequest(
+		echo.POST,
+		"/presentations",
+		body,
+	)
+	req.Header.Set("Content-Type", "multipart/form-data")
+	if err != nil {
+		t.Errorf("The request could not be created because of: %v", err)
 	}
+
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	c.SetPath("/presentations")
+
+	context := CreatePresentation(db)
+
+	res := context(c)
+	if res != nil {
+		t.Errorf("Error: %v", res)
+	}
+
+	assert.Equal(t, err, nil)
+	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
 func TestUpdatePresentation(t *testing.T) {
@@ -82,7 +154,7 @@ func TestUpdatePresentation(t *testing.T) {
 	// defer db.Close()
 	// db.LogMode(true)
 
-	// e := echo.New()
+	e := echo.New()
 
 	// discription := "2222"
 	// title := "BBBB"
@@ -115,7 +187,7 @@ func TestUpdatePresentation(t *testing.T) {
 	// 	return c.JSON(fasthttp.StatusOK, presentation)
 	// })
 
-	e := echo.New()
+	// e := echo.New()
 
 	requestBody := model.Presentation{
 		Title:       "これはタイトルです",
@@ -165,19 +237,32 @@ func TestUpdatePresentation(t *testing.T) {
 }
 
 func TestDeletePresentation(t *testing.T) {
-
-	url := "http://localhost:3001" + "/presentations/1"
-
-	client := &http.Client{}
-	req, err := http.NewRequest(http.MethodDelete, url, nil)
+	db, _, err := MockDB()
 	if err != nil {
-		fmt.Println(err)
-		return
+		t.Fatal(err)
 	}
 
-	resp, err := client.Do(req)
-	if resp.StatusCode != 200 {
-		t.Errorf("got = %d, want = 200", resp.StatusCode)
+	e := echo.New()
+
+	req := httptest.NewRequest(
+		echo.DELETE,
+		"/presentations/1",
+		nil,
+	)
+
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	c.SetPath("/presentations/:id")
+	c.SetParamNames("id")
+	c.SetParamValues("1")
+
+	test := DeletePresentation(db)
+
+	tes := test(c)
+	if tes != nil {
+		t.Errorf("Error: %v", tes)
 	}
-	defer resp.Body.Close()
+
+	assert.Equal(t, err, nil)
+	assert.Equal(t, http.StatusOK, rec.Code)
 }

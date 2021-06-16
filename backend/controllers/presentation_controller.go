@@ -64,7 +64,7 @@ func DeletePresentation(db *gorm.DB) echo.HandlerFunc {
 			var presentation []model.Presentation
 			db.First(&presentation, id)
 			db.Delete(&presentation)
-			return c.JSON(http.StatusOK, presentation)
+			return c.JSON(fasthttp.StatusOK, presentation)
 		} else {
 			return c.JSON(http.StatusBadRequest, nil)
 		}

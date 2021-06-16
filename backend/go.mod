@@ -10,6 +10,7 @@ require (
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/go-playground/assert v1.2.1
 	github.com/go-playground/assert/v2 v2.0.1
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.3.0
 	github.com/labstack/echo v3.3.10+incompatible
