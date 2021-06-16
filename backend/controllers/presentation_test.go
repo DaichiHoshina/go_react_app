@@ -33,11 +33,11 @@ func TestGetPresentations(t *testing.T) {
 	c := e.NewContext(req, rec)
 	c.SetPath("/presentations")
 
-	test := GetPresentations(db)
+	handler := GetPresentations(db)
 
-	tes := test(c)
-	if tes != nil {
-		t.Errorf("Error: %v", tes)
+	res := handler(c)
+	if res != nil {
+		t.Errorf("Error: %v", res)
 	}
 
 	assert.Equal(t, err, nil)
@@ -64,11 +64,11 @@ func TestGetPresentation(t *testing.T) {
 	c.SetParamNames("id")
 	c.SetParamValues("1")
 
-	test := GetPresentation(db)
+	handler := GetPresentation(db)
 
-	tes := test(c)
-	if tes != nil {
-		t.Errorf("Error: %v", tes)
+	res := handler(c)
+	if res != nil {
+		t.Errorf("Error: %v", res)
 	}
 
 	assert.Equal(t, err, nil)
@@ -76,9 +76,6 @@ func TestGetPresentation(t *testing.T) {
 }
 
 func TestCreatePresentation(t *testing.T) {
-
-	// url := "http://localhost:3001" + "/presentations"
-
 	fieldname := "file"
 	filename := ".././IMG_7931.PNG"
 	file, err := os.Open(filename)
@@ -88,8 +85,6 @@ func TestCreatePresentation(t *testing.T) {
 
 	body := &bytes.Buffer{}
 
-	// データのmultipartエンコーディングを管理するmultipart.Writerを生成する。
-	// ランダムなbase-16バウンダリが生成される。
 	mw := multipart.NewWriter(body)
 	err = mw.WriteField("user_id", "1")
 
@@ -98,10 +93,8 @@ func TestCreatePresentation(t *testing.T) {
 		t.Errorf("Expected nil, got %v", err)
 	}
 
-	// fwで作ったパートにファイルのデータを書き込む
 	_, err = io.Copy(fw, file)
 
-	// 書き込みが終わったので最終のバウンダリを入れる
 	err = mw.Close()
 
 	// res, err := http.Post(url, contentType, body)
@@ -121,7 +114,7 @@ func TestCreatePresentation(t *testing.T) {
 
 	e := echo.New()
 
-	req, err := http.NewRequest(
+	req := httptest.NewRequest(
 		echo.POST,
 		"/presentations",
 		body,
@@ -130,14 +123,14 @@ func TestCreatePresentation(t *testing.T) {
 	if err != nil {
 		t.Errorf("The request could not be created because of: %v", err)
 	}
+	defer req.Body.Close()
 
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	c.SetPath("/presentations")
 
-	context := CreatePresentation(db)
-
-	res := context(c)
+	handler := CreatePresentation(db)
+	res := handler(c)
 	if res != nil {
 		t.Errorf("Error: %v", res)
 	}
@@ -147,47 +140,12 @@ func TestCreatePresentation(t *testing.T) {
 }
 
 func TestUpdatePresentation(t *testing.T) {
-	// db, _, err := MockDB()
-	// if err != nil {
-	// 	t.Fatal(err)
-	// }
-	// defer db.Close()
-	// db.LogMode(true)
+	db, _, err := MockDB()
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	e := echo.New()
-
-	// discription := "2222"
-	// title := "BBBB"
-	// id := 1
-	// url := "http://localhost:3001/presentations/1"
-
-	// Mock設定
-	// mock.ExpectQuery(regexp.QuoteMeta(
-	// 	`INSERT INTO "presentationss" ("discription","title") VALUES ($1,$2)
-	// 	RETURNING "presentationss"."id"`)).
-	// 	WithArgs(title, discription).
-	// 	WillReturnRows(
-	// 		sqlmock.NewRows([]string{"id"}).AddRow(id))
-
-	// e.PUT(url, func(c echo.Context) (err error) {
-
-	// 	var presentation []model.Presentation
-	// 	db.First(&presentation, id)
-	// 	post := new(model.Presentation)
-
-	// 	if err := c.Bind(post); err != nil {
-	// 		return err
-	// 	}
-
-	// 	db.Model(&presentation).Update(
-	// 		"discription", discription,
-	// 	).Update(
-	// 		"title", title,
-	// 	)
-	// 	return c.JSON(fasthttp.StatusOK, presentation)
-	// })
-
-	// e := echo.New()
 
 	requestBody := model.Presentation{
 		Title:       "これはタイトルです",
@@ -201,39 +159,29 @@ func TestUpdatePresentation(t *testing.T) {
 
 	req := httptest.NewRequest(
 		echo.PUT,
-		"/presentations/4",
+		"/presentations/1",
 		bytes.NewBuffer(jsonValue),
 	)
-	// defer req.Body.Close()
-	// if err != nil {
-	// 	fmt.Println("request error")
-	// 	fmt.Println(err)
-	// 	return
-	// }
+	req.Header.Set("Content-Type", "application/json")
+	defer req.Body.Close()
+	if err != nil {
+		t.Errorf("Expected nil, got %v", err)
+	}
+
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
-	c.SetPath("/presentations/1")
+	c.SetPath("/presentations/:id")
+	c.SetParamNames("id")
+	c.SetParamValues("1")
 
-	// var userJSON = `[{"title":"これはタイトルです", "discription":"これは記事の内容です"}]`
+	handler := UpdatePresentation(db)
+	res := handler(c)
+	if res != nil {
+		t.Errorf("Error: %v", res)
+	}
 
-	// assert.Equal(t, userJSON, rec.Body.String())
+	assert.Equal(t, err, nil)
 	assert.Equal(t, http.StatusOK, rec.Code)
-
-	// req.Header.Set("Content-Type", "application/json")
-
-	// client := new(http.Client)
-	// resp, err := client.Do(req)
-	// if resp.StatusCode != 200 {
-	// 	t.Errorf("got = %d, want = 200", resp.StatusCode)
-	// }
-	// defer resp.Body.Close()
-
-	// byteArray, err := ioutil.ReadAll(resp.Body)
-	// if err != nil {
-	// 	panic("Error")
-	// }
-
-	// fmt.Printf("%#v", string(byteArray))
 }
 
 func TestDeletePresentation(t *testing.T) {
@@ -256,11 +204,11 @@ func TestDeletePresentation(t *testing.T) {
 	c.SetParamNames("id")
 	c.SetParamValues("1")
 
-	test := DeletePresentation(db)
+	handler := DeletePresentation(db)
 
-	tes := test(c)
-	if tes != nil {
-		t.Errorf("Error: %v", tes)
+	res := handler(c)
+	if res != nil {
+		t.Errorf("Error: %v", res)
 	}
 
 	assert.Equal(t, err, nil)
