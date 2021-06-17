@@ -76,6 +76,7 @@ func TestGetPresentation(t *testing.T) {
 }
 
 func TestCreatePresentation(t *testing.T) {
+	url := "http://localhost:3001/presentations"
 	fieldname := "file"
 	filename := ".././IMG_7931.PNG"
 	file, err := os.Open(filename)
@@ -95,48 +96,19 @@ func TestCreatePresentation(t *testing.T) {
 
 	_, err = io.Copy(fw, file)
 
+	contentType := mw.FormDataContentType()
+
 	err = mw.Close()
 
-	// res, err := http.Post(url, contentType, body)
-	// res.Header.Add("Content-Type", "multipart/form-data")
-	// if err != nil {
-	// 	t.Errorf("Expected nil, got %v", err)
-	// }
-	// if res.StatusCode == http.StatusOK {
-	// 	t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
-	// 	t.Errorf("body is %d", body)
-	// }
-
-	db, _, err := MockDB()
+	res, err := http.Post(url, contentType, body)
+	res.Header.Add("Content-Type", "multipart/form-data")
 	if err != nil {
-		t.Fatal(err)
+		t.Errorf("Expected nil, got %v", err)
 	}
-
-	e := echo.New()
-
-	req := httptest.NewRequest(
-		echo.POST,
-		"/presentations",
-		body,
-	)
-	req.Header.Set("Content-Type", "multipart/form-data")
-	if err != nil {
-		t.Errorf("The request could not be created because of: %v", err)
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
+		t.Errorf("body is %d", body)
 	}
-	defer req.Body.Close()
-
-	rec := httptest.NewRecorder()
-	c := e.NewContext(req, rec)
-	c.SetPath("/presentations")
-
-	handler := CreatePresentation(db)
-	res := handler(c)
-	if res != nil {
-		t.Errorf("Error: %v", res)
-	}
-
-	assert.Equal(t, err, nil)
-	assert.Equal(t, http.StatusOK, rec.Code)
 }
 
 func TestUpdatePresentation(t *testing.T) {
