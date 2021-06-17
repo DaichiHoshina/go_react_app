@@ -17,14 +17,14 @@ func CreateLike(db *gorm.DB) echo.HandlerFunc {
 			return err
 		}
 		fmt.Println(post.UserID, post.PresentationID)
-		presentation := model.Like{
+		like := model.Like{
 			UserID:         post.UserID,
 			PresentationID: post.PresentationID,
 		}
-		if result := db.Create(&presentation); result.Error != nil {
+		if result := db.Create(&like); result.Error != nil {
 			return c.JSON(http.StatusBadRequest, result.Error)
 		}
-		return c.JSON(fasthttp.StatusOK, presentation)
+		return c.JSON(fasthttp.StatusOK, like)
 	}
 }
 
@@ -35,14 +35,14 @@ func DeleteLike(db *gorm.DB) echo.HandlerFunc {
 			return err
 		}
 		fmt.Println(post.UserID, post.PresentationID)
-		presentation := model.Like{
+		like := model.Like{
 			UserID:         post.UserID,
 			PresentationID: post.PresentationID,
 		}
-		db.First(&presentation, presentation)
-		if result := db.Delete(&presentation); result.Error != nil {
+		db.First(&like, like)
+		if result := db.Delete(&like); result.Error != nil {
 			return c.JSON(http.StatusBadRequest, result.Error)
 		}
-		return c.JSON(fasthttp.StatusOK, presentation)
+		return c.JSON(fasthttp.StatusOK, like)
 	}
 }

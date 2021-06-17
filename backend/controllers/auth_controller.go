@@ -95,7 +95,7 @@ func Login(db *gorm.DB) echo.HandlerFunc {
 			return c.JSON(http.StatusNotFound, jsonMap)
 		}
 
-		// JWT
+		// JWTトークンを取得
 		claims := jwt.StandardClaims{
 			Issuer:    strconv.Itoa(int(user.ID)),
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
