@@ -34,6 +34,9 @@ services:
       DB_ROOTPASS: password
       DB_USERNAME: root
       DB_USERPASS: password
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_ACCESS_KEY:  ${AWS_ACCESS_KEY}
+      BUCKET_NAME: repgram
     # networks:
     #   - test-network
     # restart: always

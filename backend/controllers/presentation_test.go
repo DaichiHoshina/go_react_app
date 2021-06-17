@@ -107,7 +107,7 @@ func TestCreatePresentation(t *testing.T) {
 	}
 	if res.StatusCode != http.StatusOK {
 		t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
-		t.Errorf("body is %d", body)
+		t.Errorf("body is %d", res.Body)
 	}
 }
 
