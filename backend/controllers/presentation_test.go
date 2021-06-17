@@ -76,7 +76,7 @@ func TestGetPresentation(t *testing.T) {
 }
 
 func TestCreatePresentation(t *testing.T) {
-	url := "http://localhost:3001/presentations"
+	// url := "http://localhost:3001/presentations"
 	fieldname := "file"
 	filename := ".././IMG_7931.PNG"
 	file, err := os.Open(filename)
@@ -100,15 +100,36 @@ func TestCreatePresentation(t *testing.T) {
 
 	err = mw.Close()
 
-	res, err := http.Post(url, contentType, body)
-	res.Header.Add("Content-Type", "multipart/form-data")
+	db, _, err := MockDB()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	e := echo.New()
+
+	req := httptest.NewRequest(
+		echo.POST,
+		"/presentations",
+		body,
+	)
+	req.Header.Add("Content-Type", contentType)
+	defer req.Body.Close()
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
 	}
-	if res.StatusCode != http.StatusOK {
-		t.Errorf("Expected status code is %d, got %d", http.StatusOK, res.StatusCode)
-		t.Errorf("body is %d", res.Body)
+
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	c.SetPath("/presentations")
+
+	handler := UpdateUser(db)
+	res := handler(c)
+	if res != nil {
+		t.Errorf("Error: %v", res)
 	}
+
+	assert.Equal(t, err, nil)
+	assert.Equal(t, res, nil)
 }
 
 func TestUpdatePresentation(t *testing.T) {

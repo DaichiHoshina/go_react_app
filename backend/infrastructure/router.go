@@ -19,11 +19,8 @@ func Init(e *echo.Echo, db *gorm.DB) {
 
 	users := e.Group("/users")
 	{
-		users.GET("", controllers.GetUsers(db))
 		users.GET("/:id", controllers.GetUser(db))
-		users.POST("", controllers.CreateUser(db))
 		users.POST("/:id", controllers.UpdateUser(db))
-		users.DELETE("/:id", controllers.DeleteUser(db))
 	}
 
 	presentations := e.Group("/presentations")

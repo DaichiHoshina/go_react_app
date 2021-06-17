@@ -2,21 +2,12 @@ package controllers
 
 import (
 	"fmt"
-	"net/http"
 
 	"github.com/DaichiHoshina/go_react_app/backend/model"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"
 	"gorm.io/gorm"
 )
-
-func GetUsers(db *gorm.DB) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		var users []model.User
-		db.Find(&users)
-		return c.JSON(fasthttp.StatusOK, users)
-	}
-}
 
 func GetUser(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
@@ -27,18 +18,6 @@ func GetUser(db *gorm.DB) echo.HandlerFunc {
 		} else {
 			return c.JSON(fasthttp.StatusNotFound, nil)
 		}
-	}
-}
-
-func CreateUser(db *gorm.DB) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		post := new(model.User)
-		if err := c.Bind(post); err != nil {
-			return err
-		}
-		user := model.User{Name: post.Name}
-		db.Create(&user)
-		return c.JSON(fasthttp.StatusOK, user)
 	}
 }
 
@@ -81,19 +60,6 @@ func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 			return c.JSON(fasthttp.StatusOK, user)
 		} else {
 			return c.JSON(fasthttp.StatusBadRequest, nil)
-		}
-	}
-}
-
-func DeleteUser(db *gorm.DB) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		if id := c.Param("id"); id != "" {
-			var user []model.User
-			db.First(&user, id)
-			db.Delete(&user)
-			return c.JSON(http.StatusOK, user)
-		} else {
-			return c.JSON(http.StatusBadRequest, nil)
 		}
 	}
 }
