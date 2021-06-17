@@ -36,7 +36,7 @@ services:
       DB_USERPASS: password
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_ACCESS_KEY: ${AWS_ACCESS_KEY_ID}
-      BUCKET_NAME: repgram
+      BUCKET_NAME: repgram-production
     # networks:
     #   - test-network
     # restart: always
