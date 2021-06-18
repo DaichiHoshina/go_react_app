@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import LoginForm from "../organisms/login/LoginForm";
 
 const LoginFormTemplate: FC = () => {

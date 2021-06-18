@@ -1,5 +1,4 @@
 import { Button, Card } from "@material-ui/core";
-import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../services/User";
 import TextFieldParts from "../../atoms/share/TextFieldParts";
@@ -9,6 +8,7 @@ import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { TUser } from "../../../modules/User";
 import { loginSchema } from "../../../const/validation";
+import { FC } from "react";
 interface Props {
   isSubmit: boolean;
 }
@@ -23,7 +23,7 @@ const LoginForm: FC<Props> = () => {
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       const result = await dispatch(loginUser({ loginForm: values }));
-      if (result.payload.status === 200) {
+      if (result.payload?.status === 200) {
         router.push("/presentations");
         enqueueSnackbar(`Welcome!!`, {
           variant: "success",
@@ -43,7 +43,7 @@ const LoginForm: FC<Props> = () => {
 
   const testUserLogin = async () => {
     const result = await dispatch(loginUser({ loginForm: testValues }));
-    if (result.payload.status === 200) {
+    if (result.payload?.status === 200) {
       router.push("/presentations");
       enqueueSnackbar("Welcome!!", {
         variant: "success",
