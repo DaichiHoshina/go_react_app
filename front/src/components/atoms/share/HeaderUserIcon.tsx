@@ -16,7 +16,7 @@ const HeaderUserIcon: React.FC = () => {
   const [userImage, setUserImage] = useState("");
   const [userId, setUserId] = useState<number | string>("");
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar() || {};
 
   const handleClose = () => {
     setAnchorEl(null);

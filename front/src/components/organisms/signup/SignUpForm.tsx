@@ -15,7 +15,7 @@ interface Props {
 const SignUpForm: FC<Props> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar() || {};
 
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },

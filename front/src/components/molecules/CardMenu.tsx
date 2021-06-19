@@ -31,7 +31,7 @@ interface TProps {
 const CardMenu = (props: TProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar() || {};
 
   const handleClose = () => {
     setAnchorEl(null);

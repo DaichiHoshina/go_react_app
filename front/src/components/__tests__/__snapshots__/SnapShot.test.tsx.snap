@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout>のスナップショット 1`] = `
+<div
+  className="min-h-screen pt-10"
+>
+  <header
+    className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-elevation4"
+    style={
+      Object {
+        "backgroundColor": "#000000",
+        "color": "#FFFFFF",
+        "zIndex": 1201,
+      }
+    }
+  >
+    <div
+      className="flex"
+    >
+      <div
+        className="mt-2"
+      >
+        <div
+          className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
+        >
+          <a
+            className="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorInherit"
+            href="/presentations"
+            onBlur={[Function]}
+            onFocus={[Function]}
+          >
+            <h6
+              className="MuiTypography-root flex-grow MuiTypography-h6 MuiTypography-colorInherit"
+            >
+              Repgram
+            </h6>
+          </a>
+        </div>
+      </div>
+      <div
+        className="ml-auto mt-2 mr-2"
+      >
+        <div
+          className="flex"
+        >
+          <div
+            className="mr-2"
+          >
+            <button
+              className="MuiButtonBase-root MuiButton-root MuiButton-text"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Sign In
+              </span>
+            </button>
+          </div>
+          <div>
+            <button
+              className="MuiButtonBase-root MuiButton-root MuiButton-text"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Sign Up
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div
+    className="p-7 mt-3"
+  >
+    <h2
+      className="MuiTypography-root MuiTypography-h6 MuiTypography-colorInherit"
+    >
+      
+    </h2>
+    
+  </div>
+  <div
+    className="MuiBox-root MuiBox-root-1 pt-8"
+  >
+    <div
+      className="mt-5 pt-5 text-center text-xs border-t border-gray-300"
+    >
+      Copyright 2021 Daichi Hoshina
+    </div>
+  </div>
+</div>
+`;
