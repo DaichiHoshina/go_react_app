@@ -16,10 +16,10 @@ interface Props {
 
 const UserDetailCard: React.FC<Props> = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const id: any = router.query;
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);
-  const { enqueueSnackbar } = useSnackbar();
+  const enqueueSnackbar: any = useSnackbar();
 
   // アクセス制限
   const userLoginConfirm = async () => {
