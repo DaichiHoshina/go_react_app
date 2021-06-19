@@ -16,8 +16,8 @@ interface Props {
 
 const UserDetailCard: React.FC<Props> = () => {
   const router = useRouter();
-  const { id } = router.query;
-  const { enqueueSnackbar } = useSnackbar();
+  const { id } = router?.query || {};
+  const { enqueueSnackbar } = useSnackbar() || {};
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);
 
