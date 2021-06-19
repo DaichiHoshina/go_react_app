@@ -32,7 +32,7 @@ interface Props {
 const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
   const router = useRouter();
   const id: any = router.query;
-  const enqueueSnackbar: any = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const state = useSelector(
     (state: { presentationState: TPresentationState; userState: TUserState }) =>
@@ -50,6 +50,8 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
     }
   }, [state?.presentationState?.presentation?.id]);
 
+  const setTime = isEditPage ? 0 : 1000;
+
   const formik = useFormik<TPresentation>({
     initialValues: {
       user_id: isEditPage
@@ -58,7 +60,7 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
     },
     validationSchema: PresentationCreateSchema,
     onSubmit: async (values) => {
-      if ((formik.values?.image ?? []).length === 0) {
+      if (!isEditPage && (formik.values?.image ?? []).length === 0) {
         enqueueSnackbar("画像を添付してください", {
           variant: "error",
         });
@@ -74,9 +76,10 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
           );
       if (response.arg) {
         // 画像が保存されるまでタイムラグがあるため、○秒後に実行するようにしている
-        enqueueSnackbar("データを送信中", {
-          variant: "success",
-        });
+        !isEditPage &&
+          enqueueSnackbar("データを送信中", {
+            variant: "success",
+          });
         setTimeout(function () {
           enqueueSnackbar(isEditPage ? "Update!!" : "Create!!", {
             variant: "success",
@@ -88,7 +91,7 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
             })
           );
           router.push("/presentations");
-        }, 3000);
+        }, setTime);
       } else {
         enqueueSnackbar("Failure...", {
           variant: "error",

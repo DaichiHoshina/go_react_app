@@ -9,7 +9,7 @@ import { Link } from "@material-ui/core";
 import { TUser } from "../modules/User";
 import HeaderUserIcon from "../components/atoms/share/HeaderUserIcon";
 import { loginConfirm } from "../services/User";
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import LoginIcon from "./atoms/share/LoginIcon";
 export interface LayoutProps {
   children: React.ReactNode;

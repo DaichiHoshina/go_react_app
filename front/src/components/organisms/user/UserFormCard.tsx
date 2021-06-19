@@ -26,7 +26,7 @@ const UserFormCard: React.FC<Props> = ({
 }) => {
   const router = useRouter();
   const id: any = router?.query;
-  const enqueueSnackbar: any = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);
 
