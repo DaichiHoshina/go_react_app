@@ -2,8 +2,7 @@ import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
-import { useFormik, useFormikContext } from "formik";
-import { useRouter } from "next/router";
+import { useFormik } from "formik";
 import { TPresentation } from "../../../modules/Presentation";
 import {
   deletePresentation,
@@ -46,19 +45,12 @@ interface Props {
   presentation?: TPresentation;
 }
 
-const DeleteOrButton: React.FC<Props> = ({
-  isEditPage = false,
-  formik,
-  presentation,
-}) => {
+const DeleteOrButton: React.FC<Props> = ({ presentation }) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
-  const router = useRouter();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar() || {};
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const [modalOpen, setModalOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -70,9 +62,9 @@ const DeleteOrButton: React.FC<Props> = ({
   };
 
   const clickPresentationDelete = async (presentation: TPresentation) => {
-    const response = await dispatch(
+    const response: any = await dispatch(
       deletePresentation({
-        id: presentation.id,
+        id: presentation.id!,
       })
     );
     if (response.payload?.[0]) {
@@ -85,7 +77,6 @@ const DeleteOrButton: React.FC<Props> = ({
       );
     }
     handleClose();
-    setAnchorEl(null);
   };
 
   const body = (

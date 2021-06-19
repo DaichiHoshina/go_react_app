@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { List, ListItem, ListItemText } from "@material-ui/core";
-import { useRouter } from "next/router";
 
 export type LinkInfo = {
   text: string;
@@ -9,13 +8,10 @@ export type LinkInfo = {
 };
 
 const SideMenuArea: React.FC = (): JSX.Element => {
-  const [navLinkInfos, setNavLinkInfos] = useState<
-    { text: string; url: string }[]
-  >([
+  const [navLinkInfos] = useState<{ text: string; url: string }[]>([
     { text: "トップページ", url: "/" },
     { text: "ユーザー管理", url: "/users" },
   ]);
-  const router = useRouter();
 
   return (
     <>

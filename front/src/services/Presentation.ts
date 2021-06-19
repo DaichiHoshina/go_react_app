@@ -97,7 +97,7 @@ export const updatePresentation = createAsyncThunk(
 
 export const deletePresentation = createAsyncThunk(
   "presentations/deletePresentation",
-  async (arg: { id?: string }, thunkAPI) => {
+  async (arg: { id?: string | number }, thunkAPI) => {
     const { id } = arg;
     try {
       const url = `${process.env.API_URL}/presentations/${id}`;
