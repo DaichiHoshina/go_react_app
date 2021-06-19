@@ -1,7 +1,6 @@
 import { InputAdornment, TextField, IconButton } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { useFormik } from "formik";
 
 interface Props {
   isSubmit?: boolean;
@@ -14,7 +13,7 @@ interface Props {
   multiline?: boolean;
   rows?: number;
   placeholder?: string;
-  formik?: ReturnType<typeof useFormik>;
+  formik?: any;
   type?: string;
   directErrorMessage?: string;
 }

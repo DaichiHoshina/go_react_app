@@ -1,5 +1,5 @@
 import { Card } from "@material-ui/core";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { TUser, TUserState } from "../../../modules/User";
 import { fetchUser, loginConfirm } from "../../../services/User";
 import EditLinkButton from "../../atoms/share/EditLinkButton";
@@ -23,8 +23,8 @@ const UserDetailCard: React.FC<Props> = () => {
 
   // アクセス制限
   const userLoginConfirm = async () => {
-    await dispatch(fetchUser({ id: id }));
-    const result = await dispatch(loginConfirm());
+    await dispatch(fetchUser({ id: id[0] }));
+    const result: any = await dispatch(loginConfirm());
     if (id != result.payload?.data.id) {
       router.push("/presentations");
       enqueueSnackbar("権限のないページにアクセスしました", {

@@ -22,7 +22,7 @@ const LoginForm: FC<Props> = () => {
     initialValues: { email: "", password: "" },
     validationSchema: loginSchema,
     onSubmit: async (values) => {
-      const result = await dispatch(loginUser({ loginForm: values }));
+      const result: any = await dispatch(loginUser({ loginForm: values }));
       if (result.payload?.status === 200) {
         router.push("/presentations");
         enqueueSnackbar(`Welcome!!`, {
@@ -42,7 +42,7 @@ const LoginForm: FC<Props> = () => {
   };
 
   const testUserLogin = async () => {
-    const result = await dispatch(loginUser({ loginForm: testValues }));
+    const result: any = await dispatch(loginUser({ loginForm: testValues }));
     if (result.payload?.status === 200) {
       router.push("/presentations");
       enqueueSnackbar("Welcome!!", {

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 interface Props {
   keyName: string;
-  value?: string | JSX.Element | null;
+  value?: number | string | JSX.Element | null;
   keyClass?: string;
   valueClass?: string;
 }
@@ -10,12 +10,12 @@ interface Props {
 const Div = () => <div />;
 
 const KeyValuePair: React.FC<Props> = ({
-  keyName = '',
+  keyName = "",
   value = <Div />,
-  keyClass = 'w-1/3',
-  valueClass = 'w-2/3',
+  keyClass = "w-1/3",
+  valueClass = "w-2/3",
 }) => {
-  if (!value) value = '-';
+  if (!value) value = "-";
   return (
     <>
       <li className="flex w-full">

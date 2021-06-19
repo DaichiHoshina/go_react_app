@@ -2,8 +2,7 @@ import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
-import { useFormik, useFormikContext } from "formik";
-import { useRouter } from "next/router";
+import { useFormik } from "formik";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   isEditPage?: boolean;
   formik?: ReturnType<typeof useFormik>;
-  // 設定をする
 }
 
 const CreateOrEditButton: React.FC<Props> = ({
@@ -44,10 +42,8 @@ const CreateOrEditButton: React.FC<Props> = ({
   formik,
 }) => {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const router = useRouter();
 
   const handleOpen = () => {
     setOpen(true);

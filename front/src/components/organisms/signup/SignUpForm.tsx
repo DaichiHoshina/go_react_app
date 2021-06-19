@@ -21,7 +21,7 @@ const SignUpForm: FC<Props> = () => {
     initialValues: { name: "", email: "", password: "" },
     validationSchema: AccountCreateSchema,
     onSubmit: async (values) => {
-      const result = await dispatch(signUpUser({ loginForm: values }));
+      const result: any = await dispatch(signUpUser({ loginForm: values }));
       if (result.payload.status === 200) {
         router.push("/presentations");
         enqueueSnackbar("Success!!", {

@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import UserFormCard from "../organisms/user/UserFormCard";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<UserFormCard />).toJSON();
+  const tree = renderer.create(<UserFormCard isEditPage={true} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
