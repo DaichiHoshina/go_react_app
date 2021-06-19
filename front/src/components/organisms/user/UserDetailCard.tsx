@@ -16,14 +16,14 @@ interface Props {
 
 const UserDetailCard: React.FC<Props> = () => {
   const router = useRouter();
-  const id: any = router.query;
+  const { id } = router.query;
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);
-  const { enqueueSnackbar } = useSnackbar();
 
   // アクセス制限
   const userLoginConfirm = async () => {
-    await dispatch(fetchUser({ id: id[0] }));
+    await dispatch(fetchUser({ id: id }));
     const result: any = await dispatch(loginConfirm());
     if (id != result.payload?.data.id) {
       router.push("/presentations");
@@ -35,7 +35,7 @@ const UserDetailCard: React.FC<Props> = () => {
 
   useEffect(() => {
     userLoginConfirm();
-  }, []);
+  }, [id]);
 
   return (
     <>

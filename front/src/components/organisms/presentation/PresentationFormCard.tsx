@@ -31,7 +31,7 @@ interface Props {
 
 const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
   const router = useRouter();
-  const id: any = router.query;
+  const { id } = router.query;
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const state = useSelector(

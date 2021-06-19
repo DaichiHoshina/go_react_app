@@ -29,7 +29,7 @@ export const fetchPresentations = createAsyncThunk(
 
 export const fetchPresentation = createAsyncThunk(
   "presentations/fetchPresentation",
-  async (arg: { id?: number }, thunkAPI) => {
+  async (arg: { id?: number | string[] | string }, thunkAPI) => {
     const { id } = arg;
     try {
       const url = `${process.env.API_URL}/presentations/${id}`;
@@ -76,7 +76,10 @@ export const createPresentation = createAsyncThunk(
 
 export const updatePresentation = createAsyncThunk(
   "presentations/ updatePresentation",
-  async (arg: { id?: string; presentation?: TPresentation }, thunkAPI) => {
+  async (
+    arg: { id?: string | string[]; presentation?: TPresentation },
+    thunkAPI
+  ) => {
     const { presentation } = arg;
     const { id } = arg;
 
