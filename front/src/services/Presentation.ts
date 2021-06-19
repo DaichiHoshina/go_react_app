@@ -43,7 +43,10 @@ export const fetchPresentation = createAsyncThunk(
 
 export const createPresentation = createAsyncThunk(
   "presentations/createPresentation",
-  async (arg: { presentation?: TPresentation; user_id?: number }, thunkAPI) => {
+  async (
+    arg: { presentation?: TPresentation; user_id?: number | string },
+    thunkAPI
+  ) => {
     const { presentation, user_id } = arg;
 
     // ログインしているユーザーのIDをuser_idに設定する。

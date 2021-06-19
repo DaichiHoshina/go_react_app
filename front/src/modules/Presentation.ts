@@ -15,7 +15,7 @@ export type TPresentation = {
   discription?: string | null;
   title?: string | null;
   created_at?: Date | null;
-  user_id?: number | null;
+  user_id?: string | number | null;
   image?: string | null;
   user?: TUser | null;
   likes?: Array<TLike> | null;

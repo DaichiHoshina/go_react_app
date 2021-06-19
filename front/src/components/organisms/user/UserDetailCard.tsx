@@ -19,7 +19,7 @@ const UserDetailCard: React.FC<Props> = () => {
   const id: any = router.query;
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);
-  const enqueueSnackbar: any = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   // アクセス制限
   const userLoginConfirm = async () => {

@@ -1,9 +1,17 @@
 import React from "react";
+import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
+import store from "../../store";
 import UserFormCard from "../organisms/user/UserFormCard";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<UserFormCard isEditPage={true} />).toJSON();
+  const tree = renderer
+    .create(
+      <Provider store={store()}>
+        <UserFormCard isEditPage={true} />
+      </Provider>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 

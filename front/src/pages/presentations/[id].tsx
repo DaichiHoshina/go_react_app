@@ -1,11 +1,8 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import PageReturnButton from "../../components/atoms/share/PageReturnButton";
 import SeparateHr from "../../components/atoms/share/SeparateHr";
 import Layout from "../../components/Layout";
 import PresentationFormCard from "../../components/organisms/presentation/PresentationFormCard";
-import { fetchPresentation } from "../../services/Presentation";
 
 const PresentationEditArea: React.FC = () => {
   return (

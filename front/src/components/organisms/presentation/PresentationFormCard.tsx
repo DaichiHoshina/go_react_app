@@ -1,7 +1,7 @@
 import { Card } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TPresentation,
@@ -19,9 +19,8 @@ import TextFieldParts from "../../atoms/share/TextFieldParts";
 import { useFormik } from "formik";
 import KeyValuePair from "../common/KeyValuePair";
 import { PresentationCreateSchema } from "../../../const/validation";
-import { TUser, TUserState } from "../../../modules/User";
+import { TUserState } from "../../../modules/User";
 import { loginConfirm } from "../../../services/User";
-import FileUploadForm from "../FileUploadForm";
 import { DropzoneArea } from "material-ui-dropzone";
 
 interface Props {
@@ -65,7 +64,7 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
         });
         return;
       }
-      const response = (await isEditPage)
+      const response: any = (await isEditPage)
         ? dispatch(updatePresentation({ presentation: values, id: id }))
         : dispatch(
             createPresentation({
