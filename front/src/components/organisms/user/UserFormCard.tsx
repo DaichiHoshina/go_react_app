@@ -31,7 +31,7 @@ const UserFormCard: React.FC<Props> = ({
   const state = useSelector((state: { userState: TUserState }) => state);
 
   useEffect(() => {
-    dispatch(fetchUser({ id: id }));
+    dispatch(fetchUser({ id: id[0] }));
   }, [router.query]);
 
   useEffect(() => {
@@ -44,8 +44,8 @@ const UserFormCard: React.FC<Props> = ({
     initialValues: {},
     validationSchema: UserSettingUpdateSchema,
     onSubmit: async (values) => {
-      const response = (await isEditPage)
-        ? dispatch(updateUser({ user: values, id: id }))
+      const response: any = (await isEditPage)
+        ? dispatch(updateUser({ user: values, id: id[0] }))
         : dispatch(createUser({ user: values }));
       if (response.arg) {
         enqueueSnackbar("データを送信中", {

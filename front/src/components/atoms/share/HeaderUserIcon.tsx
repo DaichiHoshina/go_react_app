@@ -1,6 +1,5 @@
 import { Avatar, IconButton } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { useDispatch } from "react-redux";
@@ -15,7 +14,7 @@ const HeaderUserIcon: React.FC = () => {
   const open = Boolean(anchorEl);
   const [userName, setUserName] = useState("");
   const [userImage, setUserImage] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState<number | string>("");
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -28,7 +27,7 @@ const HeaderUserIcon: React.FC = () => {
   };
 
   const clickLogout = async () => {
-    const result = await dispatch(logoutUser());
+    const result: any = await dispatch(logoutUser());
     if (result?.payload?.status === 200) {
       enqueueSnackbar("Logout!!", {
         variant: "success",
@@ -44,7 +43,7 @@ const HeaderUserIcon: React.FC = () => {
 
   // ログイン中か確認する
   const userLoginConfirm = async () => {
-    const result = await dispatch(loginConfirm());
+    const result: any = await dispatch(loginConfirm());
     const user: TUser = await result.payload?.data;
     user && (await setUserName(user?.name!));
     user && (await setUserId(user?.id!));

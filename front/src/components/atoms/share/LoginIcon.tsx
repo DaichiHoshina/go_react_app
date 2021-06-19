@@ -1,5 +1,4 @@
-import { Button, IconButton } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { Button } from "@material-ui/core";
 import { useRouter } from "next/router";
 
 const LoginIcon: React.FC = () => {

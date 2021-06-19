@@ -29,7 +29,7 @@ export const fetchUsers = createAsyncThunk(
 
 export const fetchUser = createAsyncThunk(
   "users/fetchUser",
-  async (arg: { id?: number }, thunkAPI) => {
+  async (arg: { id?: number | string }, thunkAPI) => {
     const { id } = arg;
     try {
       const url = `${process.env.API_URL}/users/${id}`;

@@ -13,11 +13,7 @@ interface Props {
   key?: number;
 }
 
-const FavoriteIconButton: FC<Props> = ({
-  presentation,
-  loginUser,
-  key,
-}: Props) => {
+const FavoriteIconButton: FC<Props> = ({ presentation, loginUser }: Props) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -33,7 +29,7 @@ const FavoriteIconButton: FC<Props> = ({
   );
 
   const likeCreate = async (
-    user_id: number,
+    user_id: number | string,
     presentation_id: number | string
   ) => {
     const likeValue = {
@@ -54,7 +50,7 @@ const FavoriteIconButton: FC<Props> = ({
   };
 
   const likeDelete = async (
-    user_id: number,
+    user_id: number | string,
     presentation_id: number | string
   ) => {
     const likeValue = {

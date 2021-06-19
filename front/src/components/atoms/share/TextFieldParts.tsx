@@ -20,7 +20,6 @@ interface Props {
 }
 
 const TextFieldParts: FC<Props> = ({
-  isSubmit = false,
   fullWidth = true,
   label = "",
   name = "",
@@ -31,7 +30,6 @@ const TextFieldParts: FC<Props> = ({
   placeholder = "",
   formik,
   type = "text",
-  directErrorMessage,
 }: Props) => {
   const [isShowPassword, setIsShowPassword] = useState(
     isPasswordForm ? false : true
@@ -81,11 +79,11 @@ const TextFieldParts: FC<Props> = ({
   );
 };
 
-// export default TextFieldParts;
+export default TextFieldParts;
 
-export default React.memo(TextFieldParts, (prevProps, nextProps) => {
-  prevProps.formik?.values[prevProps.name] ===
-    nextProps.formik?.values[nextProps.name] &&
-    prevProps.formik?.errors[prevProps.name] ===
-      nextProps.formik?.errors[nextProps.name];
-});
+// export default React.memo(TextFieldParts, (prevProps, nextProps) => {
+//   prevProps.formik?.values[prevProps.name] ===
+//     nextProps.formik?.values[nextProps.name] &&
+//     prevProps.formik?.errors[prevProps.name] ===
+//       nextProps.formik?.errors[nextProps.name];
+// });

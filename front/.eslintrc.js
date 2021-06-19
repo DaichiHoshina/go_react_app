@@ -1,7 +1,7 @@
 module.exports = {
   ignorePatterns: ["!.eslintrc.js", "!.babelrc.js"],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react", "prettier"],
+  plugins: ["@typescript-eslint", "react", "prettier", "jest"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
