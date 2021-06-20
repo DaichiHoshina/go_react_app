@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PresentationFormCard>の新規作成画面スナップショット 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root p-5 w-4/5 MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <ul
+    className="flex flex-col space-y-2"
+  >
+    <div
+      className="mb-3"
+    >
+      <li
+        className="flex w-full"
+      >
+        <p
+          className="w-1/3"
+        >
+          image
+        </p>
+        <div
+          className="w-2/3"
+        >
+          <div
+            className="MuiDropzoneArea-root"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            tabIndex={0}
+          >
+            <input
+              accept=""
+              autoComplete="off"
+              multiple={false}
+              onChange={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              tabIndex={-1}
+              type="file"
+            />
+            <div
+              className="MuiDropzoneArea-textContainer"
+            >
+              <p
+                className="MuiTypography-root MuiDropzoneArea-text MuiTypography-h5"
+              >
+                ここにファイルをドロップ
+またはファイルを選択
+              </p>
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiDropzoneArea-icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
+                />
+              </svg>
+            </div>
+          </div>
+          <p
+            className="pl-3 pt-2 text-red-500 text-xs"
+          >
+            select image.
+          </p>
+        </div>
+      </li>
+    </div>
+    <li
+      className="flex w-full"
+    >
+      <p
+        className="w-1/3"
+      >
+        discription
+      </p>
+      <div
+        className="w-2/3"
+      >
+        <div
+          className="flex"
+        >
+          <div
+            className="w-full"
+          >
+            <div
+              className="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              
+              <div
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                onClick={[Function]}
+              >
+                <input
+                  aria-invalid={false}
+                  autoFocus={false}
+                  className="MuiInputBase-input MuiOutlinedInput-input"
+                  disabled={false}
+                  id="outlined-basic"
+                  name="discription"
+                  onAnimationStart={[Function]}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  placeholder=""
+                  required={false}
+                  rows={1}
+                  style={
+                    Object {
+                      "padding": 8,
+                      "paddingLeft": 10,
+                      "paddingRight": 10,
+                    }
+                  }
+                  type="text"
+                />
+                <fieldset
+                  aria-hidden={true}
+                  className="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
+                  style={
+                    Object {
+                      "paddingLeft": 8,
+                    }
+                  }
+                >
+                  <legend
+                    className="PrivateNotchedOutline-legend-2"
+                    style={
+                      Object {
+                        "width": 0.01,
+                      }
+                    }
+                  >
+                    <span
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "&#8203;",
+                        }
+                      }
+                    />
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <hr
+    className="my-5 border-t border-gray-300"
+  />
+  <div
+    className="flex justify-end"
+  >
+    <div>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained mr-5 MuiButton-containedSecondary"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          CREATE!
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<PresentationFormCard>の編集画面スナップショット 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root p-5 w-4/5 MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <ul
+    className="flex flex-col space-y-2"
+  >
+    <li
+      className="flex w-full"
+    >
+      <p
+        className="w-1/3"
+      >
+        discription
+      </p>
+      <div
+        className="w-2/3"
+      >
+        <div
+          className="flex"
+        >
+          <div
+            className="w-full"
+          >
+            <div
+              className="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+            >
+              
+              <div
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                onClick={[Function]}
+              >
+                <input
+                  aria-invalid={false}
+                  autoFocus={false}
+                  className="MuiInputBase-input MuiOutlinedInput-input"
+                  disabled={false}
+                  id="outlined-basic"
+                  name="discription"
+                  onAnimationStart={[Function]}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  placeholder=""
+                  required={false}
+                  rows={1}
+                  style={
+                    Object {
+                      "padding": 8,
+                      "paddingLeft": 10,
+                      "paddingRight": 10,
+                    }
+                  }
+                  type="text"
+                />
+                <fieldset
+                  aria-hidden={true}
+                  className="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
+                  style={
+                    Object {
+                      "paddingLeft": 8,
+                    }
+                  }
+                >
+                  <legend
+                    className="PrivateNotchedOutline-legend-2"
+                    style={
+                      Object {
+                        "width": 0.01,
+                      }
+                    }
+                  >
+                    <span
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "&#8203;",
+                        }
+                      }
+                    />
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <hr
+    className="my-5 border-t border-gray-300"
+  />
+  <div
+    className="flex justify-end"
+  >
+    <div>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained mr-5 MuiButton-containedSecondary"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          UPDATE!
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

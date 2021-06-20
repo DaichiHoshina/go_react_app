@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useRouter } from "next/router";
+import React from "react";
 
 const LoginIcon: React.FC = () => {
   const router = useRouter();
@@ -13,16 +14,14 @@ const LoginIcon: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="flex">
-        <div className="mr-2">
-          <Button onClick={clickSignIn}>Sign In</Button>
-        </div>
-        <div>
-          <Button onClick={clickSignUp}>Sign Up</Button>
-        </div>
+    <div className="flex">
+      <div className="mr-2">
+        <Button onClick={clickSignIn}>Sign In</Button>
       </div>
-    </>
+      <div>
+        <Button onClick={clickSignUp}>Sign Up</Button>
+      </div>
+    </div>
   );
 };
 

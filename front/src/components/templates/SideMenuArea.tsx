@@ -14,21 +14,19 @@ const SideMenuArea: React.FC = (): JSX.Element => {
   ]);
 
   return (
-    <>
-      <div className="pt-16">
-        <List>
-          {navLinkInfos.map((linkInfo) => (
-            <Link href={linkInfo.url} key={linkInfo.text}>
-              <div key={linkInfo.text}>
-                <ListItem button key={linkInfo.url}>
-                  <ListItemText primary={linkInfo.text} />
-                </ListItem>
-              </div>
-            </Link>
-          ))}
-        </List>
-      </div>
-    </>
+    <div className="pt-16">
+      <List>
+        {navLinkInfos.map((linkInfo) => (
+          <Link href={linkInfo.url} key={linkInfo.text}>
+            <div key={linkInfo.text}>
+              <ListItem button key={linkInfo.url}>
+                <ListItemText primary={linkInfo.text} />
+              </ListItem>
+            </div>
+          </Link>
+        ))}
+      </List>
+    </div>
   );
 };
 
