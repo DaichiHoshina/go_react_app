@@ -19,24 +19,15 @@ jobs:
       - run:
           name: コンテナ起動
           command: docker network ls
-      # - run:
-      #     name: 静的デバッグ
-      #     command: make lint
-      - run:
-          name: マイグレーション
-          command: docker-compose ps
-      - run:
-          name: マイグレーション
-          command: docker-compose exec backend env
-      - run:
-          name: マイグレーション
-          command: docker logs dockerMySQL
       - run:
           name: マイグレーション
           command: make backend-migrate
       - run:
-          name: テスト
+          name: バックエンドテスト
           command: make backend-test
+      - run:
+          name: フロントエンドテスト
+          command: make front-test
 workflows:
   version: 2
   front:

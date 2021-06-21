@@ -4,6 +4,8 @@ backend-migrate:
 backend-test:
 	docker-compose exec backend go test -v ./...
 
-# staticcheck
+front-test:
+	docker-compose exec front yarn test
+
 backend-lint:
 	docker-compose exec backend staticcheck ./...
