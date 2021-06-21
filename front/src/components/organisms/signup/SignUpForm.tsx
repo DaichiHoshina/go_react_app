@@ -1,5 +1,5 @@
 import { Button, Card } from "@material-ui/core";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { signUpUser } from "../../../services/User";
 import TextFieldParts from "../../atoms/share/TextFieldParts";
@@ -64,8 +64,14 @@ const SignUpForm: FC<Props> = () => {
         </ul>
         <Button
           type="submit"
+          data-testid="form"
           variant="contained"
           color="primary"
+          disabled={
+            !formik.values.name ||
+            !formik.values.email ||
+            !formik.values.password
+          }
           fullWidth
           className="border-none ring-transparent"
         >

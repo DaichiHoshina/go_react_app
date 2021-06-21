@@ -58,22 +58,7 @@ test("新規投稿ページのレンダリング", () => {
   const input = screen.getByText("discription");
   userEvent.type(input, "test");
 
+  // ボタンが押下可能かどうか
   const submitButton = getByText("CREATE!");
   expect(submitButton).toBeInTheDocument();
 });
-
-// test("ボタンのテスト", () => {
-//   const formik = jest.fn();
-
-//   const {} = render(
-//     <Provider store={store()}>
-//       <CreateOrEditButton />
-//     </Provider>
-//   );
-
-//   // ボタンのテスト
-//   fireEvent.click(screen.getByRole("button"));
-
-//   // モーダルが開かれるかどうか
-//   expect(formik).toHaveBeenCalledTimes(1);
-// });
