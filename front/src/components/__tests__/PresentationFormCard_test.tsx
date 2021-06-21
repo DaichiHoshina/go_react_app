@@ -1,9 +1,11 @@
+import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import store from "../../store";
 import PresentationFormCard from "../organisms/presentation/PresentationFormCard";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 it("<PresentationFormCard>の新規作成画面スナップショット", () => {
   const tree = renderer
@@ -27,27 +29,51 @@ it("<PresentationFormCard>の編集画面スナップショット", () => {
   expect(tree).toMatchSnapshot();
 });
 
-describe("button", () => {
-  test("ボタンのテスト", () => {
-    render(
-      <Provider store={store()}>
-        <PresentationFormCard isEditPage={true} />
-      </Provider>
-    );
+test("投稿編集ページのレンダリング", () => {
+  // const handleOpen = jest.fn();
 
-    screen.getByText("UPDATE!");
-  });
+  const { getByText } = render(
+    <Provider store={store()}>
+      <PresentationFormCard isEditPage={true} />
+    </Provider>
+  );
+
+  // inputのテスト
+  const input = screen.getByText("discription");
+  userEvent.type(input, "test");
+
+  // ボタンのテスト
+  const submitButton = getByText("UPDATE!");
+  expect(submitButton).toBeInTheDocument();
 });
 
-// describe("view", () => {
-//   it("button", () => {
-//     const testMock = jest.fn();
+test("新規投稿ページのレンダリング", () => {
+  const { getByText } = render(
+    <Provider store={store()}>
+      <PresentationFormCard isEditPage={false} />
+    </Provider>
+  );
 
-//     const wrapper = render(<Button />); // shallowWrapper取得
+  // inputのテスト
+  const input = screen.getByText("discription");
+  userEvent.type(input, "test");
 
-//     wrapper.setProps({ formik: testMock });
+  const submitButton = getByText("CREATE!");
+  expect(submitButton).toBeInTheDocument();
+});
 
-//     expect(wrapper.find("button").length).toBe(1);
-//     // expect(wrapper.find(KeyValuePair).length).toBe(1);
-//   });
+// test("ボタンのテスト", () => {
+//   const formik = jest.fn();
+
+//   const {} = render(
+//     <Provider store={store()}>
+//       <CreateOrEditButton />
+//     </Provider>
+//   );
+
+//   // ボタンのテスト
+//   fireEvent.click(screen.getByRole("button"));
+
+//   // モーダルが開かれるかどうか
+//   expect(formik).toHaveBeenCalledTimes(1);
 // });
