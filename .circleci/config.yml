@@ -19,12 +19,12 @@ jobs:
       - run:
           name: コンテナ起動
           command: docker network ls
-      - run:
-          name: マイグレーション
-          command: make backend-migrate
-      - run:
-          name: バックエンドテスト
-          command: make backend-test
+      # - run:
+      #     name: マイグレーション
+      #     command: make backend-migrate
+      # - run:
+      #     name: バックエンドテスト
+      #     command: make backend-test
       - run:
           name: フロントエンドテスト
           command: make front-test
