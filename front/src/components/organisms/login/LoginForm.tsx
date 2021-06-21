@@ -79,6 +79,8 @@ const LoginForm: FC<Props> = () => {
           />
         </ul>
         <Button
+          data-testid="form"
+          disabled={!formik.values.email || !formik.values.password}
           type="submit"
           variant="contained"
           color="primary"

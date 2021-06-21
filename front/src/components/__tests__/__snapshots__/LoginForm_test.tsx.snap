@@ -1,129 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Layout>のスナップショット 1`] = `
-<div
-  className="min-h-screen pt-10"
->
-  <header
-    className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-elevation4"
-    style={
-      Object {
-        "backgroundColor": "#000000",
-        "color": "#FFFFFF",
-        "zIndex": 1201,
-      }
-    }
-  >
-    <div
-      className="flex"
-    >
-      <div
-        className="mt-2"
-      >
-        <div
-          className="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
-        >
-          <a
-            className="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorInherit"
-            href="/presentations"
-            onBlur={[Function]}
-            onFocus={[Function]}
-          >
-            <h6
-              className="MuiTypography-root flex-grow MuiTypography-h6 MuiTypography-colorInherit"
-            >
-              Repgram
-            </h6>
-          </a>
-        </div>
-      </div>
-      <div
-        className="ml-auto mt-2 mr-2"
-      >
-        <div
-          className="flex"
-        >
-          <div
-            className="mr-2"
-          >
-            <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-text"
-              disabled={false}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={0}
-              type="button"
-            >
-              <span
-                className="MuiButton-label"
-              >
-                Sign In
-              </span>
-            </button>
-          </div>
-          <div>
-            <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-text"
-              disabled={false}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={0}
-              type="button"
-            >
-              <span
-                className="MuiButton-label"
-              >
-                Sign Up
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <div
-    className="p-7 mt-3"
-  >
-    <h2
-      className="MuiTypography-root MuiTypography-h6 MuiTypography-colorInherit"
-    >
-      
-    </h2>
-    
-  </div>
-  <div
-    className="MuiBox-root MuiBox-root-1 pt-8"
-  >
-    <div
-      className="mt-5 pt-5 text-center text-xs border-t border-gray-300"
-    >
-      Copyright 2021 Daichi Hoshina
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<LoginFormTemplete>のスナップショット 1`] = `
+exports[`<LoginTemplate>の新規作成画面スナップショット 1`] = `
 <div
   className="flex justify-center p-24"
 >
@@ -201,7 +78,7 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
                   />
                   <fieldset
                     aria-hidden={true}
-                    className="PrivateNotchedOutline-root-2 MuiOutlinedInput-notchedOutline"
+                    className="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
                     style={
                       Object {
                         "paddingLeft": 8,
@@ -209,7 +86,7 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
                     }
                   >
                     <legend
-                      className="PrivateNotchedOutline-legend-3"
+                      className="PrivateNotchedOutline-legend-2"
                       style={
                         Object {
                           "width": 0.01,
@@ -316,14 +193,11 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
                           />
                         </svg>
                       </span>
-                      <span
-                        className="MuiTouchRipple-root"
-                      />
                     </button>
                   </div>
                   <fieldset
                     aria-hidden={true}
-                    className="PrivateNotchedOutline-root-2 MuiOutlinedInput-notchedOutline"
+                    className="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
                     style={
                       Object {
                         "paddingLeft": 8,
@@ -331,7 +205,7 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
                     }
                   >
                     <legend
-                      className="PrivateNotchedOutline-legend-3"
+                      className="PrivateNotchedOutline-legend-2"
                       style={
                         Object {
                           "width": 0.01,
@@ -354,8 +228,9 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
         </li>
       </ul>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-contained border-none ring-transparent MuiButton-containedPrimary MuiButton-fullWidth"
-        disabled={false}
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained border-none ring-transparent MuiButton-containedPrimary Mui-disabled MuiButton-fullWidth Mui-disabled"
+        data-testid="form"
+        disabled={true}
         onBlur={[Function]}
         onDragLeave={[Function]}
         onFocus={[Function]}
@@ -367,7 +242,7 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
         onTouchEnd={[Function]}
         onTouchMove={[Function]}
         onTouchStart={[Function]}
-        tabIndex={0}
+        tabIndex={-1}
         type="submit"
       >
         <span
@@ -375,9 +250,6 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
         >
           Login
         </span>
-        <span
-          className="MuiTouchRipple-root"
-        />
       </button>
       <div
         className="mt-5"
@@ -405,9 +277,6 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
           >
             Login Test User!!
           </span>
-          <span
-            className="MuiTouchRipple-root"
-          />
         </button>
       </div>
       <div>
@@ -415,80 +284,5 @@ exports[`<LoginFormTemplete>のスナップショット 1`] = `
       </div>
     </form>
   </div>
-</div>
-`;
-
-exports[`<SideMenuArea>のスナップショット 1`] = `
-<div
-  className="pt-16"
->
-  <ul
-    className="MuiList-root MuiList-padding"
-  >
-    <div
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-    >
-      <div
-        aria-disabled={false}
-        className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
-        onBlur={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        role="button"
-        tabIndex={0}
-      >
-        <div
-          className="MuiListItemText-root"
-        >
-          <span
-            className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-          >
-            トップページ
-          </span>
-        </div>
-      </div>
-    </div>
-    <div
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-    >
-      <div
-        aria-disabled={false}
-        className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
-        onBlur={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        role="button"
-        tabIndex={0}
-      >
-        <div
-          className="MuiListItemText-root"
-        >
-          <span
-            className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-          >
-            ユーザー管理
-          </span>
-        </div>
-      </div>
-    </div>
-  </ul>
 </div>
 `;
