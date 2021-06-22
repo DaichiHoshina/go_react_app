@@ -10,8 +10,6 @@ interface Props {
 
 const EditLinkButton: React.FC<Props> = ({ id }) => {
   const router = useRouter();
-
-  // asPathではクエリがついている可能性もあるので、クエリ部削除。
   const editPath = router.asPath.split("?")[0] + (id ? `/${id}` : "") + "/edit";
 
   return (

@@ -139,15 +139,6 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
               />
             </div>
           )}
-
-          {/* <KeyValuePair
-            keyName="title"
-            value={
-              <div className="flex">
-                <TextFieldParts name="title" formik={formik} />
-              </div>
-            }
-          /> */}
           <KeyValuePair
             keyName="discription"
             value={

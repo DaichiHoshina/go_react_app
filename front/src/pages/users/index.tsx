@@ -26,20 +26,6 @@ export interface UsersApiInterface {
   tbm_users?: TUser[];
 }
 
-interface formType {
-  name?: string;
-  kana?: string;
-  pref?: string;
-  pic?: string;
-  medical_org_id?: string;
-  reservation_type_memo?: string;
-  operating?: string;
-  exist_interlock?: string;
-  page?: number;
-  per?: number;
-  sorts: string[];
-}
-
 const UsersList: React.FC = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: { userState: TUserState }) => state);

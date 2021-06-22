@@ -58,7 +58,6 @@ export const createUser = createAsyncThunk(
   }
 );
 
-// ユーザー更新
 export const updateUser = createAsyncThunk(
   "users/ updateUser",
   async (arg: { id?: string | string[]; user?: TUser }, thunkAPI) => {
@@ -102,7 +101,6 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
-// ユーザー登録処理
 export const signUpUser = createAsyncThunk(
   "auth/signUp",
   async (arg: { loginForm: any }, thunkAPI) => {
@@ -124,7 +122,6 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
-// ログイン処理
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (arg: { loginForm: any }, thunkAPI) => {
@@ -145,7 +142,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// ログアウト処理
 export const logoutUser = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {

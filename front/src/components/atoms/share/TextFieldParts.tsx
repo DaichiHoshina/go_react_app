@@ -79,10 +79,3 @@ const TextFieldParts: FC<Props> = ({
 };
 
 export default TextFieldParts;
-
-// export default React.memo(TextFieldParts, (prevProps, nextProps) => {
-//   prevProps.formik?.values[prevProps.name] ===
-//     nextProps.formik?.values[nextProps.name] &&
-//     prevProps.formik?.errors[prevProps.name] ===
-//       nextProps.formik?.errors[nextProps.name];
-// });

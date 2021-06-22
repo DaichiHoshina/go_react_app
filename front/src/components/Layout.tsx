@@ -42,12 +42,14 @@ export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           <div className="mt-2">
             <Toolbar variant="dense">
               <Link href="/presentations" color="inherit" underline="none">
+                {/* タイトルロゴ */}
                 <Typography variant="h6" color="inherit" className="flex-grow">
                   Repgram
                 </Typography>
               </Link>
             </Toolbar>
           </div>
+          {/* 右上のアイコン */}
           <div className="ml-auto mt-2 mr-2">
             {isLogin ? <HeaderUserIcon /> : <LoginIcon />}
           </div>
