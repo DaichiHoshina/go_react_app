@@ -7,5 +7,8 @@ backend-test:
 front-test:
 	docker-compose exec front yarn test
 
+front-lint:
+	docker-compose exec front yarn lint
+
 backend-lint:
 	docker-compose exec backend staticcheck ./...

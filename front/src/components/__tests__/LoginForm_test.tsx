@@ -19,7 +19,7 @@ it("<LoginTemplate>の新規作成画面スナップショット", () => {
 });
 
 test("ユーザー登録のレンダリングとボタン押下時", () => {
-  const {} = render(
+  render(
     <Provider store={store()}>
       <LoginFormTemplate />
     </Provider>

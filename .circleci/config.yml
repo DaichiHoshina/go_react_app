@@ -26,6 +26,9 @@ jobs:
           name: jestインストール
           command: docker-compose exec front yarn add jest@26.0.1
       - run:
+          name: フロントLint
+          command: make front-lint
+      - run:
           name: フロントエンドテスト
           command: make front-test
 

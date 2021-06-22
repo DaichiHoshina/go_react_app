@@ -109,7 +109,9 @@ exports[`<Layout>のスナップショット 1`] = `
     >
       
     </h2>
-    
+    <div>
+      
+    </div>
   </div>
   <div
     className="MuiBox-root MuiBox-root-1 pt-8"

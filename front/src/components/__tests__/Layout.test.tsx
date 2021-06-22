@@ -8,7 +8,7 @@ it("<Layout>のスナップショット", () => {
   const tree = renderer
     .create(
       <Provider store={store()}>
-        <Layout title="" children="" />
+        <Layout title="" />
       </Provider>
     )
     .toJSON();
