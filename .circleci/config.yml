@@ -16,9 +16,6 @@ jobs:
       - run:
           name: コンテナ起動
           command: docker-compose up -d
-      - run:
-          name: コンテナ起動
-          command: docker network ls
       # - run:
       #     name: マイグレーション
       #     command: make backend-migrate
