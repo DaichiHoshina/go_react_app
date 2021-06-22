@@ -4,7 +4,10 @@ import { TLike } from "../modules/Like";
 
 export const createLike = createAsyncThunk(
   "likes/createLike",
-  async (arg: { user_id?: number; presentation_id?: number, like?:TLike }, thunkAPI) => {
+  async (
+    arg: { user_id?: number; presentation_id?: number; like?: TLike },
+    thunkAPI
+  ) => {
     const { like } = arg;
 
     const postLike = Object.assign({}, like!);
@@ -21,7 +24,10 @@ export const createLike = createAsyncThunk(
 
 export const deleteLike = createAsyncThunk(
   "likes/deleteLike",
-  async (arg: { user_id?: number; presentation_id?: number, like?:TLike }, thunkAPI) => {
+  async (
+    arg: { user_id?: number; presentation_id?: number; like?: TLike },
+    thunkAPI
+  ) => {
     const { like } = arg;
 
     const postLike = Object.assign({}, like!);
