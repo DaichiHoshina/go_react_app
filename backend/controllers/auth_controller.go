@@ -130,6 +130,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
+// ログイン中確認用
 func User(db *gorm.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 

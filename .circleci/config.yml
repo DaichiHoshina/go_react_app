@@ -13,21 +13,22 @@ jobs:
       - run:
           name: create docker network
           command: docker network create test-network
-      # - run:
-      #     name: コンテナ起動
-      #     command: docker-compose up -d
-      # - run:
-      #     name: マイグレーション
-      #     command: make backend-migrate
-      # - run:
-      #     name: バックエンドテスト
-      #     command: make backend-test
-      # - run:
-      #     name: jestインストール
-      #     command: docker-compose exec front yarn add jest@26.0.1
-      # - run:
-      #     name: フロントエンドテスト
-      #     command: make front-test
+      - run:
+          name: コンテナ起動
+          command: docker-compose up -d
+      - run:
+          name: マイグレーション
+          command: make backend-migrate
+      - run:
+          name: バックエンドテスト
+          command: make backend-test
+      - run:
+          name: jestインストール
+          command: docker-compose exec front yarn add jest@26.0.1
+      - run:
+          name: フロントエンドテスト
+          command: make front-test
+
 workflows:
   version: 2
   front:

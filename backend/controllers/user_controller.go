@@ -28,6 +28,7 @@ func UpdateUser(db *gorm.DB) echo.HandlerFunc {
 			awsS3 *model.AwsS3
 			url   string
 		)
+		// プロフィール画像投稿処理
 		upload_file, err := c.FormFile("file")
 		if err != nil {
 			return err

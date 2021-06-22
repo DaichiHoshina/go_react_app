@@ -76,7 +76,6 @@ func TestGetPresentation(t *testing.T) {
 }
 
 func TestCreatePresentation(t *testing.T) {
-	// url := "http://localhost:3001/presentations"
 	fieldname := "file"
 	filename := ".././IMG_7931.PNG"
 	file, err := os.Open(filename)
