@@ -1,29 +1,30 @@
 module.exports = {
-  ignorePatterns: ["!.eslintrc.js", "!.babelrc.js"],
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react", "prettier", "jest"],
-  extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/react",
-  ],
-  root: true,
   env: {
     browser: true,
     node: true,
     es6: true,
     jest: true,
   },
+  ignorePatterns: ["!.eslintrc.js", "!.babelrc.js"],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
+    // import 文でモジュールを使用
     sourceType: "module",
     ecmaFeatures: {
       jsx: true,
     },
   },
+  plugins: ["react-hooks", "@typescript-eslint", "react", "prettier", "jest"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier",
+  ],
+  root: true,
+  // React のバージョンは自動検出に
   settings: {
     react: {
       version: "detect",
@@ -45,5 +46,7 @@ module.exports = {
     "no-irregular-whitespace": "off",
     // 条件に定数式入れるのを許可する
     "no-constant-condition": "off",
+    // TypeScirpt なので prop-types は要らない
+    "react/prop-types": "off",
   },
 };

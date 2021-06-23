@@ -79,6 +79,7 @@ func CreatePresentation(db *gorm.DB) echo.HandlerFunc {
 			url   string
 		)
 
+		// 画像投稿処理
 		upload_file, err := c.FormFile("file")
 		if err != nil {
 			return err

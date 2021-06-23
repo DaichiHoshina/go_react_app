@@ -19,9 +19,7 @@ it("<SignUpTemplate>の新規作成画面スナップショット", () => {
 });
 
 test("ユーザー登録のレンダリングとボタン押下時", () => {
-  // const enqueueSnackbar = jest.fn();
-
-  const {} = render(
+  render(
     <Provider store={store()}>
       <SignUpTemplate />
     </Provider>

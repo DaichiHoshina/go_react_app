@@ -4,10 +4,9 @@ variable "region" { default = "ap-northeast-1"}
 
 terraform {
   backend "s3" {
-    bucket = "terrafor-test"  //e.g. terraform-state-bucket
+    bucket = "terrafor-test"
     key    = "test/terraform.tfstate"
     region     = "ap-northeast-1"
-    # profile = "sample" // s3にアクセスできるアカウントでawsのプロファイルを作成する！
   }
 }
 

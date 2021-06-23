@@ -47,7 +47,6 @@ interface Props {
 
 const DeleteOrButton: React.FC<Props> = ({ presentation }) => {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar() || {};

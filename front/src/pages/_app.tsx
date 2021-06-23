@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "../store";
 import { SnackbarProvider } from "notistack";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import React from "react";
 
 function MyApp({ Component, pageProps }: AppProps): any {
   const darkTheme = createMuiTheme({

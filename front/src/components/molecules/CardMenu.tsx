@@ -1,28 +1,11 @@
-import {
-  Avatar,
-  Button,
-  CardHeader,
-  createStyles,
-  IconButton,
-  makeStyles,
-  Menu,
-  MenuItem,
-  Theme,
-} from "@material-ui/core";
+import { Avatar, Button, CardHeader, Menu, MenuItem } from "@material-ui/core";
 import router from "next/router";
-import { useSnackbar } from "notistack";
 import React from "react";
-import { useDispatch } from "react-redux";
 import { TPresentation } from "../../modules/Presentation";
-import {
-  deletePresentation,
-  fetchPresentations,
-} from "../../services/Presentation";
 import { returnDatetimeString } from "../../utils/DateUtil";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { TUser } from "../../modules/User";
 import DeleteOrButton from "../atoms/share/DeleteOrButton";
-
 interface TProps {
   loginUser: TUser;
   presentation: TPresentation;
@@ -31,7 +14,6 @@ interface TProps {
 const CardMenu = (props: TProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { enqueueSnackbar } = useSnackbar() || {};
 
   const handleClose = () => {
     setAnchorEl(null);

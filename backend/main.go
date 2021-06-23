@@ -49,9 +49,8 @@ func main() {
 
 	// Middleware
 	e.Use(middleware.Logger())
-	// e.Use(middleware.CORS())
 
-	// DB Connect
+	// DB接続
 	db := infrastructure.Connect()
 
 	// Routes

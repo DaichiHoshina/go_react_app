@@ -12,7 +12,7 @@ import { loginConfirm } from "../services/User";
 import { useDispatch } from "react-redux";
 import LoginIcon from "./atoms/share/LoginIcon";
 export interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title: string;
 }
 
@@ -42,12 +42,14 @@ export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           <div className="mt-2">
             <Toolbar variant="dense">
               <Link href="/presentations" color="inherit" underline="none">
+                {/* タイトルロゴ */}
                 <Typography variant="h6" color="inherit" className="flex-grow">
                   Repgram
                 </Typography>
               </Link>
             </Toolbar>
           </div>
+          {/* 右上のアイコン */}
           <div className="ml-auto mt-2 mr-2">
             {isLogin ? <HeaderUserIcon /> : <LoginIcon />}
           </div>
@@ -57,7 +59,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         <Typography component="h2" variant="h6" color="inherit">
           {title}
         </Typography>
-        {children}
+        <div>{children}</div>
       </div>
       <Box className="pt-8">
         <Footer />
