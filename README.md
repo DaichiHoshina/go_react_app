@@ -9,11 +9,13 @@
 
 - フロントエンド
 
-  - React(TypeScript、Next.js)
+  - React 17.0.1
+    - TypeScript、Next.js
 
 - バックエンド
 
-  - Golang(Echo)
+  - Golang 1.16
+    - Echo、GORM
 
 - インフラ
   - Docker,docker-compose
