@@ -53,7 +53,7 @@ workflows:
   front:
     jobs:
       - docker-compose
-      - front-test
+      - front-test:
           requires:
             - docker-compose
       - aws-ecr/build-and-push-image:
@@ -80,7 +80,7 @@ workflows:
   backend:
     jobs:
       - docker-compose
-      - backend-test
+      - backend-test:
           requires:
             - docker-compose
       - aws-ecr/build-and-push-image:
