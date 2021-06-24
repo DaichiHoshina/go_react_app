@@ -1,4 +1,3 @@
-import React from "react";
 import { FC } from "react";
 import LoginForm from "../organisms/login/LoginForm";
 

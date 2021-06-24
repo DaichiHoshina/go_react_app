@@ -1,5 +1,5 @@
 import { InputAdornment, TextField, IconButton } from "@material-ui/core";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 interface Props {
