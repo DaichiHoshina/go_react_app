@@ -1,5 +1,5 @@
 import { Button, Card } from "@material-ui/core";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { signUpUser } from "../../../services/User";
 import TextFieldParts from "../../atoms/share/TextFieldParts";
