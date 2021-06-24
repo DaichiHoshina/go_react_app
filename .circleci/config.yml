@@ -40,7 +40,7 @@ jobs:
           command: make backend-migrate
       - run:
           name: staticcheckインストール
-          command: docker-compose exec go get honnef.co/go/tools/cmd/staticcheck@latest
+          command: docker-compose exec backend go get honnef.co/go/tools/cmd/staticcheck@latest
       - run:
           name: バックエンドLint
           command: make backend-lint
