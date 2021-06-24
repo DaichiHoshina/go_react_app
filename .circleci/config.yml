@@ -21,32 +21,32 @@ jobs:
     machine: true
 
     steps:
-    - run:
-        name: jestインストール
-        command: docker-compose exec front yarn add jest@26.0.1
-    - run:
-        name: フロントLint
-        command: make front-lint
-    - run:
-        name: フロントエンドテスト
-        command: make front-test
+      - run:
+          name: jestインストール
+          command: docker-compose exec front yarn add jest@26.0.1
+      - run:
+          name: フロントLint
+          command: make front-lint
+      - run:
+          name: フロントエンドテスト
+          command: make front-test
 
   backend-test:
     machine: true
-    
+
     steps:
-    - run:
-        name: マイグレーション
-        command: make backend-migrate
-    - run:
-        name: staticcheckインストール
-        command: docker-compose exec go get honnef.co/go/tools/cmd/staticcheck@latest
-    - run:
-        name: バックエンドLint
-        command: make backend-lint
-    - run:
-        name: バックエンドテスト
-        command: make backend-test
+      - run:
+          name: マイグレーション
+          command: make backend-migrate
+      - run:
+          name: staticcheckインストール
+          command: docker-compose exec go get honnef.co/go/tools/cmd/staticcheck@latest
+      - run:
+          name: バックエンドLint
+          command: make backend-lint
+      - run:
+          name: バックエンドテスト
+          command: make backend-test
 
 workflows:
   version: 2
@@ -79,10 +79,9 @@ workflows:
           container-image-name-updates: "container=${FRONT_CONTAINER_NAME},tag=latest"
   backend:
     jobs:
-      - docker-compose
       - backend-test:
           requires:
-            - docker-compose
+            - front-test
       - aws-ecr/build-and-push-image:
           requires:
             - backend-test
