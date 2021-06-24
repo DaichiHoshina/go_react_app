@@ -5,7 +5,7 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.2.1
 
 jobs:
-  docker-compose:
+  test:
     machine: true
 
     steps:
@@ -16,11 +16,6 @@ jobs:
       - run:
           name: コンテナ起動
           command: docker-compose up -d
-
-  front-test:
-    machine: true
-
-    steps:
       - run:
           name: jestインストール
           command: docker-compose exec front yarn add jest@26.0.1
@@ -30,11 +25,6 @@ jobs:
       - run:
           name: フロントエンドテスト
           command: make front-test
-
-  backend-test:
-    machine: true
-
-    steps:
       - run:
           name: マイグレーション
           command: make backend-migrate
@@ -52,13 +42,10 @@ workflows:
   version: 2
   front:
     jobs:
-      - docker-compose
-      - front-test:
-          requires:
-            - docker-compose
+      - test
       - aws-ecr/build-and-push-image:
           requires:
-            - front-test
+            - test
           filters:
             branches:
               only: master
@@ -79,12 +66,10 @@ workflows:
           container-image-name-updates: "container=${FRONT_CONTAINER_NAME},tag=latest"
   backend:
     jobs:
-      - backend-test:
-          requires:
-            - front-test
+      - test
       - aws-ecr/build-and-push-image:
           requires:
-            - backend-test
+            - test
           filters:
             branches:
               only: master
