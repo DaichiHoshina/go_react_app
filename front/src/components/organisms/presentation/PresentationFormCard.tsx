@@ -50,7 +50,7 @@ const PresentationFormCard: React.FC<Props> = ({ isEditPage = false }) => {
     }
   }, [state?.presentationState?.presentation?.id]);
 
-  const setTime = isEditPage ? 0 : 1000;
+  const setTime = isEditPage ? 0 : 2000;
 
   const formik = useFormik<TPresentation>({
     initialValues: {

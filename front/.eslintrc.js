@@ -31,6 +31,7 @@ module.exports = {
     },
   },
   rules: {
+    "react/react-in-jsx-scope": "off",
     // 必要に応じてルールを追加
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
