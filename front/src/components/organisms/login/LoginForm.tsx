@@ -9,7 +9,6 @@ import { useSnackbar } from "notistack";
 import { TUser } from "../../../modules/User";
 import { loginSchema } from "../../../const/validation";
 import { FC } from "react";
-import React from "react";
 interface Props {
   isSubmit: boolean;
 }
