@@ -20,6 +20,9 @@ jobs:
           name: マイグレーション
           command: make backend-migrate
       - run:
+          name: バックエンドLint
+          command: make backend-lint
+      - run:
           name: バックエンドテスト
           command: make backend-test
       - run:

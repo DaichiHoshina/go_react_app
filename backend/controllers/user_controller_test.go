@@ -55,18 +55,18 @@ func TestUpdateUser(t *testing.T) {
 	body := &bytes.Buffer{}
 
 	mw := multipart.NewWriter(body)
-	err = mw.WriteField("user_id", "1")
+	mw.WriteField("user_id", "1")
 
 	fw, err := mw.CreateFormFile(fieldname, filename)
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
 	}
 
-	_, err = io.Copy(fw, file)
+	io.Copy(fw, file)
 
 	contentType := mw.FormDataContentType()
 
-	err = mw.Close()
+	mw.Close()
 
 	db, _, err := MockDB()
 	if err != nil {
