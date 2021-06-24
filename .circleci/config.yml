@@ -18,6 +18,9 @@ jobs:
           command: docker-compose up -d
 
   front-test:
+    machine: true
+
+    steps:
     - run:
         name: jestインストール
         command: docker-compose exec front yarn add jest@26.0.1
@@ -29,6 +32,9 @@ jobs:
         command: make front-test
 
   backend-test:
+    machine: true
+    
+    steps:
     - run:
         name: マイグレーション
         command: make backend-migrate
